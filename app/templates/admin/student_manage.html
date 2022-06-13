@@ -7,7 +7,18 @@
 <form action="/add_student" method="POST">
     <div class="form-row">
       <div class="col">
-        <select type="text" name="MajorName" class="form-control custom-select" placeholder="专业名" required>
+      <select type="text" name="DeptName" class="form-control custom-select" placeholder="学院" required>
+            {% if info %}
+            {% for dept in info.dept %}
+            <option>{{ dept }}</option>
+            {% endfor %}
+            {% else %}
+            <option>无学院信息，请录入</option>
+            {% endif %}
+        </select>
+      </div>
+    <div class="col">
+        <select type="text" name="MajorName" class="form-control custom-select" placeholder="专业" required>
             {% if info %}
             {% for major in info.majors %}
             <option>{{ major }}</option>
@@ -23,15 +34,15 @@
       <div class="col">
         <input type="text" name="StudentName" class="form-control" placeholder="姓名" required>
       </div>
-      <div class="col">
-        <select type="text" name="StudentSex" class="form-control custom-select" placeholder="性别" required>
-            <option>男</option>
-            <option>女</option>
-        </select>
-    </div>
-      <div class="col">
-        <input type="datetime" name="StudentInyear" class="form-control" placeholder="出生日期">
-      </div>
+{#      <div class="col">#}
+{#        <select type="text" name="StudentSex" class="form-control custom-select" placeholder="性别" required>#}
+{#            <option>男</option>#}
+{#            <option>女</option>#}
+{#        </select>#}
+{#    </div>#}
+{#      <div class="col">#}
+{#        <input type="datetime" name="StudentInyear" class="form-control" placeholder="出生日期">#}
+{#      </div>#}
       <div class="col">
       <button type="submit" class="btn btn-block btn-success mb-2">新增录入</button>
       </div>
@@ -46,8 +57,8 @@
             <th class="lead">专业名</th>
             <th class="lead">学号</th>
             <th class="lead">姓名</th>
-            <th class="lead">性别</th>
-            <th class="lead">出生日期</th>
+{#            <th class="lead">性别</th>#}
+{#            <th class="lead">出生日期</th>#}
             <th class="lead">学生管理</th>
         </tr>
             </thead>
@@ -59,8 +70,8 @@
            <td class="lead">{{ student.major.MajorName }}</td>
            <td class="lead">{{ student.StudentNum }}</td>
            <td class="lead">{{ student.StudentName }}</td>
-           <td class="lead">{{ student.StudentSex }}</td>
-           <td class="lead">{{ student.StudentInyear }}</td>
+{#           <td class="lead">{{ student.StudentSex }}</td>#}
+{#           <td class="lead">{{ student.StudentInyear }}</td>#}
            <td class="lead">
             <a href="{{ url_for('delete_student', StudentNum=student.StudentNum) }}" class="btn btn-outline-danger btn-sm" role="button">删除学生</a>               
             </td>

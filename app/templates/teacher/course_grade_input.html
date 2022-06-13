@@ -6,8 +6,7 @@
     {% for course_table in course_tables %}
     <div class="container mb-5">
     <hr>
-    </strong><font>{{ course_table[0].ClassNum }}</font></p>
-    <p class="lead CourseNum"><strong>课程号：</strong>{{ course_table[0].CourseNum }}</p>
+    <p class="lead CourseNum"><strong>课程号：</strong><font>{{ course_table[0].CourseNum }}</font></p>
     <p class="lead"><strong>课程名：</strong>{{ course_table[0].CourseName }}</p>
     <p class="lead"><strong>选课人数：</strong>{{ course_table[0].CourseStudents }}</p>
     <form action="/course_grade_input/" method="POST" class="form-signin">
@@ -16,7 +15,6 @@
             <tr>
                 <th class="lead">学号</th>
                 <th class="lead">姓名</th>
-                <th class="lead">性别</th>
                 <th class="lead">学院</th>
                 <th class="lead">专业</th>
                 <th class="lead">成绩</th>
@@ -28,7 +26,6 @@
             <tr>
             <td class="lead StudentNum">{{ table.StudentNum }}</td>
             <td class="lead">{{ table.StudentName }}</td>
-            <td class="lead">{{ table.StudentSex }}</td>
             <td class="lead">{{ table.DeptName }}</td>
             <td class="lead">{{ table.MajorName }}</td>
             {% if table.Grade %}
@@ -39,7 +36,7 @@
                             <strong>{{ table.Grade }}</strong>
                         </div>
                         <div class="col-md-7 column">
-                            <a  class="btn btn-primary btn-sm" href="{{ url_for('grade_set_zero', CourseNum=course_table[0].ClassNum, StudentNum=table.StudentNum) }}">重置成绩</a>
+                            <a  class="btn btn-primary btn-sm" href="{{ url_for('grade_set_zero', CourseNum=course_table[0].CourseNum, StudentNum=table.StudentNum) }}">重置成绩</a>
                         </div>
                     </div>
                 </td>
@@ -50,7 +47,7 @@
                             <strong>{{ table.Grade }}</strong>
                         </div>
                         <div class="col-md-7 column">
-                            <a  class="btn btn-outline-danger btn-sm" href="{{ url_for('grade_set_zero', CourseNum=course_table[0].ClassNum, StudentNum=table.StudentNum) }}">重置成绩</a>
+                            <a  class="btn btn-outline-danger btn-sm" href="{{ url_for('grade_set_zero', CourseNum=course_table[0].CourseNum, StudentNum=table.StudentNum) }}">重置成绩</a>
                         </div>
                     </div>
                 </td>

@@ -28,8 +28,8 @@
            <td class="lead">{{ table.TeacherName }}</td>
             <td class="lead">{{ table.ClassTime }}</td>
            <td class="lead">
-               <a href="{{ url_for('course_change', CourseNum=table.ClassNum) }}" class="btn btn-outline-primary btn-sm" role="button">更换教师</a>
-               <a href="{{ url_for('course_drop', CourseNum=table.ClassNum) }}" class="btn btn-outline-danger btn-sm" role="button">退选</a>
+               <a href="{{ url_for('course_change', CourseNum=table.CourseNum) }}" class="btn btn-outline-primary btn-sm" role="button">更换教师</a>
+               <a href="{{ url_for('course_drop', CourseNum=table.CourseNum) }}" class="btn btn-outline-danger btn-sm" role="button">退选</a>
             </td>
         </tr>
         {% endfor %}

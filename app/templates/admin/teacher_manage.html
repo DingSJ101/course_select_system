@@ -23,18 +23,18 @@
       <div class="col">
         <input type="text" name="TeacherName" class="form-control" placeholder="姓名" required>
       </div>
-      <div class="col">
-        <select type="text" name="TeacherSex" class="form-control custom-select" placeholder="性别" required>
-            <option>男</option>
-            <option>女</option>
-        </select>
-    </div>
+{#      <div class="col">#}
+{#        <select type="text" name="TeacherSex" class="form-control custom-select" placeholder="性别" required>#}
+{#            <option>男</option>#}
+{#            <option>女</option>#}
+{#        </select>#}
+{#    </div>#}
     <div class="col">
         <input type="text" name="TeacherTitle" class="form-control" placeholder="职称">
       </div>
-      <div class="col">
-        <input type="datetime" name="TeacherInyear" class="form-control" placeholder="出生日期">
-      </div>
+{#      <div class="col">#}
+{#        <input type="datetime" name="TeacherInyear" class="form-control" placeholder="出生日期">#}
+{#      </div>#}
       <div class="col">
       <button type="submit" class="btn btn-block btn-success mb-2">新增录入</button>
       </div>
@@ -49,9 +49,9 @@
             <th class="lead">学院名</th>
             <th class="lead">工号</th>
             <th class="lead">姓名</th>
-            <th class="lead">性别</th>
+{#            <th class="lead">性别</th>#}
             <th class="lead">职称</th>
-            <th class="lead">出生日期</th>
+{#            <th class="lead">出生日期</th>#}
         </tr>
             </thead>
             <tbody>
@@ -62,9 +62,9 @@
            <td class="lead">{{ teacher.dept.DeptName }}</td>
            <td class="lead">{{ teacher.TeacherNum }}</td>
            <td class="lead">{{ teacher.TeacherName }}</td>
-           <td class="lead">{{ teacher.TeacherSex }}</td>
+{#           <td class="lead">{{ teacher.TeacherSex }}</td>#}
            <td class="lead">{{ teacher.TeacherTitle }}</td>
-           <td class="lead">{{ teacher.TeacherInyear }}</td>
+{#           <td class="lead">{{ teacher.TeacherInyear }}</td>#}
         </tr>
         {% endfor %}
         {% endif %}
