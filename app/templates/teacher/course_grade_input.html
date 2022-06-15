@@ -28,7 +28,7 @@
             <td class="lead">{{ table.StudentName }}</td>
             <td class="lead">{{ table.DeptName }}</td>
             <td class="lead">{{ table.MajorName }}</td>
-            {% if table.Grade %}
+            {% if table.Grade >= 0 %}
                 {% if table.Grade < 60 %}
                 <td class="lead table-danger">
                     <div class="row clearfix">
