@@ -5,29 +5,1713 @@ nohup: ignoring input
    Use a production WSGI server instead.
  * Debug mode: off
  * Running on http://0.0.0.0:8000/ (Press CTRL+C to quit)
-2022-06-15 19:36:04,442 INFO sqlalchemy.engine.base.Engine select version()
-2022-06-15 19:36:04,442 INFO sqlalchemy.engine.base.Engine {}
-2022-06-15 19:36:04,469 INFO sqlalchemy.engine.base.Engine select current_schema()
-2022-06-15 19:36:04,469 INFO sqlalchemy.engine.base.Engine {}
-2022-06-15 19:36:04,497 INFO sqlalchemy.engine.base.Engine SELECT CAST('test plain returns' AS VARCHAR(60)) AS anon_1
-2022-06-15 19:36:04,497 INFO sqlalchemy.engine.base.Engine {}
-2022-06-15 19:36:04,515 INFO sqlalchemy.engine.base.Engine SELECT CAST('test unicode returns' AS VARCHAR(60)) AS anon_1
-2022-06-15 19:36:04,515 INFO sqlalchemy.engine.base.Engine {}
-2022-06-15 19:36:04,527 INFO sqlalchemy.engine.base.Engine show standard_conforming_strings
-2022-06-15 19:36:04,527 INFO sqlalchemy.engine.base.Engine {}
-2022-06-15 19:36:04,553 INFO sqlalchemy.engine.base.Engine BEGIN (implicit)
-2022-06-15 19:36:04,553 INFO sqlalchemy.engine.base.Engine SELECT account."User_id" AS "account_User_id", account."User_type" AS "account_User_type", account."Passwd" AS "account_Passwd" 
+2022-06-15 22:07:37,243 INFO sqlalchemy.engine.base.Engine select version()
+2022-06-15 22:07:37,243 INFO sqlalchemy.engine.base.Engine {}
+2022-06-15 22:07:37,266 INFO sqlalchemy.engine.base.Engine select current_schema()
+2022-06-15 22:07:37,266 INFO sqlalchemy.engine.base.Engine {}
+2022-06-15 22:07:37,290 INFO sqlalchemy.engine.base.Engine SELECT CAST('test plain returns' AS VARCHAR(60)) AS anon_1
+2022-06-15 22:07:37,290 INFO sqlalchemy.engine.base.Engine {}
+2022-06-15 22:07:37,305 INFO sqlalchemy.engine.base.Engine SELECT CAST('test unicode returns' AS VARCHAR(60)) AS anon_1
+2022-06-15 22:07:37,305 INFO sqlalchemy.engine.base.Engine {}
+2022-06-15 22:07:37,316 INFO sqlalchemy.engine.base.Engine show standard_conforming_strings
+2022-06-15 22:07:37,316 INFO sqlalchemy.engine.base.Engine {}
+2022-06-15 22:07:37,338 INFO sqlalchemy.engine.base.Engine BEGIN (implicit)
+2022-06-15 22:07:37,339 INFO sqlalchemy.engine.base.Engine SELECT account."User_id" AS "account_User_id", account."User_type" AS "account_User_type", account."Passwd" AS "account_Passwd" 
 FROM account 
 WHERE account."User_id" = %(User_id_1)s 
  LIMIT %(param_1)s
-2022-06-15 19:36:04,554 INFO sqlalchemy.engine.base.Engine {'User_id_1': '19000000', 'param_1': 1}
-2022-06-15 19:36:04,597 INFO sqlalchemy.engine.base.Engine SELECT student."StudentNum" AS "student_StudentNum", student."StudentName" AS "student_StudentName", student."MajorNum" AS "student_MajorNum", student."DeptNum" AS "student_DeptNum" 
+2022-06-15 22:07:37,339 INFO sqlalchemy.engine.base.Engine {'User_id_1': '19000000', 'param_1': 1}
+2022-06-15 22:07:37,365 INFO sqlalchemy.engine.base.Engine SELECT student."StudentNum" AS "student_StudentNum", student."StudentName" AS "student_StudentName", student."MajorNum" AS "student_MajorNum", student."DeptNum" AS "student_DeptNum" 
 FROM student 
 WHERE student."StudentNum" = %(param_1)s
-2022-06-15 19:36:04,597 INFO sqlalchemy.engine.base.Engine {'param_1': 19000000}
-2022-06-15 19:36:04,616 INFO sqlalchemy.engine.base.Engine ROLLBACK
-101.94.166.243 - - [15/Jun/2022 19:36:04] "GET / HTTP/1.1" 200 -
-101.94.166.243 - - [15/Jun/2022 19:36:04] "GET /static/sweetalert/dist/sweetalert.css HTTP/1.1" 404 -
-101.94.166.243 - - [15/Jun/2022 19:36:05] "GET /static/sweetalert/dist/sweetalert.min.js HTTP/1.1" 404 -
-101.94.166.243 - - [15/Jun/2022 19:36:05] "GET /static/sweetalert/dist/sweetalert.min.js HTTP/1.1" 404 -
-127.0.0.1 - - [15/Jun/2022 19:36:20] "GET / HTTP/1.1" 200 -
+2022-06-15 22:07:37,366 INFO sqlalchemy.engine.base.Engine {'param_1': 19000000}
+2022-06-15 22:07:37,378 INFO sqlalchemy.engine.base.Engine SELECT student_class_table."StudentNum" AS "student_class_table_StudentNum", student_class_table."ClassNum" AS "student_class_table_ClassNum", student_class_table."Grade" AS "student_class_table_Grade" 
+FROM student_class_table 
+WHERE student_class_table."ClassNum" LIKE %(ClassNum_1)s AND student_class_table."StudentNum" = %(StudentNum_1)s 
+ LIMIT %(param_1)s
+2022-06-15 22:07:37,379 INFO sqlalchemy.engine.base.Engine {'ClassNum_1': '01026086_%', 'StudentNum_1': '19000000', 'param_1': 1}
+2022-06-15 22:07:37,393 INFO sqlalchemy.engine.base.Engine SELECT student_class_table."StudentNum" AS "student_class_table_StudentNum", student_class_table."ClassNum" AS "student_class_table_ClassNum", student_class_table."Grade" AS "student_class_table_Grade" 
+FROM student_class_table 
+WHERE student_class_table."StudentNum" = %(StudentNum_1)s AND student_class_table."ClassNum" = %(ClassNum_1)s 
+ LIMIT %(param_1)s
+2022-06-15 22:07:37,393 INFO sqlalchemy.engine.base.Engine {'StudentNum_1': '19000000', 'ClassNum_1': '01026086_1111', 'param_1': 1}
+2022-06-15 22:07:37,405 INFO sqlalchemy.engine.base.Engine DELETE FROM student_class_table WHERE student_class_table."StudentNum" = %(StudentNum)s AND student_class_table."ClassNum" = %(ClassNum)s
+2022-06-15 22:07:37,405 INFO sqlalchemy.engine.base.Engine {'StudentNum': '19000000', 'ClassNum': '01026086_1111'}
+2022-06-15 22:07:37,419 INFO sqlalchemy.engine.base.Engine COMMIT
+101.94.166.243 - - [15/Jun/2022 22:07:37] "GET /course_change/01026086 HTTP/1.1" 302 -
+2022-06-15 22:07:37,475 INFO sqlalchemy.engine.base.Engine BEGIN (implicit)
+2022-06-15 22:07:37,475 INFO sqlalchemy.engine.base.Engine SELECT account."User_id" AS "account_User_id", account."User_type" AS "account_User_type", account."Passwd" AS "account_Passwd" 
+FROM account 
+WHERE account."User_id" = %(User_id_1)s 
+ LIMIT %(param_1)s
+2022-06-15 22:07:37,475 INFO sqlalchemy.engine.base.Engine {'User_id_1': '19000000', 'param_1': 1}
+2022-06-15 22:07:37,498 INFO sqlalchemy.engine.base.Engine SELECT student."StudentNum" AS "student_StudentNum", student."StudentName" AS "student_StudentName", student."MajorNum" AS "student_MajorNum", student."DeptNum" AS "student_DeptNum" 
+FROM student 
+WHERE student."StudentNum" = %(param_1)s
+2022-06-15 22:07:37,498 INFO sqlalchemy.engine.base.Engine {'param_1': 19000000}
+2022-06-15 22:07:37,510 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(CourseNum_1)s 
+ LIMIT %(param_1)s
+2022-06-15 22:07:37,510 INFO sqlalchemy.engine.base.Engine {'CourseNum_1': '01026086', 'param_1': 1}
+2022-06-15 22:07:37,523 INFO sqlalchemy.engine.base.Engine SELECT class."ClassNum" AS "class_ClassNum", class."ClassTime" AS "class_ClassTime", class."ClassVenue" AS "class_ClassVenue", class."ClassCapacity" AS "class_ClassCapacity", class."CourseNum" AS "class_CourseNum", class."TeacherNum" AS "class_TeacherNum" 
+FROM class 
+WHERE %(param_1)s = class."CourseNum"
+2022-06-15 22:07:37,523 INFO sqlalchemy.engine.base.Engine {'param_1': '01026086'}
+2022-06-15 22:07:37,535 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:07:37,536 INFO sqlalchemy.engine.base.Engine {'param_1': '10001273'}
+2022-06-15 22:07:37,547 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:07:37,547 INFO sqlalchemy.engine.base.Engine {'param_1': '10001794'}
+2022-06-15 22:07:37,588 INFO sqlalchemy.engine.base.Engine ROLLBACK
+101.94.166.243 - - [15/Jun/2022 22:07:37] "GET /course_teachers/01026086_1111 HTTP/1.1" 200 -
+2022-06-15 22:08:07,888 INFO sqlalchemy.engine.base.Engine BEGIN (implicit)
+2022-06-15 22:08:07,889 INFO sqlalchemy.engine.base.Engine SELECT account."User_id" AS "account_User_id", account."User_type" AS "account_User_type", account."Passwd" AS "account_Passwd" 
+FROM account 
+WHERE account."User_id" = %(User_id_1)s 
+ LIMIT %(param_1)s
+2022-06-15 22:08:07,889 INFO sqlalchemy.engine.base.Engine {'User_id_1': '1000', 'param_1': 1}
+2022-06-15 22:08:07,912 INFO sqlalchemy.engine.base.Engine SELECT manager."ManagerNum" AS "manager_ManagerNum", manager."ManagerName" AS "manager_ManagerName" 
+FROM manager 
+WHERE manager."ManagerNum" = %(param_1)s
+2022-06-15 22:08:07,912 INFO sqlalchemy.engine.base.Engine {'param_1': 1000}
+2022-06-15 22:08:07,925 INFO sqlalchemy.engine.base.Engine SELECT student_class_table."StudentNum" AS "student_class_table_StudentNum", student_class_table."ClassNum" AS "student_class_table_ClassNum", student_class_table."Grade" AS "student_class_table_Grade" 
+FROM student_class_table 
+WHERE student_class_table."StudentNum" = %(StudentNum_1)s AND student_class_table."ClassNum" LIKE %(ClassNum_1)s 
+ LIMIT %(param_1)s
+2022-06-15 22:08:07,925 INFO sqlalchemy.engine.base.Engine {'StudentNum_1': '19000000', 'ClassNum_1': '01026086_%', 'param_1': 1}
+2022-06-15 22:08:07,937 INFO sqlalchemy.engine.base.Engine ROLLBACK
+101.94.166.243 - - [15/Jun/2022 22:08:07] "POST /add_course_select HTTP/1.1" 302 -
+2022-06-15 22:08:08,013 INFO sqlalchemy.engine.base.Engine BEGIN (implicit)
+2022-06-15 22:08:08,013 INFO sqlalchemy.engine.base.Engine SELECT account."User_id" AS "account_User_id", account."User_type" AS "account_User_type", account."Passwd" AS "account_Passwd" 
+FROM account 
+WHERE account."User_id" = %(User_id_1)s 
+ LIMIT %(param_1)s
+2022-06-15 22:08:08,013 INFO sqlalchemy.engine.base.Engine {'User_id_1': '1000', 'param_1': 1}
+2022-06-15 22:08:08,035 INFO sqlalchemy.engine.base.Engine SELECT manager."ManagerNum" AS "manager_ManagerNum", manager."ManagerName" AS "manager_ManagerName" 
+FROM manager 
+WHERE manager."ManagerNum" = %(param_1)s
+2022-06-15 22:08:08,035 INFO sqlalchemy.engine.base.Engine {'param_1': 1000}
+2022-06-15 22:08:08,047 INFO sqlalchemy.engine.base.Engine SELECT class."ClassNum" AS "class_ClassNum", class."ClassTime" AS "class_ClassTime", class."ClassVenue" AS "class_ClassVenue", class."ClassCapacity" AS "class_ClassCapacity", class."CourseNum" AS "class_CourseNum", class."TeacherNum" AS "class_TeacherNum" 
+FROM class ORDER BY class."ClassNum"
+2022-06-15 22:08:08,047 INFO sqlalchemy.engine.base.Engine {}
+2022-06-15 22:08:08,061 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:08,061 INFO sqlalchemy.engine.base.Engine {'param_1': '01026086'}
+2022-06-15 22:08:08,072 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:08,072 INFO sqlalchemy.engine.base.Engine {'param_1': '10001794'}
+2022-06-15 22:08:08,084 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:08,084 INFO sqlalchemy.engine.base.Engine {'param_1': '10001273'}
+2022-06-15 22:08:08,095 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:08,095 INFO sqlalchemy.engine.base.Engine {'param_1': '01036111'}
+2022-06-15 22:08:08,107 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:08,107 INFO sqlalchemy.engine.base.Engine {'param_1': '10000185'}
+2022-06-15 22:08:08,118 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:08,118 INFO sqlalchemy.engine.base.Engine {'param_1': '01065113'}
+2022-06-15 22:08:08,129 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:08,129 INFO sqlalchemy.engine.base.Engine {'param_1': '10000365'}
+2022-06-15 22:08:08,141 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:08,141 INFO sqlalchemy.engine.base.Engine {'param_1': '01825254'}
+2022-06-15 22:08:08,152 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:08,152 INFO sqlalchemy.engine.base.Engine {'param_1': '10001150'}
+2022-06-15 22:08:08,163 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:08,163 INFO sqlalchemy.engine.base.Engine {'param_1': '0182SY03'}
+2022-06-15 22:08:08,175 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:08,175 INFO sqlalchemy.engine.base.Engine {'param_1': '10000552'}
+2022-06-15 22:08:08,186 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:08,186 INFO sqlalchemy.engine.base.Engine {'param_1': '0200R601'}
+2022-06-15 22:08:08,197 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:08,197 INFO sqlalchemy.engine.base.Engine {'param_1': '10001639'}
+2022-06-15 22:08:08,209 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:08,209 INFO sqlalchemy.engine.base.Engine {'param_1': '0200Y007'}
+2022-06-15 22:08:08,220 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:08,220 INFO sqlalchemy.engine.base.Engine {'param_1': '10001602'}
+2022-06-15 22:08:08,232 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:08,232 INFO sqlalchemy.engine.base.Engine {'param_1': '02076456'}
+2022-06-15 22:08:08,243 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:08,243 INFO sqlalchemy.engine.base.Engine {'param_1': '10001815'}
+2022-06-15 22:08:08,255 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:08,255 INFO sqlalchemy.engine.base.Engine {'param_1': '02086290'}
+2022-06-15 22:08:08,266 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:08,266 INFO sqlalchemy.engine.base.Engine {'param_1': '10001704'}
+2022-06-15 22:08:08,277 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:08,277 INFO sqlalchemy.engine.base.Engine {'param_1': '02095101'}
+2022-06-15 22:08:08,288 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:08,289 INFO sqlalchemy.engine.base.Engine {'param_1': '10001405'}
+2022-06-15 22:08:08,300 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:08,300 INFO sqlalchemy.engine.base.Engine {'param_1': '0209EY01'}
+2022-06-15 22:08:08,311 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:08,312 INFO sqlalchemy.engine.base.Engine {'param_1': '10000893'}
+2022-06-15 22:08:08,323 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:08,323 INFO sqlalchemy.engine.base.Engine {'param_1': '10000728'}
+2022-06-15 22:08:08,334 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:08,334 INFO sqlalchemy.engine.base.Engine {'param_1': '10000747'}
+2022-06-15 22:08:08,346 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:08,346 INFO sqlalchemy.engine.base.Engine {'param_1': '02606080'}
+2022-06-15 22:08:08,357 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:08,357 INFO sqlalchemy.engine.base.Engine {'param_1': '10000560'}
+2022-06-15 22:08:08,369 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:08,369 INFO sqlalchemy.engine.base.Engine {'param_1': '0260A055'}
+2022-06-15 22:08:08,380 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:08,380 INFO sqlalchemy.engine.base.Engine {'param_1': '10000709'}
+2022-06-15 22:08:08,392 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:08,392 INFO sqlalchemy.engine.base.Engine {'param_1': '03004472'}
+2022-06-15 22:08:08,403 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:08,403 INFO sqlalchemy.engine.base.Engine {'param_1': '10001240'}
+2022-06-15 22:08:08,414 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:08,414 INFO sqlalchemy.engine.base.Engine {'param_1': '03004483'}
+2022-06-15 22:08:08,426 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:08,426 INFO sqlalchemy.engine.base.Engine {'param_1': '10000244'}
+2022-06-15 22:08:08,437 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:08,437 INFO sqlalchemy.engine.base.Engine {'param_1': '03004492'}
+2022-06-15 22:08:08,448 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:08,449 INFO sqlalchemy.engine.base.Engine {'param_1': '10000499'}
+2022-06-15 22:08:08,460 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:08,460 INFO sqlalchemy.engine.base.Engine {'param_1': '03006912'}
+2022-06-15 22:08:08,471 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:08,471 INFO sqlalchemy.engine.base.Engine {'param_1': '10001682'}
+2022-06-15 22:08:08,483 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:08,483 INFO sqlalchemy.engine.base.Engine {'param_1': '03115034'}
+2022-06-15 22:08:08,494 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:08,494 INFO sqlalchemy.engine.base.Engine {'param_1': '10000091'}
+2022-06-15 22:08:08,506 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:08,506 INFO sqlalchemy.engine.base.Engine {'param_1': '10000011'}
+2022-06-15 22:08:08,517 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:08,517 INFO sqlalchemy.engine.base.Engine {'param_1': '03116231'}
+2022-06-15 22:08:08,529 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:08,529 INFO sqlalchemy.engine.base.Engine {'param_1': '10000639'}
+2022-06-15 22:08:08,540 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:08,540 INFO sqlalchemy.engine.base.Engine {'param_1': '03116285'}
+2022-06-15 22:08:08,552 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:08,552 INFO sqlalchemy.engine.base.Engine {'param_1': '10000631'}
+2022-06-15 22:08:08,564 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:08,564 INFO sqlalchemy.engine.base.Engine {'param_1': '03116301'}
+2022-06-15 22:08:08,575 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:08,575 INFO sqlalchemy.engine.base.Engine {'param_1': '03125034'}
+2022-06-15 22:08:08,586 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:08,587 INFO sqlalchemy.engine.base.Engine {'param_1': '10001456'}
+2022-06-15 22:08:08,598 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:08,598 INFO sqlalchemy.engine.base.Engine {'param_1': '0400J510'}
+2022-06-15 22:08:08,609 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:08,609 INFO sqlalchemy.engine.base.Engine {'param_1': '10001631'}
+2022-06-15 22:08:08,621 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:08,621 INFO sqlalchemy.engine.base.Engine {'param_1': '04165001'}
+2022-06-15 22:08:08,632 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:08,632 INFO sqlalchemy.engine.base.Engine {'param_1': '10000775'}
+2022-06-15 22:08:08,644 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:08,644 INFO sqlalchemy.engine.base.Engine {'param_1': '10000313'}
+2022-06-15 22:08:08,655 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:08,655 INFO sqlalchemy.engine.base.Engine {'param_1': '0417A008'}
+2022-06-15 22:08:08,666 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:08,666 INFO sqlalchemy.engine.base.Engine {'param_1': '10000945'}
+2022-06-15 22:08:08,677 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:08,678 INFO sqlalchemy.engine.base.Engine {'param_1': '04185045'}
+2022-06-15 22:08:08,689 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:08,689 INFO sqlalchemy.engine.base.Engine {'param_1': '10001287'}
+2022-06-15 22:08:08,700 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:08,700 INFO sqlalchemy.engine.base.Engine {'param_1': '0418EY08'}
+2022-06-15 22:08:08,711 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:08,712 INFO sqlalchemy.engine.base.Engine {'param_1': '10001067'}
+2022-06-15 22:08:08,723 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:08,723 INFO sqlalchemy.engine.base.Engine {'param_1': '04205003'}
+2022-06-15 22:08:08,734 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:08,734 INFO sqlalchemy.engine.base.Engine {'param_1': '10001004'}
+2022-06-15 22:08:08,745 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:08,746 INFO sqlalchemy.engine.base.Engine {'param_1': '10001254'}
+2022-06-15 22:08:08,757 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:08,757 INFO sqlalchemy.engine.base.Engine {'param_1': '10001666'}
+2022-06-15 22:08:08,768 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:08,769 INFO sqlalchemy.engine.base.Engine {'param_1': '10000796'}
+2022-06-15 22:08:08,780 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:08,780 INFO sqlalchemy.engine.base.Engine {'param_1': '04236019'}
+2022-06-15 22:08:08,791 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:08,792 INFO sqlalchemy.engine.base.Engine {'param_1': '10001396'}
+2022-06-15 22:08:08,803 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:08,803 INFO sqlalchemy.engine.base.Engine {'param_1': '04636005'}
+2022-06-15 22:08:08,814 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:08,814 INFO sqlalchemy.engine.base.Engine {'param_1': '10000741'}
+2022-06-15 22:08:08,825 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:08,825 INFO sqlalchemy.engine.base.Engine {'param_1': '0463SY04'}
+2022-06-15 22:08:08,837 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:08,837 INFO sqlalchemy.engine.base.Engine {'param_1': '10001159'}
+2022-06-15 22:08:08,848 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:08,848 INFO sqlalchemy.engine.base.Engine {'param_1': '0600R812'}
+2022-06-15 22:08:08,859 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:08,859 INFO sqlalchemy.engine.base.Engine {'param_1': '10001474'}
+2022-06-15 22:08:08,871 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:08,871 INFO sqlalchemy.engine.base.Engine {'param_1': '06266151'}
+2022-06-15 22:08:08,882 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:08,882 INFO sqlalchemy.engine.base.Engine {'param_1': '10000336'}
+2022-06-15 22:08:08,894 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:08,894 INFO sqlalchemy.engine.base.Engine {'param_1': '0700Y021'}
+2022-06-15 22:08:08,905 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:08,905 INFO sqlalchemy.engine.base.Engine {'param_1': '10001584'}
+2022-06-15 22:08:08,916 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:08,916 INFO sqlalchemy.engine.base.Engine {'param_1': '0700Y044'}
+2022-06-15 22:08:08,928 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:08,928 INFO sqlalchemy.engine.base.Engine {'param_1': '10000543'}
+2022-06-15 22:08:08,939 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:08,939 INFO sqlalchemy.engine.base.Engine {'param_1': '08306120'}
+2022-06-15 22:08:08,951 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:08,951 INFO sqlalchemy.engine.base.Engine {'param_1': '10000940'}
+2022-06-15 22:08:08,962 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:08,962 INFO sqlalchemy.engine.base.Engine {'param_1': '10000174'}
+2022-06-15 22:08:08,973 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:08,974 INFO sqlalchemy.engine.base.Engine {'param_1': '10203040'}
+2022-06-15 22:08:08,985 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:08,985 INFO sqlalchemy.engine.base.Engine {'param_1': '10000866'}
+2022-06-15 22:08:08,996 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:08,996 INFO sqlalchemy.engine.base.Engine {'param_1': '13006075'}
+2022-06-15 22:08:09,026 INFO sqlalchemy.engine.base.Engine ROLLBACK
+101.94.166.243 - - [15/Jun/2022 22:08:09] "GET /course_select_manage HTTP/1.1" 200 -
+101.94.166.243 - - [15/Jun/2022 22:08:09] "GET /static/sweetalert/dist/sweetalert.css HTTP/1.1" 404 -
+101.94.166.243 - - [15/Jun/2022 22:08:10] "GET /static/ionicons/css/ionicons.min.css.map HTTP/1.1" 404 -
+2022-06-15 22:08:14,938 INFO sqlalchemy.engine.base.Engine BEGIN (implicit)
+2022-06-15 22:08:14,938 INFO sqlalchemy.engine.base.Engine SELECT account."User_id" AS "account_User_id", account."User_type" AS "account_User_type", account."Passwd" AS "account_Passwd" 
+FROM account 
+WHERE account."User_id" = %(User_id_1)s 
+ LIMIT %(param_1)s
+2022-06-15 22:08:14,938 INFO sqlalchemy.engine.base.Engine {'User_id_1': '19000000', 'param_1': 1}
+2022-06-15 22:08:14,960 INFO sqlalchemy.engine.base.Engine SELECT student."StudentNum" AS "student_StudentNum", student."StudentName" AS "student_StudentName", student."MajorNum" AS "student_MajorNum", student."DeptNum" AS "student_DeptNum" 
+FROM student 
+WHERE student."StudentNum" = %(param_1)s
+2022-06-15 22:08:14,960 INFO sqlalchemy.engine.base.Engine {'param_1': 19000000}
+2022-06-15 22:08:14,972 INFO sqlalchemy.engine.base.Engine SELECT class."ClassNum" AS "class_ClassNum", class."ClassTime" AS "class_ClassTime", class."ClassVenue" AS "class_ClassVenue", class."ClassCapacity" AS "class_ClassCapacity", class."CourseNum" AS "class_CourseNum", class."TeacherNum" AS "class_TeacherNum" 
+FROM class, student_class_table 
+WHERE %(param_1)s = student_class_table."StudentNum" AND class."ClassNum" = student_class_table."ClassNum"
+2022-06-15 22:08:14,973 INFO sqlalchemy.engine.base.Engine {'param_1': '19000000'}
+2022-06-15 22:08:14,985 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:14,985 INFO sqlalchemy.engine.base.Engine {'param_1': '04636005'}
+2022-06-15 22:08:14,996 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:14,996 INFO sqlalchemy.engine.base.Engine {'param_1': '10000741'}
+2022-06-15 22:08:15,008 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:15,008 INFO sqlalchemy.engine.base.Engine {'param_1': '08306120'}
+2022-06-15 22:08:15,019 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:15,019 INFO sqlalchemy.engine.base.Engine {'param_1': '10000174'}
+2022-06-15 22:08:15,030 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:15,030 INFO sqlalchemy.engine.base.Engine {'param_1': '0209EY01'}
+2022-06-15 22:08:15,041 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:15,042 INFO sqlalchemy.engine.base.Engine {'param_1': '10000893'}
+2022-06-15 22:08:15,053 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:15,053 INFO sqlalchemy.engine.base.Engine {'param_1': '03004492'}
+2022-06-15 22:08:15,064 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:15,064 INFO sqlalchemy.engine.base.Engine {'param_1': '10000499'}
+2022-06-15 22:08:15,076 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:15,076 INFO sqlalchemy.engine.base.Engine {'param_1': '03116285'}
+2022-06-15 22:08:15,087 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:15,087 INFO sqlalchemy.engine.base.Engine {'param_1': '10000631'}
+2022-06-15 22:08:15,099 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:15,099 INFO sqlalchemy.engine.base.Engine {'param_1': '01026086'}
+2022-06-15 22:08:15,110 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:15,110 INFO sqlalchemy.engine.base.Engine {'param_1': '10001794'}
+2022-06-15 22:08:15,121 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:15,121 INFO sqlalchemy.engine.base.Engine {'param_1': '0260A055'}
+2022-06-15 22:08:15,132 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:15,133 INFO sqlalchemy.engine.base.Engine {'param_1': '10000709'}
+2022-06-15 22:08:15,144 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:15,144 INFO sqlalchemy.engine.base.Engine {'param_1': '04165001'}
+2022-06-15 22:08:15,155 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:15,155 INFO sqlalchemy.engine.base.Engine {'param_1': '10000775'}
+2022-06-15 22:08:15,172 INFO sqlalchemy.engine.base.Engine ROLLBACK
+101.94.166.243 - - [15/Jun/2022 22:08:15] "GET /course_select_table HTTP/1.1" 200 -
+2022-06-15 22:08:19,228 INFO sqlalchemy.engine.base.Engine BEGIN (implicit)
+2022-06-15 22:08:19,229 INFO sqlalchemy.engine.base.Engine SELECT account."User_id" AS "account_User_id", account."User_type" AS "account_User_type", account."Passwd" AS "account_Passwd" 
+FROM account 
+WHERE account."User_id" = %(User_id_1)s 
+ LIMIT %(param_1)s
+2022-06-15 22:08:19,229 INFO sqlalchemy.engine.base.Engine {'User_id_1': '19000000', 'param_1': 1}
+2022-06-15 22:08:19,251 INFO sqlalchemy.engine.base.Engine SELECT student."StudentNum" AS "student_StudentNum", student."StudentName" AS "student_StudentName", student."MajorNum" AS "student_MajorNum", student."DeptNum" AS "student_DeptNum" 
+FROM student 
+WHERE student."StudentNum" = %(param_1)s
+2022-06-15 22:08:19,251 INFO sqlalchemy.engine.base.Engine {'param_1': 19000000}
+2022-06-15 22:08:19,263 INFO sqlalchemy.engine.base.Engine SELECT class."ClassNum" AS "class_ClassNum", class."ClassTime" AS "class_ClassTime", class."ClassVenue" AS "class_ClassVenue", class."ClassCapacity" AS "class_ClassCapacity", class."CourseNum" AS "class_CourseNum", class."TeacherNum" AS "class_TeacherNum" 
+FROM class, student_class_table 
+WHERE %(param_1)s = student_class_table."StudentNum" AND class."ClassNum" = student_class_table."ClassNum"
+2022-06-15 22:08:19,263 INFO sqlalchemy.engine.base.Engine {'param_1': '19000000'}
+2022-06-15 22:08:19,276 INFO sqlalchemy.engine.base.Engine SELECT class."ClassNum" AS "class_ClassNum", class."ClassTime" AS "class_ClassTime", class."ClassVenue" AS "class_ClassVenue", class."ClassCapacity" AS "class_ClassCapacity", class."CourseNum" AS "class_CourseNum", class."TeacherNum" AS "class_TeacherNum" 
+FROM class, student_class_table 
+WHERE %(param_1)s = student_class_table."StudentNum" AND class."ClassNum" = student_class_table."ClassNum"
+2022-06-15 22:08:19,276 INFO sqlalchemy.engine.base.Engine {'param_1': '19000000'}
+2022-06-15 22:08:19,289 INFO sqlalchemy.engine.base.Engine SELECT student_class_table."StudentNum" AS "student_class_table_StudentNum", student_class_table."ClassNum" AS "student_class_table_ClassNum", student_class_table."Grade" AS "student_class_table_Grade" 
+FROM student_class_table 
+WHERE student_class_table."StudentNum" = %(StudentNum_1)s AND student_class_table."ClassNum" = %(ClassNum_1)s 
+ LIMIT %(param_1)s
+2022-06-15 22:08:19,289 INFO sqlalchemy.engine.base.Engine {'StudentNum_1': '19000000', 'ClassNum_1': '01026086_1000', 'param_1': 1}
+2022-06-15 22:08:19,300 INFO sqlalchemy.engine.base.Engine DELETE FROM student_class_table WHERE student_class_table."StudentNum" = %(StudentNum)s AND student_class_table."ClassNum" = %(ClassNum)s
+2022-06-15 22:08:19,300 INFO sqlalchemy.engine.base.Engine {'StudentNum': '19000000', 'ClassNum': '01026086_1000'}
+2022-06-15 22:08:19,311 INFO sqlalchemy.engine.base.Engine COMMIT
+101.94.166.243 - - [15/Jun/2022 22:08:19] "GET /course_drop/01026086 HTTP/1.1" 302 -
+2022-06-15 22:08:19,368 INFO sqlalchemy.engine.base.Engine BEGIN (implicit)
+2022-06-15 22:08:19,369 INFO sqlalchemy.engine.base.Engine SELECT account."User_id" AS "account_User_id", account."User_type" AS "account_User_type", account."Passwd" AS "account_Passwd" 
+FROM account 
+WHERE account."User_id" = %(User_id_1)s 
+ LIMIT %(param_1)s
+2022-06-15 22:08:19,369 INFO sqlalchemy.engine.base.Engine {'User_id_1': '19000000', 'param_1': 1}
+2022-06-15 22:08:19,390 INFO sqlalchemy.engine.base.Engine SELECT student."StudentNum" AS "student_StudentNum", student."StudentName" AS "student_StudentName", student."MajorNum" AS "student_MajorNum", student."DeptNum" AS "student_DeptNum" 
+FROM student 
+WHERE student."StudentNum" = %(param_1)s
+2022-06-15 22:08:19,391 INFO sqlalchemy.engine.base.Engine {'param_1': 19000000}
+2022-06-15 22:08:19,403 INFO sqlalchemy.engine.base.Engine SELECT class."ClassNum" AS "class_ClassNum", class."ClassTime" AS "class_ClassTime", class."ClassVenue" AS "class_ClassVenue", class."ClassCapacity" AS "class_ClassCapacity", class."CourseNum" AS "class_CourseNum", class."TeacherNum" AS "class_TeacherNum" 
+FROM class, student_class_table 
+WHERE %(param_1)s = student_class_table."StudentNum" AND class."ClassNum" = student_class_table."ClassNum"
+2022-06-15 22:08:19,403 INFO sqlalchemy.engine.base.Engine {'param_1': '19000000'}
+2022-06-15 22:08:19,416 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:19,417 INFO sqlalchemy.engine.base.Engine {'param_1': '04636005'}
+2022-06-15 22:08:19,428 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:19,428 INFO sqlalchemy.engine.base.Engine {'param_1': '10000741'}
+2022-06-15 22:08:19,439 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:19,440 INFO sqlalchemy.engine.base.Engine {'param_1': '08306120'}
+2022-06-15 22:08:19,451 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:19,451 INFO sqlalchemy.engine.base.Engine {'param_1': '10000174'}
+2022-06-15 22:08:19,462 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:19,462 INFO sqlalchemy.engine.base.Engine {'param_1': '0209EY01'}
+2022-06-15 22:08:19,474 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:19,474 INFO sqlalchemy.engine.base.Engine {'param_1': '10000893'}
+2022-06-15 22:08:19,485 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:19,485 INFO sqlalchemy.engine.base.Engine {'param_1': '03004492'}
+2022-06-15 22:08:19,496 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:19,496 INFO sqlalchemy.engine.base.Engine {'param_1': '10000499'}
+2022-06-15 22:08:19,508 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:19,508 INFO sqlalchemy.engine.base.Engine {'param_1': '03116285'}
+2022-06-15 22:08:19,519 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:19,519 INFO sqlalchemy.engine.base.Engine {'param_1': '10000631'}
+2022-06-15 22:08:19,530 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:19,530 INFO sqlalchemy.engine.base.Engine {'param_1': '0260A055'}
+2022-06-15 22:08:19,542 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:19,542 INFO sqlalchemy.engine.base.Engine {'param_1': '10000709'}
+2022-06-15 22:08:19,553 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:19,553 INFO sqlalchemy.engine.base.Engine {'param_1': '04165001'}
+2022-06-15 22:08:19,564 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:19,564 INFO sqlalchemy.engine.base.Engine {'param_1': '10000775'}
+2022-06-15 22:08:19,577 INFO sqlalchemy.engine.base.Engine ROLLBACK
+101.94.166.243 - - [15/Jun/2022 22:08:19] "GET /course_select_table HTTP/1.1" 200 -
+2022-06-15 22:08:27,015 INFO sqlalchemy.engine.base.Engine BEGIN (implicit)
+2022-06-15 22:08:27,016 INFO sqlalchemy.engine.base.Engine SELECT account."User_id" AS "account_User_id", account."User_type" AS "account_User_type", account."Passwd" AS "account_Passwd" 
+FROM account 
+WHERE account."User_id" = %(User_id_1)s 
+ LIMIT %(param_1)s
+2022-06-15 22:08:27,016 INFO sqlalchemy.engine.base.Engine {'User_id_1': '1000', 'param_1': 1}
+2022-06-15 22:08:27,038 INFO sqlalchemy.engine.base.Engine SELECT manager."ManagerNum" AS "manager_ManagerNum", manager."ManagerName" AS "manager_ManagerName" 
+FROM manager 
+WHERE manager."ManagerNum" = %(param_1)s
+2022-06-15 22:08:27,038 INFO sqlalchemy.engine.base.Engine {'param_1': 1000}
+2022-06-15 22:08:27,050 INFO sqlalchemy.engine.base.Engine SELECT student_class_table."StudentNum" AS "student_class_table_StudentNum", student_class_table."ClassNum" AS "student_class_table_ClassNum", student_class_table."Grade" AS "student_class_table_Grade" 
+FROM student_class_table 
+WHERE student_class_table."StudentNum" = %(StudentNum_1)s AND student_class_table."ClassNum" LIKE %(ClassNum_1)s 
+ LIMIT %(param_1)s
+2022-06-15 22:08:27,050 INFO sqlalchemy.engine.base.Engine {'StudentNum_1': '19000000', 'ClassNum_1': '01026086_%', 'param_1': 1}
+2022-06-15 22:08:27,062 INFO sqlalchemy.engine.base.Engine INSERT INTO student_class_table ("StudentNum", "ClassNum", "Grade") VALUES (%(StudentNum)s, %(ClassNum)s, %(Grade)s)
+2022-06-15 22:08:27,062 INFO sqlalchemy.engine.base.Engine {'StudentNum': '19000000', 'ClassNum': '01026086_1111', 'Grade': None}
+2022-06-15 22:08:27,075 INFO sqlalchemy.engine.base.Engine COMMIT
+101.94.166.243 - - [15/Jun/2022 22:08:27] "POST /add_course_select HTTP/1.1" 302 -
+2022-06-15 22:08:27,190 INFO sqlalchemy.engine.base.Engine BEGIN (implicit)
+2022-06-15 22:08:27,190 INFO sqlalchemy.engine.base.Engine SELECT account."User_id" AS "account_User_id", account."User_type" AS "account_User_type", account."Passwd" AS "account_Passwd" 
+FROM account 
+WHERE account."User_id" = %(User_id_1)s 
+ LIMIT %(param_1)s
+2022-06-15 22:08:27,191 INFO sqlalchemy.engine.base.Engine {'User_id_1': '1000', 'param_1': 1}
+2022-06-15 22:08:27,213 INFO sqlalchemy.engine.base.Engine SELECT manager."ManagerNum" AS "manager_ManagerNum", manager."ManagerName" AS "manager_ManagerName" 
+FROM manager 
+WHERE manager."ManagerNum" = %(param_1)s
+2022-06-15 22:08:27,213 INFO sqlalchemy.engine.base.Engine {'param_1': 1000}
+2022-06-15 22:08:27,224 INFO sqlalchemy.engine.base.Engine SELECT class."ClassNum" AS "class_ClassNum", class."ClassTime" AS "class_ClassTime", class."ClassVenue" AS "class_ClassVenue", class."ClassCapacity" AS "class_ClassCapacity", class."CourseNum" AS "class_CourseNum", class."TeacherNum" AS "class_TeacherNum" 
+FROM class ORDER BY class."ClassNum"
+2022-06-15 22:08:27,224 INFO sqlalchemy.engine.base.Engine {}
+2022-06-15 22:08:27,237 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:27,237 INFO sqlalchemy.engine.base.Engine {'param_1': '01026086'}
+2022-06-15 22:08:27,248 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:27,248 INFO sqlalchemy.engine.base.Engine {'param_1': '10001794'}
+2022-06-15 22:08:27,260 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:27,260 INFO sqlalchemy.engine.base.Engine {'param_1': '10001273'}
+2022-06-15 22:08:27,271 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:27,271 INFO sqlalchemy.engine.base.Engine {'param_1': '01036111'}
+2022-06-15 22:08:27,283 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:27,283 INFO sqlalchemy.engine.base.Engine {'param_1': '10000185'}
+2022-06-15 22:08:27,294 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:27,294 INFO sqlalchemy.engine.base.Engine {'param_1': '01065113'}
+2022-06-15 22:08:27,305 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:27,306 INFO sqlalchemy.engine.base.Engine {'param_1': '10000365'}
+2022-06-15 22:08:27,317 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:27,317 INFO sqlalchemy.engine.base.Engine {'param_1': '01825254'}
+2022-06-15 22:08:27,328 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:27,328 INFO sqlalchemy.engine.base.Engine {'param_1': '10001150'}
+2022-06-15 22:08:27,339 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:27,339 INFO sqlalchemy.engine.base.Engine {'param_1': '0182SY03'}
+2022-06-15 22:08:27,350 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:27,351 INFO sqlalchemy.engine.base.Engine {'param_1': '10000552'}
+2022-06-15 22:08:27,362 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:27,362 INFO sqlalchemy.engine.base.Engine {'param_1': '0200R601'}
+2022-06-15 22:08:27,373 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:27,373 INFO sqlalchemy.engine.base.Engine {'param_1': '10001639'}
+2022-06-15 22:08:27,385 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:27,385 INFO sqlalchemy.engine.base.Engine {'param_1': '0200Y007'}
+2022-06-15 22:08:27,396 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:27,396 INFO sqlalchemy.engine.base.Engine {'param_1': '10001602'}
+2022-06-15 22:08:27,408 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:27,408 INFO sqlalchemy.engine.base.Engine {'param_1': '02076456'}
+2022-06-15 22:08:27,419 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:27,419 INFO sqlalchemy.engine.base.Engine {'param_1': '10001815'}
+2022-06-15 22:08:27,430 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:27,430 INFO sqlalchemy.engine.base.Engine {'param_1': '02086290'}
+2022-06-15 22:08:27,442 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:27,442 INFO sqlalchemy.engine.base.Engine {'param_1': '10001704'}
+2022-06-15 22:08:27,453 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:27,453 INFO sqlalchemy.engine.base.Engine {'param_1': '02095101'}
+2022-06-15 22:08:27,465 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:27,465 INFO sqlalchemy.engine.base.Engine {'param_1': '10001405'}
+2022-06-15 22:08:27,476 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:27,477 INFO sqlalchemy.engine.base.Engine {'param_1': '0209EY01'}
+2022-06-15 22:08:27,488 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:27,488 INFO sqlalchemy.engine.base.Engine {'param_1': '10000893'}
+2022-06-15 22:08:27,500 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:27,500 INFO sqlalchemy.engine.base.Engine {'param_1': '10000728'}
+2022-06-15 22:08:27,511 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:27,511 INFO sqlalchemy.engine.base.Engine {'param_1': '10000747'}
+2022-06-15 22:08:27,522 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:27,522 INFO sqlalchemy.engine.base.Engine {'param_1': '02606080'}
+2022-06-15 22:08:27,534 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:27,534 INFO sqlalchemy.engine.base.Engine {'param_1': '10000560'}
+2022-06-15 22:08:27,546 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:27,546 INFO sqlalchemy.engine.base.Engine {'param_1': '0260A055'}
+2022-06-15 22:08:27,557 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:27,557 INFO sqlalchemy.engine.base.Engine {'param_1': '10000709'}
+2022-06-15 22:08:27,569 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:27,569 INFO sqlalchemy.engine.base.Engine {'param_1': '03004472'}
+2022-06-15 22:08:27,580 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:27,580 INFO sqlalchemy.engine.base.Engine {'param_1': '10001240'}
+2022-06-15 22:08:27,591 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:27,592 INFO sqlalchemy.engine.base.Engine {'param_1': '03004483'}
+2022-06-15 22:08:27,603 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:27,603 INFO sqlalchemy.engine.base.Engine {'param_1': '10000244'}
+2022-06-15 22:08:27,614 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:27,614 INFO sqlalchemy.engine.base.Engine {'param_1': '03004492'}
+2022-06-15 22:08:27,625 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:27,626 INFO sqlalchemy.engine.base.Engine {'param_1': '10000499'}
+2022-06-15 22:08:27,637 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:27,637 INFO sqlalchemy.engine.base.Engine {'param_1': '03006912'}
+2022-06-15 22:08:27,648 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:27,648 INFO sqlalchemy.engine.base.Engine {'param_1': '10001682'}
+2022-06-15 22:08:27,659 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:27,659 INFO sqlalchemy.engine.base.Engine {'param_1': '03115034'}
+2022-06-15 22:08:27,671 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:27,671 INFO sqlalchemy.engine.base.Engine {'param_1': '10000091'}
+2022-06-15 22:08:27,682 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:27,682 INFO sqlalchemy.engine.base.Engine {'param_1': '10000011'}
+2022-06-15 22:08:27,694 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:27,694 INFO sqlalchemy.engine.base.Engine {'param_1': '03116231'}
+2022-06-15 22:08:27,705 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:27,705 INFO sqlalchemy.engine.base.Engine {'param_1': '10000639'}
+2022-06-15 22:08:27,716 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:27,716 INFO sqlalchemy.engine.base.Engine {'param_1': '03116285'}
+2022-06-15 22:08:27,728 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:27,728 INFO sqlalchemy.engine.base.Engine {'param_1': '10000631'}
+2022-06-15 22:08:27,739 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:27,739 INFO sqlalchemy.engine.base.Engine {'param_1': '03116301'}
+2022-06-15 22:08:27,750 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:27,750 INFO sqlalchemy.engine.base.Engine {'param_1': '03125034'}
+2022-06-15 22:08:27,761 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:27,762 INFO sqlalchemy.engine.base.Engine {'param_1': '10001456'}
+2022-06-15 22:08:27,773 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:27,773 INFO sqlalchemy.engine.base.Engine {'param_1': '0400J510'}
+2022-06-15 22:08:27,784 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:27,784 INFO sqlalchemy.engine.base.Engine {'param_1': '10001631'}
+2022-06-15 22:08:27,795 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:27,795 INFO sqlalchemy.engine.base.Engine {'param_1': '04165001'}
+2022-06-15 22:08:27,807 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:27,807 INFO sqlalchemy.engine.base.Engine {'param_1': '10000775'}
+2022-06-15 22:08:27,818 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:27,818 INFO sqlalchemy.engine.base.Engine {'param_1': '10000313'}
+2022-06-15 22:08:27,829 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:27,830 INFO sqlalchemy.engine.base.Engine {'param_1': '0417A008'}
+2022-06-15 22:08:27,841 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:27,841 INFO sqlalchemy.engine.base.Engine {'param_1': '10000945'}
+2022-06-15 22:08:27,852 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:27,852 INFO sqlalchemy.engine.base.Engine {'param_1': '04185045'}
+2022-06-15 22:08:27,864 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:27,864 INFO sqlalchemy.engine.base.Engine {'param_1': '10001287'}
+2022-06-15 22:08:27,875 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:27,875 INFO sqlalchemy.engine.base.Engine {'param_1': '0418EY08'}
+2022-06-15 22:08:27,886 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:27,886 INFO sqlalchemy.engine.base.Engine {'param_1': '10001067'}
+2022-06-15 22:08:27,897 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:27,898 INFO sqlalchemy.engine.base.Engine {'param_1': '04205003'}
+2022-06-15 22:08:27,909 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:27,909 INFO sqlalchemy.engine.base.Engine {'param_1': '10001004'}
+2022-06-15 22:08:27,920 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:27,920 INFO sqlalchemy.engine.base.Engine {'param_1': '10001254'}
+2022-06-15 22:08:27,931 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:27,931 INFO sqlalchemy.engine.base.Engine {'param_1': '10001666'}
+2022-06-15 22:08:27,943 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:27,943 INFO sqlalchemy.engine.base.Engine {'param_1': '10000796'}
+2022-06-15 22:08:27,954 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:27,954 INFO sqlalchemy.engine.base.Engine {'param_1': '04236019'}
+2022-06-15 22:08:27,965 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:27,965 INFO sqlalchemy.engine.base.Engine {'param_1': '10001396'}
+2022-06-15 22:08:27,977 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:27,977 INFO sqlalchemy.engine.base.Engine {'param_1': '04636005'}
+2022-06-15 22:08:27,988 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:27,988 INFO sqlalchemy.engine.base.Engine {'param_1': '10000741'}
+2022-06-15 22:08:27,999 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:27,999 INFO sqlalchemy.engine.base.Engine {'param_1': '0463SY04'}
+2022-06-15 22:08:28,010 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:28,011 INFO sqlalchemy.engine.base.Engine {'param_1': '10001159'}
+2022-06-15 22:08:28,022 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:28,022 INFO sqlalchemy.engine.base.Engine {'param_1': '0600R812'}
+2022-06-15 22:08:28,033 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:28,033 INFO sqlalchemy.engine.base.Engine {'param_1': '10001474'}
+2022-06-15 22:08:28,044 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:28,044 INFO sqlalchemy.engine.base.Engine {'param_1': '06266151'}
+2022-06-15 22:08:28,055 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:28,056 INFO sqlalchemy.engine.base.Engine {'param_1': '10000336'}
+2022-06-15 22:08:28,067 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:28,067 INFO sqlalchemy.engine.base.Engine {'param_1': '0700Y021'}
+2022-06-15 22:08:28,078 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:28,078 INFO sqlalchemy.engine.base.Engine {'param_1': '10001584'}
+2022-06-15 22:08:28,089 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:28,089 INFO sqlalchemy.engine.base.Engine {'param_1': '0700Y044'}
+2022-06-15 22:08:28,100 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:28,100 INFO sqlalchemy.engine.base.Engine {'param_1': '10000543'}
+2022-06-15 22:08:28,112 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:28,112 INFO sqlalchemy.engine.base.Engine {'param_1': '08306120'}
+2022-06-15 22:08:28,123 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:28,123 INFO sqlalchemy.engine.base.Engine {'param_1': '10000940'}
+2022-06-15 22:08:28,134 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:28,134 INFO sqlalchemy.engine.base.Engine {'param_1': '10000174'}
+2022-06-15 22:08:28,145 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:28,145 INFO sqlalchemy.engine.base.Engine {'param_1': '10203040'}
+2022-06-15 22:08:28,157 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:28,157 INFO sqlalchemy.engine.base.Engine {'param_1': '10000866'}
+2022-06-15 22:08:28,168 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:28,168 INFO sqlalchemy.engine.base.Engine {'param_1': '13006075'}
+2022-06-15 22:08:28,186 INFO sqlalchemy.engine.base.Engine ROLLBACK
+101.94.166.243 - - [15/Jun/2022 22:08:28] "GET /course_select_manage HTTP/1.1" 200 -
+101.94.166.243 - - [15/Jun/2022 22:08:28] "GET /static/sweetalert/dist/sweetalert.css HTTP/1.1" 404 -
+101.94.166.243 - - [15/Jun/2022 22:08:29] "GET /static/ionicons/css/ionicons.min.css.map HTTP/1.1" 404 -
+2022-06-15 22:08:35,753 INFO sqlalchemy.engine.base.Engine BEGIN (implicit)
+2022-06-15 22:08:35,754 INFO sqlalchemy.engine.base.Engine SELECT account."User_id" AS "account_User_id", account."User_type" AS "account_User_type", account."Passwd" AS "account_Passwd" 
+FROM account 
+WHERE account."User_id" = %(User_id_1)s 
+ LIMIT %(param_1)s
+2022-06-15 22:08:35,754 INFO sqlalchemy.engine.base.Engine {'User_id_1': '1000', 'param_1': 1}
+2022-06-15 22:08:35,775 INFO sqlalchemy.engine.base.Engine SELECT manager."ManagerNum" AS "manager_ManagerNum", manager."ManagerName" AS "manager_ManagerName" 
+FROM manager 
+WHERE manager."ManagerNum" = %(param_1)s
+2022-06-15 22:08:35,776 INFO sqlalchemy.engine.base.Engine {'param_1': 1000}
+2022-06-15 22:08:35,787 INFO sqlalchemy.engine.base.Engine SELECT student_class_table."StudentNum" AS "student_class_table_StudentNum", student_class_table."ClassNum" AS "student_class_table_ClassNum", student_class_table."Grade" AS "student_class_table_Grade" 
+FROM student_class_table 
+WHERE student_class_table."StudentNum" = %(StudentNum_1)s AND student_class_table."ClassNum" LIKE %(ClassNum_1)s 
+ LIMIT %(param_1)s
+2022-06-15 22:08:35,788 INFO sqlalchemy.engine.base.Engine {'StudentNum_1': '19000000', 'ClassNum_1': '01014117_%', 'param_1': 1}
+2022-06-15 22:08:35,799 INFO sqlalchemy.engine.base.Engine INSERT INTO student_class_table ("StudentNum", "ClassNum", "Grade") VALUES (%(StudentNum)s, %(ClassNum)s, %(Grade)s)
+2022-06-15 22:08:35,799 INFO sqlalchemy.engine.base.Engine {'StudentNum': '19000000', 'ClassNum': '01014117_2000', 'Grade': None}
+2022-06-15 22:08:35,813 INFO sqlalchemy.engine.base.Engine ROLLBACK
+101.94.166.243 - - [15/Jun/2022 22:08:35] "POST /add_course_select HTTP/1.1" 302 -
+2022-06-15 22:08:35,911 INFO sqlalchemy.engine.base.Engine BEGIN (implicit)
+2022-06-15 22:08:35,912 INFO sqlalchemy.engine.base.Engine SELECT account."User_id" AS "account_User_id", account."User_type" AS "account_User_type", account."Passwd" AS "account_Passwd" 
+FROM account 
+WHERE account."User_id" = %(User_id_1)s 
+ LIMIT %(param_1)s
+2022-06-15 22:08:35,912 INFO sqlalchemy.engine.base.Engine {'User_id_1': '1000', 'param_1': 1}
+2022-06-15 22:08:35,934 INFO sqlalchemy.engine.base.Engine SELECT manager."ManagerNum" AS "manager_ManagerNum", manager."ManagerName" AS "manager_ManagerName" 
+FROM manager 
+WHERE manager."ManagerNum" = %(param_1)s
+2022-06-15 22:08:35,934 INFO sqlalchemy.engine.base.Engine {'param_1': 1000}
+2022-06-15 22:08:35,946 INFO sqlalchemy.engine.base.Engine SELECT class."ClassNum" AS "class_ClassNum", class."ClassTime" AS "class_ClassTime", class."ClassVenue" AS "class_ClassVenue", class."ClassCapacity" AS "class_ClassCapacity", class."CourseNum" AS "class_CourseNum", class."TeacherNum" AS "class_TeacherNum" 
+FROM class ORDER BY class."ClassNum"
+2022-06-15 22:08:35,946 INFO sqlalchemy.engine.base.Engine {}
+2022-06-15 22:08:35,958 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:35,958 INFO sqlalchemy.engine.base.Engine {'param_1': '01026086'}
+2022-06-15 22:08:35,969 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:35,969 INFO sqlalchemy.engine.base.Engine {'param_1': '10001794'}
+2022-06-15 22:08:35,980 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:35,980 INFO sqlalchemy.engine.base.Engine {'param_1': '10001273'}
+2022-06-15 22:08:35,992 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:35,992 INFO sqlalchemy.engine.base.Engine {'param_1': '01036111'}
+2022-06-15 22:08:36,003 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:36,003 INFO sqlalchemy.engine.base.Engine {'param_1': '10000185'}
+2022-06-15 22:08:36,014 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:36,014 INFO sqlalchemy.engine.base.Engine {'param_1': '01065113'}
+2022-06-15 22:08:36,025 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:36,025 INFO sqlalchemy.engine.base.Engine {'param_1': '10000365'}
+2022-06-15 22:08:36,037 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:36,037 INFO sqlalchemy.engine.base.Engine {'param_1': '01825254'}
+2022-06-15 22:08:36,048 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:36,048 INFO sqlalchemy.engine.base.Engine {'param_1': '10001150'}
+2022-06-15 22:08:36,059 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:36,059 INFO sqlalchemy.engine.base.Engine {'param_1': '0182SY03'}
+2022-06-15 22:08:36,071 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:36,071 INFO sqlalchemy.engine.base.Engine {'param_1': '10000552'}
+2022-06-15 22:08:36,082 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:36,082 INFO sqlalchemy.engine.base.Engine {'param_1': '0200R601'}
+2022-06-15 22:08:36,093 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:36,093 INFO sqlalchemy.engine.base.Engine {'param_1': '10001639'}
+2022-06-15 22:08:36,105 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:36,105 INFO sqlalchemy.engine.base.Engine {'param_1': '0200Y007'}
+2022-06-15 22:08:36,116 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:36,116 INFO sqlalchemy.engine.base.Engine {'param_1': '10001602'}
+2022-06-15 22:08:36,127 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:36,127 INFO sqlalchemy.engine.base.Engine {'param_1': '02076456'}
+2022-06-15 22:08:36,139 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:36,139 INFO sqlalchemy.engine.base.Engine {'param_1': '10001815'}
+2022-06-15 22:08:36,150 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:36,150 INFO sqlalchemy.engine.base.Engine {'param_1': '02086290'}
+2022-06-15 22:08:36,161 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:36,162 INFO sqlalchemy.engine.base.Engine {'param_1': '10001704'}
+2022-06-15 22:08:36,173 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:36,173 INFO sqlalchemy.engine.base.Engine {'param_1': '02095101'}
+2022-06-15 22:08:36,184 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:36,184 INFO sqlalchemy.engine.base.Engine {'param_1': '10001405'}
+2022-06-15 22:08:36,195 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:36,195 INFO sqlalchemy.engine.base.Engine {'param_1': '0209EY01'}
+2022-06-15 22:08:36,206 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:36,206 INFO sqlalchemy.engine.base.Engine {'param_1': '10000893'}
+2022-06-15 22:08:36,218 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:36,218 INFO sqlalchemy.engine.base.Engine {'param_1': '10000728'}
+2022-06-15 22:08:36,229 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:36,229 INFO sqlalchemy.engine.base.Engine {'param_1': '10000747'}
+2022-06-15 22:08:36,240 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:36,240 INFO sqlalchemy.engine.base.Engine {'param_1': '02606080'}
+2022-06-15 22:08:36,251 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:36,252 INFO sqlalchemy.engine.base.Engine {'param_1': '10000560'}
+2022-06-15 22:08:36,263 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:36,263 INFO sqlalchemy.engine.base.Engine {'param_1': '0260A055'}
+2022-06-15 22:08:36,274 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:36,274 INFO sqlalchemy.engine.base.Engine {'param_1': '10000709'}
+2022-06-15 22:08:36,286 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:36,286 INFO sqlalchemy.engine.base.Engine {'param_1': '03004472'}
+2022-06-15 22:08:36,297 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:36,297 INFO sqlalchemy.engine.base.Engine {'param_1': '10001240'}
+2022-06-15 22:08:36,308 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:36,308 INFO sqlalchemy.engine.base.Engine {'param_1': '03004483'}
+2022-06-15 22:08:36,320 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:36,320 INFO sqlalchemy.engine.base.Engine {'param_1': '10000244'}
+2022-06-15 22:08:36,331 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:36,331 INFO sqlalchemy.engine.base.Engine {'param_1': '03004492'}
+2022-06-15 22:08:36,342 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:36,342 INFO sqlalchemy.engine.base.Engine {'param_1': '10000499'}
+2022-06-15 22:08:36,353 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:36,354 INFO sqlalchemy.engine.base.Engine {'param_1': '03006912'}
+2022-06-15 22:08:36,365 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:36,365 INFO sqlalchemy.engine.base.Engine {'param_1': '10001682'}
+2022-06-15 22:08:36,376 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:36,377 INFO sqlalchemy.engine.base.Engine {'param_1': '03115034'}
+2022-06-15 22:08:36,388 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:36,388 INFO sqlalchemy.engine.base.Engine {'param_1': '10000091'}
+2022-06-15 22:08:36,399 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:36,399 INFO sqlalchemy.engine.base.Engine {'param_1': '10000011'}
+2022-06-15 22:08:36,410 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:36,410 INFO sqlalchemy.engine.base.Engine {'param_1': '03116231'}
+2022-06-15 22:08:36,422 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:36,422 INFO sqlalchemy.engine.base.Engine {'param_1': '10000639'}
+2022-06-15 22:08:36,433 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:36,433 INFO sqlalchemy.engine.base.Engine {'param_1': '03116285'}
+2022-06-15 22:08:36,444 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:36,444 INFO sqlalchemy.engine.base.Engine {'param_1': '10000631'}
+2022-06-15 22:08:36,455 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:36,456 INFO sqlalchemy.engine.base.Engine {'param_1': '03116301'}
+2022-06-15 22:08:36,467 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:36,467 INFO sqlalchemy.engine.base.Engine {'param_1': '03125034'}
+2022-06-15 22:08:36,478 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:36,479 INFO sqlalchemy.engine.base.Engine {'param_1': '10001456'}
+2022-06-15 22:08:36,490 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:36,490 INFO sqlalchemy.engine.base.Engine {'param_1': '0400J510'}
+2022-06-15 22:08:36,501 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:36,502 INFO sqlalchemy.engine.base.Engine {'param_1': '10001631'}
+2022-06-15 22:08:36,513 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:36,513 INFO sqlalchemy.engine.base.Engine {'param_1': '04165001'}
+2022-06-15 22:08:36,524 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:36,524 INFO sqlalchemy.engine.base.Engine {'param_1': '10000775'}
+2022-06-15 22:08:36,536 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:36,536 INFO sqlalchemy.engine.base.Engine {'param_1': '10000313'}
+2022-06-15 22:08:36,547 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:36,547 INFO sqlalchemy.engine.base.Engine {'param_1': '0417A008'}
+2022-06-15 22:08:36,558 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:36,558 INFO sqlalchemy.engine.base.Engine {'param_1': '10000945'}
+2022-06-15 22:08:36,570 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:36,570 INFO sqlalchemy.engine.base.Engine {'param_1': '04185045'}
+2022-06-15 22:08:36,581 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:36,581 INFO sqlalchemy.engine.base.Engine {'param_1': '10001287'}
+2022-06-15 22:08:36,593 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:36,593 INFO sqlalchemy.engine.base.Engine {'param_1': '0418EY08'}
+2022-06-15 22:08:36,604 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:36,604 INFO sqlalchemy.engine.base.Engine {'param_1': '10001067'}
+2022-06-15 22:08:36,616 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:36,616 INFO sqlalchemy.engine.base.Engine {'param_1': '04205003'}
+2022-06-15 22:08:36,627 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:36,627 INFO sqlalchemy.engine.base.Engine {'param_1': '10001004'}
+2022-06-15 22:08:36,639 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:36,639 INFO sqlalchemy.engine.base.Engine {'param_1': '10001254'}
+2022-06-15 22:08:36,650 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:36,650 INFO sqlalchemy.engine.base.Engine {'param_1': '10001666'}
+2022-06-15 22:08:36,662 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:36,662 INFO sqlalchemy.engine.base.Engine {'param_1': '10000796'}
+2022-06-15 22:08:36,673 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:36,673 INFO sqlalchemy.engine.base.Engine {'param_1': '04236019'}
+2022-06-15 22:08:36,684 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:36,685 INFO sqlalchemy.engine.base.Engine {'param_1': '10001396'}
+2022-06-15 22:08:36,696 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:36,696 INFO sqlalchemy.engine.base.Engine {'param_1': '04636005'}
+2022-06-15 22:08:36,707 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:36,707 INFO sqlalchemy.engine.base.Engine {'param_1': '10000741'}
+2022-06-15 22:08:36,718 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:36,718 INFO sqlalchemy.engine.base.Engine {'param_1': '0463SY04'}
+2022-06-15 22:08:36,729 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:36,729 INFO sqlalchemy.engine.base.Engine {'param_1': '10001159'}
+2022-06-15 22:08:36,740 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:36,741 INFO sqlalchemy.engine.base.Engine {'param_1': '0600R812'}
+2022-06-15 22:08:36,752 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:36,753 INFO sqlalchemy.engine.base.Engine {'param_1': '10001474'}
+2022-06-15 22:08:36,764 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:36,764 INFO sqlalchemy.engine.base.Engine {'param_1': '06266151'}
+2022-06-15 22:08:36,775 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:36,775 INFO sqlalchemy.engine.base.Engine {'param_1': '10000336'}
+2022-06-15 22:08:36,787 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:36,787 INFO sqlalchemy.engine.base.Engine {'param_1': '0700Y021'}
+2022-06-15 22:08:36,798 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:36,798 INFO sqlalchemy.engine.base.Engine {'param_1': '10001584'}
+2022-06-15 22:08:36,810 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:36,810 INFO sqlalchemy.engine.base.Engine {'param_1': '0700Y044'}
+2022-06-15 22:08:36,821 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:36,821 INFO sqlalchemy.engine.base.Engine {'param_1': '10000543'}
+2022-06-15 22:08:36,832 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:36,832 INFO sqlalchemy.engine.base.Engine {'param_1': '08306120'}
+2022-06-15 22:08:36,845 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:36,845 INFO sqlalchemy.engine.base.Engine {'param_1': '10000940'}
+2022-06-15 22:08:36,856 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:36,857 INFO sqlalchemy.engine.base.Engine {'param_1': '10000174'}
+2022-06-15 22:08:36,868 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:36,868 INFO sqlalchemy.engine.base.Engine {'param_1': '10203040'}
+2022-06-15 22:08:36,879 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:36,879 INFO sqlalchemy.engine.base.Engine {'param_1': '10000866'}
+2022-06-15 22:08:36,890 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:36,890 INFO sqlalchemy.engine.base.Engine {'param_1': '13006075'}
+2022-06-15 22:08:36,907 INFO sqlalchemy.engine.base.Engine ROLLBACK
+101.94.166.243 - - [15/Jun/2022 22:08:36] "GET /course_select_manage HTTP/1.1" 200 -
+101.94.166.243 - - [15/Jun/2022 22:08:37] "GET /static/sweetalert/dist/sweetalert.css HTTP/1.1" 404 -
+101.94.166.243 - - [15/Jun/2022 22:08:38] "GET /static/ionicons/css/ionicons.min.css.map HTTP/1.1" 404 -
+2022-06-15 22:08:45,905 INFO sqlalchemy.engine.base.Engine BEGIN (implicit)
+2022-06-15 22:08:45,905 INFO sqlalchemy.engine.base.Engine SELECT account."User_id" AS "account_User_id", account."User_type" AS "account_User_type", account."Passwd" AS "account_Passwd" 
+FROM account 
+WHERE account."User_id" = %(User_id_1)s 
+ LIMIT %(param_1)s
+2022-06-15 22:08:45,905 INFO sqlalchemy.engine.base.Engine {'User_id_1': '1000', 'param_1': 1}
+2022-06-15 22:08:45,927 INFO sqlalchemy.engine.base.Engine SELECT manager."ManagerNum" AS "manager_ManagerNum", manager."ManagerName" AS "manager_ManagerName" 
+FROM manager 
+WHERE manager."ManagerNum" = %(param_1)s
+2022-06-15 22:08:45,927 INFO sqlalchemy.engine.base.Engine {'param_1': 1000}
+2022-06-15 22:08:45,939 INFO sqlalchemy.engine.base.Engine SELECT student_class_table."StudentNum" AS "student_class_table_StudentNum", student_class_table."ClassNum" AS "student_class_table_ClassNum", student_class_table."Grade" AS "student_class_table_Grade" 
+FROM student_class_table 
+WHERE student_class_table."StudentNum" = %(StudentNum_1)s AND student_class_table."ClassNum" LIKE %(ClassNum_1)s 
+ LIMIT %(param_1)s
+2022-06-15 22:08:45,939 INFO sqlalchemy.engine.base.Engine {'StudentNum_1': '19000000', 'ClassNum_1': '01026086_%', 'param_1': 1}
+2022-06-15 22:08:45,951 INFO sqlalchemy.engine.base.Engine ROLLBACK
+101.94.166.243 - - [15/Jun/2022 22:08:45] "POST /add_course_select HTTP/1.1" 302 -
+2022-06-15 22:08:46,040 INFO sqlalchemy.engine.base.Engine BEGIN (implicit)
+2022-06-15 22:08:46,040 INFO sqlalchemy.engine.base.Engine SELECT account."User_id" AS "account_User_id", account."User_type" AS "account_User_type", account."Passwd" AS "account_Passwd" 
+FROM account 
+WHERE account."User_id" = %(User_id_1)s 
+ LIMIT %(param_1)s
+2022-06-15 22:08:46,041 INFO sqlalchemy.engine.base.Engine {'User_id_1': '1000', 'param_1': 1}
+2022-06-15 22:08:46,062 INFO sqlalchemy.engine.base.Engine SELECT manager."ManagerNum" AS "manager_ManagerNum", manager."ManagerName" AS "manager_ManagerName" 
+FROM manager 
+WHERE manager."ManagerNum" = %(param_1)s
+2022-06-15 22:08:46,062 INFO sqlalchemy.engine.base.Engine {'param_1': 1000}
+2022-06-15 22:08:46,074 INFO sqlalchemy.engine.base.Engine SELECT class."ClassNum" AS "class_ClassNum", class."ClassTime" AS "class_ClassTime", class."ClassVenue" AS "class_ClassVenue", class."ClassCapacity" AS "class_ClassCapacity", class."CourseNum" AS "class_CourseNum", class."TeacherNum" AS "class_TeacherNum" 
+FROM class ORDER BY class."ClassNum"
+2022-06-15 22:08:46,074 INFO sqlalchemy.engine.base.Engine {}
+2022-06-15 22:08:46,087 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:46,087 INFO sqlalchemy.engine.base.Engine {'param_1': '01026086'}
+2022-06-15 22:08:46,098 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:46,098 INFO sqlalchemy.engine.base.Engine {'param_1': '10001794'}
+2022-06-15 22:08:46,110 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:46,110 INFO sqlalchemy.engine.base.Engine {'param_1': '10001273'}
+2022-06-15 22:08:46,121 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:46,121 INFO sqlalchemy.engine.base.Engine {'param_1': '01036111'}
+2022-06-15 22:08:46,133 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:46,133 INFO sqlalchemy.engine.base.Engine {'param_1': '10000185'}
+2022-06-15 22:08:46,145 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:46,145 INFO sqlalchemy.engine.base.Engine {'param_1': '01065113'}
+2022-06-15 22:08:46,156 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:46,156 INFO sqlalchemy.engine.base.Engine {'param_1': '10000365'}
+2022-06-15 22:08:46,168 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:46,168 INFO sqlalchemy.engine.base.Engine {'param_1': '01825254'}
+2022-06-15 22:08:46,180 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:46,180 INFO sqlalchemy.engine.base.Engine {'param_1': '10001150'}
+2022-06-15 22:08:46,191 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:46,191 INFO sqlalchemy.engine.base.Engine {'param_1': '0182SY03'}
+2022-06-15 22:08:46,203 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:46,203 INFO sqlalchemy.engine.base.Engine {'param_1': '10000552'}
+2022-06-15 22:08:46,214 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:46,214 INFO sqlalchemy.engine.base.Engine {'param_1': '0200R601'}
+2022-06-15 22:08:46,225 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:46,226 INFO sqlalchemy.engine.base.Engine {'param_1': '10001639'}
+2022-06-15 22:08:46,237 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:46,237 INFO sqlalchemy.engine.base.Engine {'param_1': '0200Y007'}
+2022-06-15 22:08:46,248 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:46,248 INFO sqlalchemy.engine.base.Engine {'param_1': '10001602'}
+2022-06-15 22:08:46,260 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:46,260 INFO sqlalchemy.engine.base.Engine {'param_1': '02076456'}
+2022-06-15 22:08:46,271 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:46,271 INFO sqlalchemy.engine.base.Engine {'param_1': '10001815'}
+2022-06-15 22:08:46,283 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:46,283 INFO sqlalchemy.engine.base.Engine {'param_1': '02086290'}
+2022-06-15 22:08:46,294 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:46,294 INFO sqlalchemy.engine.base.Engine {'param_1': '10001704'}
+2022-06-15 22:08:46,306 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:46,306 INFO sqlalchemy.engine.base.Engine {'param_1': '02095101'}
+2022-06-15 22:08:46,317 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:46,317 INFO sqlalchemy.engine.base.Engine {'param_1': '10001405'}
+2022-06-15 22:08:46,329 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:46,329 INFO sqlalchemy.engine.base.Engine {'param_1': '0209EY01'}
+2022-06-15 22:08:46,340 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:46,341 INFO sqlalchemy.engine.base.Engine {'param_1': '10000893'}
+2022-06-15 22:08:46,352 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:46,352 INFO sqlalchemy.engine.base.Engine {'param_1': '10000728'}
+2022-06-15 22:08:46,363 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:46,363 INFO sqlalchemy.engine.base.Engine {'param_1': '10000747'}
+2022-06-15 22:08:46,375 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:46,375 INFO sqlalchemy.engine.base.Engine {'param_1': '02606080'}
+2022-06-15 22:08:46,386 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:46,386 INFO sqlalchemy.engine.base.Engine {'param_1': '10000560'}
+2022-06-15 22:08:46,397 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:46,398 INFO sqlalchemy.engine.base.Engine {'param_1': '0260A055'}
+2022-06-15 22:08:46,409 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:46,409 INFO sqlalchemy.engine.base.Engine {'param_1': '10000709'}
+2022-06-15 22:08:46,420 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:46,420 INFO sqlalchemy.engine.base.Engine {'param_1': '03004472'}
+2022-06-15 22:08:46,432 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:46,432 INFO sqlalchemy.engine.base.Engine {'param_1': '10001240'}
+2022-06-15 22:08:46,444 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:46,444 INFO sqlalchemy.engine.base.Engine {'param_1': '03004483'}
+2022-06-15 22:08:46,455 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:46,455 INFO sqlalchemy.engine.base.Engine {'param_1': '10000244'}
+2022-06-15 22:08:46,466 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:46,466 INFO sqlalchemy.engine.base.Engine {'param_1': '03004492'}
+2022-06-15 22:08:46,477 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:46,478 INFO sqlalchemy.engine.base.Engine {'param_1': '10000499'}
+2022-06-15 22:08:46,489 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:46,489 INFO sqlalchemy.engine.base.Engine {'param_1': '03006912'}
+2022-06-15 22:08:46,500 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:46,500 INFO sqlalchemy.engine.base.Engine {'param_1': '10001682'}
+2022-06-15 22:08:46,511 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:46,511 INFO sqlalchemy.engine.base.Engine {'param_1': '03115034'}
+2022-06-15 22:08:46,523 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:46,523 INFO sqlalchemy.engine.base.Engine {'param_1': '10000091'}
+2022-06-15 22:08:46,534 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:46,534 INFO sqlalchemy.engine.base.Engine {'param_1': '10000011'}
+2022-06-15 22:08:46,545 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:46,545 INFO sqlalchemy.engine.base.Engine {'param_1': '03116231'}
+2022-06-15 22:08:46,557 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:46,557 INFO sqlalchemy.engine.base.Engine {'param_1': '10000639'}
+2022-06-15 22:08:46,568 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:46,568 INFO sqlalchemy.engine.base.Engine {'param_1': '03116285'}
+2022-06-15 22:08:46,579 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:46,579 INFO sqlalchemy.engine.base.Engine {'param_1': '10000631'}
+2022-06-15 22:08:46,590 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:46,591 INFO sqlalchemy.engine.base.Engine {'param_1': '03116301'}
+2022-06-15 22:08:46,602 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:46,602 INFO sqlalchemy.engine.base.Engine {'param_1': '03125034'}
+2022-06-15 22:08:46,613 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:46,613 INFO sqlalchemy.engine.base.Engine {'param_1': '10001456'}
+2022-06-15 22:08:46,624 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:46,624 INFO sqlalchemy.engine.base.Engine {'param_1': '0400J510'}
+2022-06-15 22:08:46,636 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:46,636 INFO sqlalchemy.engine.base.Engine {'param_1': '10001631'}
+2022-06-15 22:08:46,647 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:46,647 INFO sqlalchemy.engine.base.Engine {'param_1': '04165001'}
+2022-06-15 22:08:46,658 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:46,658 INFO sqlalchemy.engine.base.Engine {'param_1': '10000775'}
+2022-06-15 22:08:46,670 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:46,670 INFO sqlalchemy.engine.base.Engine {'param_1': '10000313'}
+2022-06-15 22:08:46,681 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:46,681 INFO sqlalchemy.engine.base.Engine {'param_1': '0417A008'}
+2022-06-15 22:08:46,692 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:46,692 INFO sqlalchemy.engine.base.Engine {'param_1': '10000945'}
+2022-06-15 22:08:46,704 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:46,704 INFO sqlalchemy.engine.base.Engine {'param_1': '04185045'}
+2022-06-15 22:08:46,715 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:46,715 INFO sqlalchemy.engine.base.Engine {'param_1': '10001287'}
+2022-06-15 22:08:46,726 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:46,726 INFO sqlalchemy.engine.base.Engine {'param_1': '0418EY08'}
+2022-06-15 22:08:46,738 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:46,738 INFO sqlalchemy.engine.base.Engine {'param_1': '10001067'}
+2022-06-15 22:08:46,749 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:46,749 INFO sqlalchemy.engine.base.Engine {'param_1': '04205003'}
+2022-06-15 22:08:46,760 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:46,760 INFO sqlalchemy.engine.base.Engine {'param_1': '10001004'}
+2022-06-15 22:08:46,772 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:46,772 INFO sqlalchemy.engine.base.Engine {'param_1': '10001254'}
+2022-06-15 22:08:46,783 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:46,783 INFO sqlalchemy.engine.base.Engine {'param_1': '10001666'}
+2022-06-15 22:08:46,795 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:46,795 INFO sqlalchemy.engine.base.Engine {'param_1': '10000796'}
+2022-06-15 22:08:46,806 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:46,807 INFO sqlalchemy.engine.base.Engine {'param_1': '04236019'}
+2022-06-15 22:08:46,818 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:46,818 INFO sqlalchemy.engine.base.Engine {'param_1': '10001396'}
+2022-06-15 22:08:46,829 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:46,829 INFO sqlalchemy.engine.base.Engine {'param_1': '04636005'}
+2022-06-15 22:08:46,841 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:46,841 INFO sqlalchemy.engine.base.Engine {'param_1': '10000741'}
+2022-06-15 22:08:46,852 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:46,852 INFO sqlalchemy.engine.base.Engine {'param_1': '0463SY04'}
+2022-06-15 22:08:46,863 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:46,864 INFO sqlalchemy.engine.base.Engine {'param_1': '10001159'}
+2022-06-15 22:08:46,875 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:46,875 INFO sqlalchemy.engine.base.Engine {'param_1': '0600R812'}
+2022-06-15 22:08:46,886 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:46,887 INFO sqlalchemy.engine.base.Engine {'param_1': '10001474'}
+2022-06-15 22:08:46,898 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:46,898 INFO sqlalchemy.engine.base.Engine {'param_1': '06266151'}
+2022-06-15 22:08:46,909 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:46,909 INFO sqlalchemy.engine.base.Engine {'param_1': '10000336'}
+2022-06-15 22:08:46,920 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:46,920 INFO sqlalchemy.engine.base.Engine {'param_1': '0700Y021'}
+2022-06-15 22:08:46,932 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:46,932 INFO sqlalchemy.engine.base.Engine {'param_1': '10001584'}
+2022-06-15 22:08:46,943 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:46,943 INFO sqlalchemy.engine.base.Engine {'param_1': '0700Y044'}
+2022-06-15 22:08:46,954 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:46,954 INFO sqlalchemy.engine.base.Engine {'param_1': '10000543'}
+2022-06-15 22:08:46,966 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:46,966 INFO sqlalchemy.engine.base.Engine {'param_1': '08306120'}
+2022-06-15 22:08:46,977 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:46,977 INFO sqlalchemy.engine.base.Engine {'param_1': '10000940'}
+2022-06-15 22:08:46,988 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:46,988 INFO sqlalchemy.engine.base.Engine {'param_1': '10000174'}
+2022-06-15 22:08:47,000 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:47,000 INFO sqlalchemy.engine.base.Engine {'param_1': '10203040'}
+2022-06-15 22:08:47,011 INFO sqlalchemy.engine.base.Engine SELECT teacher."TeacherNum" AS "teacher_TeacherNum", teacher."TeacherName" AS "teacher_TeacherName", teacher."TeacherTitle" AS "teacher_TeacherTitle", teacher."DeptNum" AS "teacher_DeptNum" 
+FROM teacher 
+WHERE teacher."TeacherNum" = %(param_1)s
+2022-06-15 22:08:47,011 INFO sqlalchemy.engine.base.Engine {'param_1': '10000866'}
+2022-06-15 22:08:47,022 INFO sqlalchemy.engine.base.Engine SELECT course."CourseNum" AS "course_CourseNum", course."CourseName" AS "course_CourseName", course."CourseCredit" AS "course_CourseCredit", course."CourseCapacity" AS "course_CourseCapacity" 
+FROM course 
+WHERE course."CourseNum" = %(param_1)s
+2022-06-15 22:08:47,022 INFO sqlalchemy.engine.base.Engine {'param_1': '13006075'}
+2022-06-15 22:08:47,039 INFO sqlalchemy.engine.base.Engine ROLLBACK
+101.94.166.243 - - [15/Jun/2022 22:08:47] "GET /course_select_manage HTTP/1.1" 200 -
+101.94.166.243 - - [15/Jun/2022 22:08:47] "GET /static/sweetalert/dist/sweetalert.css HTTP/1.1" 404 -
+101.94.166.243 - - [15/Jun/2022 22:08:48] "GET /static/ionicons/css/ionicons.min.css.map HTTP/1.1" 404 -

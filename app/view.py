@@ -725,19 +725,32 @@ def course_teacher_delete(CourseNum, TeacherNum):
 def add_course_select():
     if isinstance(current_user._get_current_object(), Manager):
         if request.method == 'POST':
-            CourseNum = request.form['CourseNum']
-            TeacherNum = request.form['TeacherNum']
-            StudentNum = request.form['StudentNum']
-            cla = Class.query.filter_by(CourseNum=CourseNum, TeacherNum=TeacherNum).first()
-            if not cla:
-                flash('当前教师未开设该课程')
-            elif not Student_Class_table.query.filter_by(StudentNum=StudentNum, ClassNum=cla.ClassNum).first():
-                course_select_table = Student_Class_table(StudentNum, cla.ClassNum)
-                db.session.add(course_select_table)
-                db.session.commit()
-                flash('手动选课成功！')
-            else:
-                flash('手动选课失败！该学生已选择该门课程！')
+            # CourseNum = request.form['CourseNum']
+            # TeacherNum = request.form['TeacherNum']
+            try:
+                ClassNum = request.form['ClassNum']
+                StudentNum = request.form['StudentNum']
+                if not Student_Class_table.query.filter(and_(Student_Class_table.StudentNum==StudentNum, Student_Class_table.ClassNum.like(ClassNum[:8]+'_%'))).first():
+                # if not Student_Class_table.query.filter_by(StudentNum=StudentNum, ClassNum=ClassNum).first():
+                    course_select_table = Student_Class_table(StudentNum, ClassNum)
+                    db.session.add(course_select_table)
+                    db.session.commit()
+                    flash('手动选课成功！')
+                else:
+                    flash('手动选课失败！该学生已选择该门课程！')
+            except:
+                flash('当前班级不存在')
+            
+            # cla = Class.query.filter_by(CourseNum=CourseNum, TeacherNum=TeacherNum).first()
+            # if not cla:
+                
+            # elif not Student_Class_table.query.filter_by(StudentNum=StudentNum, ClassNum=cla.ClassNum).first():
+            #     course_select_table = Student_Class_table(StudentNum, cla.ClassNum)
+            #     db.session.add(course_select_table)
+            #     db.session.commit()
+            #     flash('手动选课成功！')
+            # else:
+                
     return redirect(url_for('course_select_manage'))
 
 
