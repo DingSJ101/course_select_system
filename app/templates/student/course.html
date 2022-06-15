@@ -19,18 +19,17 @@
           </div>
         </div>
       </form>
-
-            <thead class="thead-light bg-info">
+        <thead class="thead-light bg-info">
         <tr>
 {#            增加学分、教师号及教师名，可以通过课程号+教师名选课#}
             <th class="lead">课程号</th>
             <th class="lead">课程名</th>
-            <th class="lead">班级号</th>
-            <th class="lead">教师名</th>
+<!--            <th class="lead">班级号</th>-->
+<!--            <th class="lead">教师名</th>-->
             <th class="lead">学分</th>
 {#            <th class="lead">课程学时</th>#}
-            <th class="lead">上课时间</th>
-            <th class="lead"></th>
+<!--            <th class="lead">上课时间</th>-->
+            <th class="lead">操作</th>
         </tr>
             </thead>
 {#    tr定义行，th定义表格列#}
@@ -40,14 +39,15 @@
         <tr>
            <td class="lead">{{ table.CourseNum }}</td>
            <td class="lead">{{ table.CourseName }}</td>
-           <td class="lead">{{ table.ClassNum }}</td>
-           <td class="lead">{{ table.TeacherName }}</td>
+<!--           <td class="lead">{{ table.ClassNum }}</td>-->
+<!--           <td class="lead">{{ table.TeacherName }}</td>-->
            <td class="lead">{{ table.CourseCredit }}</td>
-           <td class="lead">{{ table.ClassTime }}</td>
+<!--           <td class="lead">{{ table.ClassTime }}</td>-->
            {% if table.CourseNum in course_selected %}
            <td class="lead">已选</td>
            {% else %}
-           <td class="lead"><a href="{{ url_for('course_teachers', CourseNum=table.ClassNum) }}" class="btn btn-outline-success btn-sm" role="button">选课</a></td>
+<!--           <td class="lead"><a href="{{ url_for('course_teachers', CourseNum=table.ClassNum) }}" class="btn btn-outline-success btn-sm" role="button">选课</a></td>-->
+                   <td class="lead"><a href="{{ url_for('course_teachers', CourseNum=table.CourseNum) }}" class="btn btn-outline-success btn-sm" role="button">选课</a></td>
            {% endif %}
         </tr>
         {% endfor %}
