@@ -174,7 +174,7 @@ def course_select_table():
         return render_template('student/course_select_table.html', tables=tables)
 
 
-## CourseNum like 'CourseNum_ClassNum'('00864122_3001')
+## CourseNum like 'CourseNum_ClassNum'('00864122')
 @app.route('/course_teachers/<CourseNum>', methods=['GET', ])
 @login_required
 def course_teachers(CourseNum):
@@ -195,8 +195,10 @@ def course_teachers(CourseNum):
 
             }
             tables.append(table)
-
-        return render_template('student/course_teachers.html', tables=tables)
+        class_selected = [_.ClassNum for _ in current_user.Classes]
+        
+        
+        return render_template('student/course_teachers.html', tables=tables,class_selected=class_selected)
 
 
 ## 查看所有课程，展示所有Course，具体classes在/course_teachers

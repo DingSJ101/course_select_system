@@ -25,9 +25,12 @@
        <td class="lead">{{ table.CourseStudents }}人</td>
        {% if table.CourseCapacity <= table.CourseStudents %}
        <td class="lead">人数已满</td>
+       {% elif table.ClassNum in class_selected %}
+       <td class="lead">已选</td>
        {% else %}
        <td class="lead"><a href="{{ url_for('course_select', CourseNum=table.ClassNum) }}" class="btn btn-outline-success btn-sm" role="button">选课</a></td>
        {% endif %}
+       
     </tr>
     {% endfor %}
     {% endif %}
