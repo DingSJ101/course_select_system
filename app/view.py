@@ -382,15 +382,18 @@ def course_select_detail():
 def course_grade_input(CourseNum):
     if isinstance(current_user._get_current_object(), Teacher):
         if request.method == 'POST':
-            # course_select_tables = Student_Class_table.query.filter_by(ClassNum=CourseNum).all()
-            course_select_tables = Student_Class_table.query.filter(
-                Student_Class_table.ClassNum.like(CourseNum + '_%')).all()
+            course_select_tables = Student_Class_table.query.filter_by(ClassNum=CourseNum).all()
+            # course_select_tables = Student_Class_table.query.filter(
+            #     Student_Class_table.ClassNum.like(CourseNum + '_%')).all()
             for course_select_table in course_select_tables:
                 if not course_select_table.Grade:
-                    grade = request.form[course_select_table.StudentNum]
-                    course_select_table.input_grade(grade)
-            db.session.commit()
-            flash('成绩录入成功！')
+                    try:
+                        grade = request.form[course_select_table.StudentNum]
+                        course_select_table.input_grade(grade)
+                        db.session.commit()
+                        flash('成绩录入成功！')
+                    except:
+                        continue
             return redirect(url_for('course_grade_input'))
         else:
             classes = current_user.Classes
@@ -404,6 +407,7 @@ def course_grade_input(CourseNum):
                     'CourseName': course.CourseName,
                     'CourseStudents': cla.ClassCapacity,
                     'ClassNum': cla.ClassNum,
+                    'Class':cla.ClassNum[-4:]
                 }
                 tables = []
                 for record in course_select_tables:
