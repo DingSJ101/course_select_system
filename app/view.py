@@ -762,11 +762,13 @@ def change_course_capacity(CourseNum, TeacherNum, add_or_sub):
     if isinstance(current_user._get_current_object(), Manager):
         course_teacher = Class.query.filter_by(CourseNum=CourseNum, TeacherNum=TeacherNum).first()
         course = course_teacher.course
-        if add_or_sub == 'add':
+        if add_or_sub == 'add' and course.CourseCapacity < 500:
             course.CourseCapacity += 10
             flash('课程容量扩容10人！')
-        elif add_or_sub == 'sub':
+        elif add_or_sub == 'sub' and course.CourseCapacity > 10:
             course.CourseCapacity -= 10
             flash('课程容量缩容10人！')
+        else:
+            flash('容量扩容/缩容失败！')
         db.session.commit()
     return redirect(url_for('course_select_manage'))
