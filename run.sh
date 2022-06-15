@@ -1,4 +1,8 @@
 #! /bin/bash
-rm /root/workspace/css/app.log
-touch /root/workspace/css/app.log
-nohup python /root/workspace/css/main.py > /root/workspace/css/app.log 2>&1 & 
+echo $PWD
+echo $0
+DIR=$(dirname $(readlink -f "$0"))
+echo $DIR
+rm $DIR/app.log
+touch $DIR/app.log
+nohup python $DIR/main.py > $DIR/app.log 2>&1 
