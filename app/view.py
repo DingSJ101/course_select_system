@@ -699,23 +699,24 @@ def course_delete(CourseNum):
 
 
 # Todo extra todo--管理端删除开设课程 报错get_course没有self  # to_test
-@app.route('/course_teacher_delete/<CourseNum>/<TeacherNum>')
+@app.route('/course_teacher_delete/<ClassNum>/<TeacherNum>')
 @login_required
-def course_teacher_delete(CourseNum, TeacherNum):
+def course_teacher_delete(ClassNum, TeacherNum):
     if isinstance(current_user._get_current_object(), Manager):
         # 先删除选课信息
         course_select_tables = Student_Class_table.query.filter(
-            Student_Class_table.ClassNum.like(CourseNum + '%')).all()
+            # Student_Class_table.ClassNum.like(CourseNum + '%')).all()
+            Student_Class_table.ClassNum==ClassNum).all()
         for course_select_table in course_select_tables:
             db.session.delete(course_select_table)
         db.session.commit()
         flash('删除学生选课信息成功！')
         # 再删除课程与老师的对应表
-        classes = Class.query.filter_by(CourseNum=CourseNum).all()
+        classes = Class.query.filter_by(ClassNum=ClassNum).all()
         for cla in classes:
             db.session.delete(cla)
         db.session.commit()
-        flash('删除教师开设课程成功！')
+        flash('删除班级成功！')
     return redirect(url_for('course_select_manage'))
 
 
