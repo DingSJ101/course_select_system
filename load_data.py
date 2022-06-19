@@ -1,7 +1,7 @@
 import json 
 import sqlalchemy
 # engine = sqlalchemy.create_engine( 'postgresql+psycopg2://gaussdb:123@QWEasd@175.24.167.6:15432/css')
-engine = sqlalchemy.create_engine( 'postgresql+psycopg2://gaussdb:123@QWEasd@122.9.68.170:15432/css',pool_pre_ping=True)
+engine = sqlalchemy.create_engine( 'postgresql+psycopg2://gaussdb: 123\@QWEasd@122.9.68.170:15432/css',pool_pre_ping=True)
 # sql  = 'select *  from test'
 # result = engine.execute(sql)
 # print(result.fetchone())

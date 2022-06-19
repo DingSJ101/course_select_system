@@ -1,10 +1,16 @@
-> 展示网站: <http://120.27.192.52:4070>
->
-> 首先用管理员账户登录（帐号000，密码admin）
->
-> 创建自己的8位学号，默认密码admin。
->
-> 再用自己学号登录选课系统进行体验。
+## quick start 
+
+```bash
+git clone # this repo
+
+## way one  build new container
+docker-compose up -d --force
+
+## way two use my container
+docker run -idt  --name course_select_system -v ~/workspace/course_select_system:/course_select_system -v /etc/localtime:/etc/localtime -p 8003:8000 dingsj101/course_select_system:1.2 sh /course_select_system/run.sh
+```
+
+
 
 ## 一、Python_Flask的初始化（Bootstrap框架、SQLalchemy的ORM框架、数据库迁移工具）
 
@@ -31,9 +37,6 @@
 
 密码验证采用flask的加盐哈希加密算法，无SQL注入风险，保证用户的信息安全。
 
-在此基础上，添加了"记住我"的登录选项。
-
-   ![image](https://github.com/WolfMy/course_select_system/blob/master/image/Login.png)
 
 
 ## 四、学生界面的功能简述
@@ -46,14 +49,6 @@
 
 4. 查询已选课程的成绩
 
-   ![image](https://github.com/WolfMy/course_select_system/blob/master/image/Student.png)
-
-   ![image](https://github.com/WolfMy/course_select_system/blob/master/image/SelectedCourse.png)
-
-   ![image](https://github.com/WolfMy/course_select_system/blob/master/image/AllCourse.png)
-
-   ![image](https://github.com/WolfMy/course_select_system/blob/master/image/GradeInquiry.png)
-
 
 ## 五、教师界面功能简述
 
@@ -62,13 +57,6 @@
 2. 查看学生选此教师开设课程的详情，包括各个学生的个人信息，以及已选学生人数等
 
 3. 为此教师开设课程中的学生，录入此门课程的成绩，支持录入后修改成绩的功能
-
-   ![image](https://github.com/WolfMy/course_select_system/blob/master/image/Teacher.png)
-   
-   ![image](https://github.com/WolfMy/course_select_system/blob/master/image/TeacherCourse.png)
-   
-   ![image](https://github.com/WolfMy/course_select_system/blob/master/image/GradeInput.png)
-
 
 ## 六、管理员界面简述
 
@@ -90,12 +78,3 @@
    - 修改课程容量
    - 删除此开设课程
 
-   ![image](https://github.com/WolfMy/course_select_system/blob/master/image/StuManage.png)
-
-   ![image](https://github.com/WolfMy/course_select_system/blob/master/image/TeacherManage.png)
-
-   ![image](https://github.com/WolfMy/course_select_system/blob/master/image/CourseManage.png)
-
-   ![image](https://github.com/WolfMy/course_select_system/blob/master/image/CourseManage2.png)
-
-   ![image](https://github.com/WolfMy/course_select_system/blob/master/image/SelectManage.png)
