@@ -10,7 +10,7 @@
         <input type="number" name="CourseNum" class="form-control" placeholder="课程号" required>
       </div>
       <div class="col">
-          <input type="number" name="TeacherNum" class="form-control" placeholder="教师工号" required>
+          <input type="number" name="Class" class="form-control" placeholder="班级号" required>
         </div>
       <div class="col">
       <button type="submit" class="btn btn-block btn-success mb-2">查询</button>
@@ -25,6 +25,7 @@
         <tr>
             <th class="lead">课程号</th>
             <th class="lead">课程名</th>
+            <th class="lead">班级号</th>
             <th class="lead">教师号</th>
             <th class="lead">教师名</th>
             <th class="lead">课程容量</th>
@@ -37,6 +38,7 @@
         <tr>
            <td class="lead">{{ table.CourseNum }}</td>
            <td class="lead">{{ table.CourseName }}</td>
+           <td class="lead">{{ table.ClassNum }}</td>
            <td class="lead">{{ table.TeacherNum }}</td>
            <td class="lead">{{ table.TeacherName }}</td>
            <td class="lead">{{ table.CourseCapacity }}</td>

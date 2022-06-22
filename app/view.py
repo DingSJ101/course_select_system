@@ -164,7 +164,7 @@ def course_select_table():
             table = {
                 'CourseNum': _course.CourseNum,
                 'CourseName': _course.CourseName,
-                'ClassNum': cla.ClassNum,
+                'ClassNum': cla.ClassNum.split('_')[1],
                 'CourseCredit': _course.CourseCredit,
                 'ClassTime': cla.ClassTime,
                 'ClassVenue': cla.ClassVenue,
@@ -184,7 +184,7 @@ def course_teachers(CourseNum):
         tables = []
         for cla in course.Classes:
             table = {
-                'ClassNum': cla.ClassNum,
+                'ClassNum': cla.ClassNum.split('_')[1],
                 'CourseNum': cla.CourseNum,
                 'TeacherNum': cla.TeacherNum,
                 'CourseName': course.CourseName,
@@ -336,6 +336,7 @@ def grade_query():
                                                         ClassNum=cla.ClassNum).first().Grade
             table = {
                 'CourseNum': course.CourseNum,
+                'ClassNum': cla.ClassNum.split('_')[1],
                 'CourseName': course.CourseName,
                 'CourseCredit': course.CourseCredit,
                 'CourseTime': cla.ClassTime,
@@ -357,10 +358,14 @@ def course_select_detail():
             course_select_tables = Student_Class_table.query.filter_by(ClassNum=cla.ClassNum).all()
             course = cla.course
             course_info = {
+                'ClassNum': cla.ClassNum.split('_')[1],
                 'CourseNum': course.CourseNum,
                 'CourseName': course.CourseName,
                 'CourseStudents': cla.ClassCapacity,
-                'CourseCapacity': course.CourseCapacity
+                'CourseCapacity': course.CourseCapacity,
+                'CourseCredit': course.CourseCredit,
+                'ClassVenue': cla.ClassVenue,
+                'ClassTime': cla.ClassTime
             }
             tables = []
             for student in cla.students:
@@ -408,8 +413,7 @@ def course_grade_input(CourseNum):
                     'CourseNum': course.CourseNum,
                     'CourseName': course.CourseName,
                     'CourseStudents': cla.ClassCapacity,
-                    'ClassNum': cla.ClassNum,
-                    'Class':cla.ClassNum[-4:]
+                    'ClassNum': cla.ClassNum.split('_')[1],
                 }
                 tables = []
                 for record in course_select_tables:
@@ -473,7 +477,7 @@ def course_select_manage():
             course = cla.course
             teacher = cla.teacher
             table = {
-                'ClassNum': cla.ClassNum,
+                'ClassNum': cla.ClassNum.split('_')[1],
                 'CourseNum': course.CourseNum,
                 'CourseName': course.CourseName,
                 'TeacherNum': teacher.TeacherNum,
@@ -492,8 +496,9 @@ def course_select_search():
     if isinstance(current_user._get_current_object(), Manager):
         if request.method == 'POST':
             CourseNum = request.form['CourseNum']
-            TeacherNum = request.form['TeacherNum']
-            classes = Class.query.filter_by(TeacherNum=TeacherNum, CourseNum=CourseNum).all()
+            Class1 = request.form['Class']
+            ClassNum = CourseNum+'_'+Class1
+            classes = Class.query.filter_by(ClassNum=ClassNum).all()
         else:
             classes = Class.query.order_by(Class.CourseNum).all()
         tables = []
@@ -514,6 +519,7 @@ def course_select_search():
             _course = cla.course
             # teacher=cla.teacher
             table = {
+                'ClassNum': cla.ClassNum.split('_')[1],
                 'CourseNum': _course.CourseNum,
                 'CourseName': _course.CourseName,
                 'TeacherNum': cla.TeacherNum,
@@ -545,6 +551,7 @@ def course_manage():
             table = {
                 'CourseNum': course.CourseNum,
                 'CourseName': course.CourseName,
+                'ClassNum': cla.ClassNum.split('_')[1],
                 'TeacherNum': teacher.TeacherNum,
                 'TeacherName': teacher.TeacherName,
                 'CourseCapacity': course.CourseCapacity,
@@ -731,8 +738,10 @@ def add_course_select():
             # CourseNum = request.form['CourseNum']
             # TeacherNum = request.form['TeacherNum']
             try:
-                ClassNum = request.form['ClassNum']
+                CourseNum = request.form['CourseNum']
+                Class = request.form['Class']
                 StudentNum = request.form['StudentNum']
+                ClassNum = CourseNum + '_' + Class
                 if not Student_Class_table.query.filter(and_(Student_Class_table.StudentNum==StudentNum, Student_Class_table.ClassNum.like(ClassNum[:8]+'_%'))).first():
                 # if not Student_Class_table.query.filter_by(StudentNum=StudentNum, ClassNum=ClassNum).first():
                     course_select_table = Student_Class_table(StudentNum, ClassNum)
@@ -762,9 +771,10 @@ def add_course_select():
 def drop_course_select():
     if isinstance(current_user._get_current_object(), Manager):
         if request.method == 'POST':
-            ClassNum = request.form['ClassNum']
-            # TeacherNum = request.form['TeacherNum']
+            CourseNum = request.form['CourseNum']
+            Class = request.form['Class']
             StudentNum = request.form['StudentNum']
+            ClassNum = CourseNum+'_'+Class
             course_select_table = Student_Class_table.query.filter_by(StudentNum=StudentNum, ClassNum=ClassNum).first()
             if course_select_table:
                 db.session.delete(course_select_table)

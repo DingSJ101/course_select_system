@@ -106,11 +106,11 @@
                     </div>
                 <div class="form-group">
                     <label>上课时间</label>
-                    <input type="text" name="ClassTime" class="form-control" placeholder="时间" required>
+                    <input type="text" name="ClassTime" class="form-control" placeholder="eg. 二3-4" required>
                 </div>
                 <div class="form-group">
                     <label>上课地点</label>
-                    <input type="text" name="ClassVenue" class="form-control" placeholder="地点" required>
+                    <input type="text" name="ClassVenue" class="form-control" placeholder="eg. DJ102" required>
                 </div>
                 <button type="submit" class="btn btn-success btn-block">开设课程</button>
             </form>
@@ -123,6 +123,7 @@
                 <tr>
                     <th class="lead">课程号</th>
                     <th class="lead">课程名</th>
+                    <th class="lead">班级号</th>
                     <th class="lead">课程学分</th>
 {#                    <th class="lead">课程学时</th>#}
 {#                    <th class="lead">开课学院</th>#}
@@ -137,6 +138,7 @@
                     <tr>
                        <td class="lead">{{ table.CourseNum }}</td>
                        <td class="lead">{{ table.CourseName }}</td>
+                       <td class="lead">{{ table.ClassNum }}</td>
                        <td class="lead">{{ table.CourseCredit }}</td>
                        <td class="lead">{{ table.TeacherNum }}</td>
                        <td class="lead">{{ table.TeacherName }}</td>

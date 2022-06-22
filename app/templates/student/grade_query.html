@@ -7,6 +7,7 @@
             <thead class="thead-light bg-info">
         <tr>
             <th class="lead">课程号</th>
+            <th class="lead">班级号</th>
             <th class="lead">课程名</th>
             <th class="lead">课程学分</th>
             <th class="lead">上课时间</th>
@@ -20,6 +21,7 @@
         {% for table in tables %}
         <tr>
            <td class="lead">{{ table.CourseNum }}</td>
+           <td class="lead">{{ table.ClassNum }}</td>
            <td class="lead">{{ table.CourseName }}</td>
            <td class="lead">{{ table.CourseCredit }}</td>
            <td class="lead">{{ table.CourseTime }}</td>
