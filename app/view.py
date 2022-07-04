@@ -181,6 +181,8 @@ def course_teachers(CourseNum):
     if isinstance(current_user._get_current_object(), Student):
         CourseNum = CourseNum[:8]
         course = Course.query.filter_by(CourseNum=CourseNum).first()
+        # course = Course.query.filter_by(CourseNum.like('%' + CourseNum + '%')).first()
+        # cla = Class.query.filter(Class.ClassNum.like(CourseNum + '%')).first()
         tables = []
         for cla in course.Classes:
             table = {
@@ -200,29 +202,16 @@ def course_teachers(CourseNum):
 
 
 ## 查看所有课程，展示所有Course，具体classes在/course_teachers
-@app.route('/course', methods=['GET', ])
+@app.route('/course/<searchNum>', methods=['GET', ])
+@app.route('/course', defaults={'searchNum': 'all'}, methods=['GET', 'POST'])
 @login_required
-def course():
+def course(searchNum):
+    print(searchNum)
     if isinstance(current_user._get_current_object(), Student):
-        # all_classes = Class.query.all()
-        # Classes = current_user.Classes
-        # class_selected = [Cla.CourseNum for Cla in Classes]
-        # tables = []
-        # for cla in all_classes:
-        #     _course = cla.course
-        #     table = {
-        #         'CourseNum': _course.CourseNum,
-        #         'CourseName': _course.CourseName,
-        #         'ClassNum':cla.ClassNum,
-        #         'CourseCredit': _course.CourseCredit,
-        #         'ClassTime': cla.ClassTime,
-        #         'ClassVenue': cla.ClassVenue,
-        #         'TeacherName': cla.teacher.TeacherName,
-        #         'TeacherNum': cla.TeacherNum
-
-        #     }
-        #     tables.append(table)
-        all_courses = Course.query.all()
+        if searchNum == 'all':
+            all_courses = Course.query.all()
+        else:
+            all_courses = Course.query.filter(Course.CourseNum.like('%'+searchNum+'%')).all()
         Classes = current_user.Classes
         class_selected = [Cla.CourseNum for Cla in Classes]
         tables = []
@@ -256,7 +245,6 @@ def course_drop(CourseNum):
             flash('您已成功退选该门课程。')
         return redirect(url_for('course_select_table'))
 
-
 # Todo ---查询 404报错 ## to_test
 # @app.route('/course_query/<CourseNum>/<ClassNum>', methods=['GET','POST' ])
 @app.route('/course_query', methods=['GET', 'POST'])
@@ -264,28 +252,33 @@ def course_drop(CourseNum):
 def course_query():
     CourseNum = request.form['CourseNum']
     # ClassNum = request.form['TeacherNum']
-    if isinstance(current_user._get_current_object(), Student):
-        # classes = Class.query.filter(Class.ClassNum.like(CourseNum+'%'))
-        # course = Course.query.filter_by(CourseNum=CourseNum).first()
-        # tables = []
-        # for cla in classes:
-        #     teacher= cla.teacher
-        #     student_class = Student_Class_table.query.filter_by(ClassNum=cla.ClassNum).all
-        #     table = {
-        #         'CourseNum':course.CourseNum,
-        #         'CourseName':course.CourseName,
-        #         'ClassNum':cla.ClassNum,
-        #         'TeacherName':teacher.TeacherName,
-        #         'CourseCredit':course.CourseCredit,
-        #         'ClassTime':cla.ClassTime
-        #     }
-        #     tables.append(table)
-        # return render_template('student/course_teachers.html', tables=tables)
-        course = Course.query.filter_by(CourseNum=CourseNum).first()
-        if not course:
-            flash('没有开设此课程号的课程')
-            return redirect(url_for('course'))
-        return redirect(url_for('course_teachers', CourseNum=CourseNum))
+    # if isinstance(current_user._get_current_object(), Student):
+    #     # classes = Class.query.filter(Class.ClassNum.like(CourseNum+'%'))
+    #     # course = Course.query.filter_by(CourseNum=CourseNum).first()
+    #     # tables = []
+    #     # for cla in classes:
+    #     #     teacher= cla.teacher
+    #     #     student_class = Student_Class_table.query.filter_by(ClassNum=cla.ClassNum).all
+    #     #     table = {
+    #     #         'CourseNum':course.CourseNum,
+    #     #         'CourseName':course.CourseName,
+    #     #         'ClassNum':cla.ClassNum,
+    #     #         'TeacherName':teacher.TeacherName,
+    #     #         'CourseCredit':course.CourseCredit,
+    #     #         'ClassTime':cla.ClassTime
+    #     #     }
+    #     #     tables.append(table)
+    #     # return render_template('student/course_teachers.html', tables=tables)
+    #
+    #     # course = Course.query.filter_by(CourseNum=CourseNum).first()
+    #     course = Course.query.filter(Course.CourseNum.like('%' + CourseNum + '%')).all()
+    #     print(course)
+    #
+    #     if not course:
+    #         flash('没有开设此课程号的课程')
+    #         return redirect(url_for('course'))
+    #     return redirect(url_for('course_teachers', CourseNum=CourseNum))
+    return redirect(url_for('course',searchNum=CourseNum))
 
 
 # 手动选课
