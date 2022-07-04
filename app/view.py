@@ -211,7 +211,7 @@ def course(searchNum):
         if searchNum == 'all':
             all_courses = Course.query.all()
         else:
-            all_courses = Course.query.filter(Course.CourseNum.like('%'+searchNum+'%')).all()
+            all_courses = Course.query.filter(or_(Course.CourseNum.like('%'+searchNum+'%'), Course.CourseName.like('%'+searchNum+'%'))).all()
         Classes = current_user.Classes
         class_selected = [Cla.CourseNum for Cla in Classes]
         tables = []
