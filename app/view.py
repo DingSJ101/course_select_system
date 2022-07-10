@@ -373,11 +373,12 @@ def course_select_detail():
 @app.route('/course_grade_input', defaults={'CourseNum': 0})
 @login_required
 def course_grade_input(CourseNum):
+    # CourseNum = CourseNum[:8]
     if isinstance(current_user._get_current_object(), Teacher):
         if request.method == 'POST':
-            # course_select_tables = Student_Class_table.query.filter_by(ClassNum=CourseNum).all()
-            course_select_tables = Student_Class_table.query.filter(
-                Student_Class_table.ClassNum.like(CourseNum + '_%')).all()
+            course_select_tables = Student_Class_table.query.filter_by(ClassNum=CourseNum).all()
+            # course_select_tables = Student_Class_table.query.filter(
+            #     Student_Class_table.ClassNum.like(CourseNum + '_%')).all()
             for course_select_table in course_select_tables:
                 if not course_select_table.Grade:
                     grade = request.form[course_select_table.StudentNum]
