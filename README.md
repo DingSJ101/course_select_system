@@ -6,7 +6,7 @@ git clone # this repo
 ## way one  build new container
 docker-compose up -d 
 ## way two use my container
-docker run -idt  --name course_select_system -v ~/workspace/course_select_system:/course_select_system -v /etc/localtime:/etc/localtime -p 8003:8000 dingsj101/course_select_system:1.2 sh /course_select_system/run.sh
+docker run -idt  --name course_select_system -v ~/workspace/course_select_system:/course_select_system -v /etc/localtime:/etc/localtime -p 8000:8000 dingsj101/course_select_system:1.2 sh /course_select_system/run.sh
 
 curl http://127.0.0.1:8000  # test deployment
 ```
