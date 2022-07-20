@@ -7,7 +7,8 @@ from app.models import Student, Teacher, Manager, Course, Student_Class_table, C
 from app.forms import EditProfileForm
 from app import db
 from flask_sqlalchemy import  SQLAlchemy
-from sqlalchemy import and_,or_
+from sqlalchemy import and_, or_, null
+
 
 @app.route('/')
 def index():
@@ -398,6 +399,7 @@ def course_grade_input(CourseNum):
                     'CourseName': course.CourseName,
                     'CourseStudents': cla.ClassCapacity,
                     'ClassNum': cla.ClassNum,
+                    'IsLock': cla.IsLock
                 }
                 tables = []
                 for record in course_select_tables:
@@ -415,6 +417,18 @@ def course_grade_input(CourseNum):
                     tables.append(table)
                 course_tables.append([course_info, tables, flag])
         return render_template('teacher/course_grade_input.html', course_tables=course_tables)
+
+@app.route('/set_lock/<CourseNum>')
+def set_lock(CourseNum):
+    if isinstance(current_user._get_current_object(), Teacher):
+        # course_select_table = Student_Class_table.query.filter(and_(Student_Class_table.ClassNum.like(CourseNum+'_%'), Student_Class_table.StudentNum == StudentNum)).first()
+        currentClass = Class.query.filter_by(ClassNum=CourseNum).first()
+        currentClass.IsLock = True
+        print('tcy')
+        # course_select_table.input_grade(None)
+        db.session.commit()
+        # return redirect(url_for('course_grade_input', CourseNum=CourseNum))
+        return redirect(url_for('course_grade_input'))
 
 
 ## Todo 原因：可能不是很重要，还没有成功显示过 提交了的表单成绩  #to_test
@@ -648,7 +662,7 @@ def add_course_teacher():
             ClassTime = request.form['ClassTime']
             ClassVenue = request.form['ClassVenue']
             if not Class.query.filter_by(ClassNum=new_classnum).first():
-                course_teacher = Class(new_classnum, CourseNum, TeacherNum, ClassTime, ClassVenue)
+                course_teacher = Class(new_classnum, CourseNum, TeacherNum, null(), ClassTime, ClassVenue)
                 db.session.add(course_teacher)
                 db.session.commit()
                 flash('开设课程成功！')

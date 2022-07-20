@@ -140,17 +140,19 @@ class Class(db.Model):
     ClassCapacity = db.Column(db.Integer)
     CourseNum = db.Column(db.String(8), db.ForeignKey('course.CourseNum'), nullable=True)
     TeacherNum = db.Column(db.String(8), db.ForeignKey('teacher.TeacherNum'), nullable=True)
+    IsLock = db.Column(db.Boolean)
     # course
     # students
     # teacher
-    def __init__(self, ClassNum ,CourseNum,TeacherNum,ClassTime='',ClassVenue='' ):
+    def __init__(self, ClassNum ,CourseNum,TeacherNum,IsLock,ClassTime='',ClassVenue=''):
         self.ClassNum = ClassNum
         self.ClassTime = ClassTime
         self.ClassVenue = ClassVenue
         self.CourseNum = CourseNum
         self.TeacherNum = TeacherNum
+        self.IsLock = IsLock
         self.ClassCapacity=0
-    
+
 
 class Manager(UserMixin, db.Model):
     # 管理员

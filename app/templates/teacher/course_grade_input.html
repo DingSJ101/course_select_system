@@ -18,7 +18,12 @@
                 <th class="lead">姓名</th>
                 <th class="lead">学院</th>
                 <th class="lead">专业</th>
-                <th class="lead">成绩</th>
+                <th class="lead">成绩 &nbsp
+<!--                    <button type="button" class="btn btn-warning btn-sm" id="lock"> 锁定成绩 </button>-->
+                    <button type="button" class="btn btn-warning btn-sm">
+                        <a href="{{ url_for('set_lock', CourseNum=course_table[0].ClassNum) }}"> 锁定成绩 </a> </button>
+
+                </th>
             </tr>
             </thead>
             <tbody>
@@ -37,7 +42,9 @@
                             <strong>{{ table.Grade }}</strong>
                         </div>
                         <div class="col-md-7 column">
-                            <a  class="btn btn-primary btn-sm" href="{{ url_for('grade_set_zero', CourseNum=course_table[0].CourseNum, StudentNum=table.StudentNum) }}">重置成绩</a>
+                            {% if not course_table[0].IsLock %}
+                                <a  class="btn btn-primary btn-sm reset" href="{{ url_for('grade_set_zero', CourseNum=course_table[0].CourseNum, StudentNum=table.StudentNum) }}">重置成绩</a>
+                            {% endif %}
                         </div>
                     </div>
                 </td>
@@ -48,16 +55,25 @@
                             <strong>{{ table.Grade }}</strong>
                         </div>
                         <div class="col-md-7 column">
-                            <a  class="btn btn-outline-danger btn-sm" href="{{ url_for('grade_set_zero', CourseNum=course_table[0].CourseNum, StudentNum=table.StudentNum) }}">重置成绩</a>
+                            {% if not course_table[0].IsLock %}
+                                <a  class="btn btn-outline-danger btn-sm reset" href="{{ url_for('grade_set_zero', CourseNum=course_table[0].CourseNum, StudentNum=table.StudentNum) }}">重置成绩</a>
+                            {% endif %}
                         </div>
                     </div>
                 </td>
                 {% endif %}
             {% else %}
-            <td class="lead">
-                <div class="input-group input-group-sm"> 
+            <td class="lead ">
+                {% if not course_table[0].IsLock %}
+                <div class="input-group input-group-sm">
                     <input type="number" class="form-control" max=100 min=0 required>
                 </div>
+                {% endif %}
+<!--                <select id="selectLeo" class="input-group input-group-sm">-->
+<!--                    <option value="-1" disabled selected hidden>状态</option>-->
+<!--                    <option value="1">已考</option>-->
+<!--                    <option value="1" style="color: gray;">缺考</option>-->
+<!--                </select>-->
             </td>
             {% endif %}
             </tr>
@@ -68,7 +84,7 @@
         
         <div class="row">
             <div class="col-md-12 column">
-                {% if course_table[2] %}
+                {% if course_table[2] and not course_table[0].IsLock %}
                 <button type="submit" class="btn btn-outline-success btn-lg btn-block">确认录入</button>
                 {% else %}
                 <button type="submit" class="btn btn-secondary btn-lg btn-block" disabled>已录入完成</button>
@@ -107,4 +123,27 @@
         })
     })
 </script>
+<!--<script>-->
+<!--     const oBtn = document.getElementById("lock")-->
+<!--     oBtn.onclick=function(){-->
+<!--        const aBtns = document. getElementsByClassName("reset")-->
+<!--        Array.prototype.forEach.call(aBtns,function(item){-->
+<!--            item.style.display = "none"-->
+<!--        })-->
+<!--        localStorage.setItem("isLock",true)-->
+<!--     }-->
+
+<!--     let isLock = localStorage.getItem("isLock")-->
+<!--     if(isLock === "true"){-->
+<!--       const aBtns = document.getElementsByClassName("reset")-->
+<!--        Array.prototype.forEach.call(aBtns,function(item){-->
+<!--            item.style.display = "none"-->
+<!--        })-->
+<!--     } else{-->
+<!--        const aBtns = document. getElementsByClassName("reset")-->
+<!--        Array.prototype.forEach.call(aBtns,function(item){-->
+<!--            item.style.display = "inline-block"-->
+<!--        })-->
+<!--      }-->
+<!--</script>-->
 {% endblock %}
