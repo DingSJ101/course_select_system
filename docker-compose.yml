@@ -3,9 +3,9 @@ services:
   app:
     restart: unless-stopped
     build: .
-    image: dingsj101/course_select_system:1.2
+    image: dingsj101/course_select_system:1.3
     ports:
-     - "8003:8000"
+     - "8000:8000"
     volumes:
      - .:/course_select_system
      - /etc/localtime:/etc/localtime

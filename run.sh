@@ -1,4 +1,5 @@
 #! /bin/bash
+
 echo $PWD
 echo $0
 DIR=$(dirname $(readlink -f "$0"))
