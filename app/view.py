@@ -165,7 +165,7 @@ def course_select_table():
             table = {
                 'CourseNum': _course.CourseNum,
                 'CourseName': _course.CourseName,
-                'ClassNum': cla.ClassNum.split('_')[1],
+                'ClassNum': cla.ClassNum,
                 'CourseCredit': _course.CourseCredit,
                 'ClassTime': cla.ClassTime,
                 'ClassVenue': cla.ClassVenue,
@@ -175,7 +175,7 @@ def course_select_table():
         return render_template('student/course_select_table.html', tables=tables)
 
 
-## CourseNum like 'CourseNum_ClassNum'('00864122')
+## CourseNum like 'CourseNum_ClassNum'('00864122_3001')
 @app.route('/course_teachers/<CourseNum>', methods=['GET', ])
 @login_required
 def course_teachers(CourseNum):
@@ -187,7 +187,7 @@ def course_teachers(CourseNum):
         tables = []
         for cla in course.Classes:
             table = {
-                'ClassNum': cla.ClassNum.split('_')[1],
+                'ClassNum': cla.ClassNum,
                 'CourseNum': cla.CourseNum,
                 'TeacherNum': cla.TeacherNum,
                 'CourseName': course.CourseName,
@@ -198,10 +198,8 @@ def course_teachers(CourseNum):
 
             }
             tables.append(table)
-        class_selected = [_.ClassNum for _ in current_user.Classes]
-        
-        
-        return render_template('student/course_teachers.html', tables=tables,class_selected=class_selected)
+
+        return render_template('student/course_teachers.html', tables=tables)
 
 
 ## 查看所有课程，展示所有Course，具体classes在/course_teachers
@@ -330,7 +328,6 @@ def grade_query():
                                                         ClassNum=cla.ClassNum).first().Grade
             table = {
                 'CourseNum': course.CourseNum,
-                'ClassNum': cla.ClassNum.split('_')[1],
                 'CourseName': course.CourseName,
                 'CourseCredit': course.CourseCredit,
                 'CourseTime': cla.ClassTime,
@@ -352,14 +349,10 @@ def course_select_detail():
             course_select_tables = Student_Class_table.query.filter_by(ClassNum=cla.ClassNum).all()
             course = cla.course
             course_info = {
-                'ClassNum': cla.ClassNum.split('_')[1],
                 'CourseNum': course.CourseNum,
                 'CourseName': course.CourseName,
                 'CourseStudents': cla.ClassCapacity,
-                'CourseCapacity': course.CourseCapacity,
-                'CourseCredit': course.CourseCredit,
-                'ClassVenue': cla.ClassVenue,
-                'ClassTime': cla.ClassTime
+                'CourseCapacity': course.CourseCapacity
             }
             tables = []
             for student in cla.students:
@@ -389,13 +382,10 @@ def course_grade_input(CourseNum):
             #     Student_Class_table.ClassNum.like(CourseNum + '_%')).all()
             for course_select_table in course_select_tables:
                 if not course_select_table.Grade:
-                    try:
-                        grade = request.form[course_select_table.StudentNum]
-                        course_select_table.input_grade(grade)
-                        db.session.commit()
-                        flash('成绩录入成功！')
-                    except:
-                        continue
+                    grade = request.form[course_select_table.StudentNum]
+                    course_select_table.input_grade(grade)
+            db.session.commit()
+            flash('成绩录入成功！')
             return redirect(url_for('course_grade_input'))
         else:
             classes = current_user.Classes
@@ -485,7 +475,7 @@ def course_select_manage():
             course = cla.course
             teacher = cla.teacher
             table = {
-                'ClassNum': cla.ClassNum.split('_')[1],
+                'ClassNum': cla.ClassNum,
                 'CourseNum': course.CourseNum,
                 'CourseName': course.CourseName,
                 'TeacherNum': teacher.TeacherNum,
@@ -504,9 +494,8 @@ def course_select_search():
     if isinstance(current_user._get_current_object(), Manager):
         if request.method == 'POST':
             CourseNum = request.form['CourseNum']
-            Class1 = request.form['Class']
-            ClassNum = CourseNum+'_'+Class1
-            classes = Class.query.filter_by(ClassNum=ClassNum).all()
+            TeacherNum = request.form['TeacherNum']
+            classes = Class.query.filter_by(TeacherNum=TeacherNum, CourseNum=CourseNum).all()
         else:
             classes = Class.query.order_by(Class.CourseNum).all()
         tables = []
@@ -527,7 +516,6 @@ def course_select_search():
             _course = cla.course
             # teacher=cla.teacher
             table = {
-                'ClassNum': cla.ClassNum.split('_')[1],
                 'CourseNum': _course.CourseNum,
                 'CourseName': _course.CourseName,
                 'TeacherNum': cla.TeacherNum,
@@ -559,7 +547,6 @@ def course_manage():
             table = {
                 'CourseNum': course.CourseNum,
                 'CourseName': course.CourseName,
-                'ClassNum': cla.ClassNum.split('_')[1],
                 'TeacherNum': teacher.TeacherNum,
                 'TeacherName': teacher.TeacherName,
                 'CourseCapacity': course.CourseCapacity,
@@ -716,24 +703,23 @@ def course_delete(CourseNum):
 
 
 # Todo extra todo--管理端删除开设课程 报错get_course没有self  # to_test
-@app.route('/course_teacher_delete/<ClassNum>/<TeacherNum>')
+@app.route('/course_teacher_delete/<CourseNum>/<TeacherNum>')
 @login_required
-def course_teacher_delete(ClassNum, TeacherNum):
+def course_teacher_delete(CourseNum, TeacherNum):
     if isinstance(current_user._get_current_object(), Manager):
         # 先删除选课信息
         course_select_tables = Student_Class_table.query.filter(
-            # Student_Class_table.ClassNum.like(CourseNum + '%')).all()
-            Student_Class_table.ClassNum==ClassNum).all()
+            Student_Class_table.ClassNum.like(CourseNum + '%')).all()
         for course_select_table in course_select_tables:
             db.session.delete(course_select_table)
         db.session.commit()
         flash('删除学生选课信息成功！')
         # 再删除课程与老师的对应表
-        classes = Class.query.filter_by(ClassNum=ClassNum).all()
+        classes = Class.query.filter_by(CourseNum=CourseNum).all()
         for cla in classes:
             db.session.delete(cla)
         db.session.commit()
-        flash('删除班级成功！')
+        flash('删除教师开设课程成功！')
     return redirect(url_for('course_select_manage'))
 
 
@@ -743,34 +729,19 @@ def course_teacher_delete(ClassNum, TeacherNum):
 def add_course_select():
     if isinstance(current_user._get_current_object(), Manager):
         if request.method == 'POST':
-            # CourseNum = request.form['CourseNum']
-            # TeacherNum = request.form['TeacherNum']
-            try:
-                CourseNum = request.form['CourseNum']
-                Class = request.form['Class']
-                StudentNum = request.form['StudentNum']
-                ClassNum = CourseNum + '_' + Class
-                if not Student_Class_table.query.filter(and_(Student_Class_table.StudentNum==StudentNum, Student_Class_table.ClassNum.like(ClassNum[:8]+'_%'))).first():
-                # if not Student_Class_table.query.filter_by(StudentNum=StudentNum, ClassNum=ClassNum).first():
-                    course_select_table = Student_Class_table(StudentNum, ClassNum)
-                    db.session.add(course_select_table)
-                    db.session.commit()
-                    flash('手动选课成功！')
-                else:
-                    flash('手动选课失败！该学生已选择该门课程！')
-            except:
-                flash('当前班级不存在')
-            
-            # cla = Class.query.filter_by(CourseNum=CourseNum, TeacherNum=TeacherNum).first()
-            # if not cla:
-                
-            # elif not Student_Class_table.query.filter_by(StudentNum=StudentNum, ClassNum=cla.ClassNum).first():
-            #     course_select_table = Student_Class_table(StudentNum, cla.ClassNum)
-            #     db.session.add(course_select_table)
-            #     db.session.commit()
-            #     flash('手动选课成功！')
-            # else:
-                
+            CourseNum = request.form['CourseNum']
+            TeacherNum = request.form['TeacherNum']
+            StudentNum = request.form['StudentNum']
+            cla = Class.query.filter_by(CourseNum=CourseNum, TeacherNum=TeacherNum).first()
+            if not cla:
+                flash('当前教师未开设该课程')
+            elif not Student_Class_table.query.filter_by(StudentNum=StudentNum, ClassNum=cla.ClassNum).first():
+                course_select_table = Student_Class_table(StudentNum, cla.ClassNum)
+                db.session.add(course_select_table)
+                db.session.commit()
+                flash('手动选课成功！')
+            else:
+                flash('手动选课失败！该学生已选择该门课程！')
     return redirect(url_for('course_select_manage'))
 
 
@@ -779,10 +750,9 @@ def add_course_select():
 def drop_course_select():
     if isinstance(current_user._get_current_object(), Manager):
         if request.method == 'POST':
-            CourseNum = request.form['CourseNum']
-            Class = request.form['Class']
+            ClassNum = request.form['ClassNum']
+            # TeacherNum = request.form['TeacherNum']
             StudentNum = request.form['StudentNum']
-            ClassNum = CourseNum+'_'+Class
             course_select_table = Student_Class_table.query.filter_by(StudentNum=StudentNum, ClassNum=ClassNum).first()
             if course_select_table:
                 db.session.delete(course_select_table)
