@@ -7,7 +7,8 @@ from app.models import Student, Teacher, Manager, Course, Student_Class_table, C
 from app.forms import EditProfileForm
 from app import db
 from flask_sqlalchemy import  SQLAlchemy
-from sqlalchemy import and_,or_
+from sqlalchemy import and_, or_, null
+
 
 @app.route('/')
 def index():
@@ -181,6 +182,8 @@ def course_teachers(CourseNum):
     if isinstance(current_user._get_current_object(), Student):
         CourseNum = CourseNum[:8]
         course = Course.query.filter_by(CourseNum=CourseNum).first()
+        # course = Course.query.filter_by(CourseNum.like('%' + CourseNum + '%')).first()
+        # cla = Class.query.filter(Class.ClassNum.like(CourseNum + '%')).first()
         tables = []
         for cla in course.Classes:
             table = {
@@ -202,29 +205,16 @@ def course_teachers(CourseNum):
 
 
 ## 查看所有课程，展示所有Course，具体classes在/course_teachers
-@app.route('/course', methods=['GET', ])
+@app.route('/course/<searchNum>', methods=['GET', ])
+@app.route('/course', defaults={'searchNum': 'all'}, methods=['GET', 'POST'])
 @login_required
-def course():
+def course(searchNum):
+    print(searchNum)
     if isinstance(current_user._get_current_object(), Student):
-        # all_classes = Class.query.all()
-        # Classes = current_user.Classes
-        # class_selected = [Cla.CourseNum for Cla in Classes]
-        # tables = []
-        # for cla in all_classes:
-        #     _course = cla.course
-        #     table = {
-        #         'CourseNum': _course.CourseNum,
-        #         'CourseName': _course.CourseName,
-        #         'ClassNum':cla.ClassNum,
-        #         'CourseCredit': _course.CourseCredit,
-        #         'ClassTime': cla.ClassTime,
-        #         'ClassVenue': cla.ClassVenue,
-        #         'TeacherName': cla.teacher.TeacherName,
-        #         'TeacherNum': cla.TeacherNum
-
-        #     }
-        #     tables.append(table)
-        all_courses = Course.query.all()
+        if searchNum == 'all':
+            all_courses = Course.query.all()
+        else:
+            all_courses = Course.query.filter(or_(Course.CourseNum.like('%'+searchNum+'%'), Course.CourseName.like('%'+searchNum+'%'))).all()
         Classes = current_user.Classes
         class_selected = [Cla.CourseNum for Cla in Classes]
         tables = []
@@ -258,7 +248,6 @@ def course_drop(CourseNum):
             flash('您已成功退选该门课程。')
         return redirect(url_for('course_select_table'))
 
-
 # Todo ---查询 404报错 ## to_test
 # @app.route('/course_query/<CourseNum>/<ClassNum>', methods=['GET','POST' ])
 @app.route('/course_query', methods=['GET', 'POST'])
@@ -266,28 +255,33 @@ def course_drop(CourseNum):
 def course_query():
     CourseNum = request.form['CourseNum']
     # ClassNum = request.form['TeacherNum']
-    if isinstance(current_user._get_current_object(), Student):
-        # classes = Class.query.filter(Class.ClassNum.like(CourseNum+'%'))
-        # course = Course.query.filter_by(CourseNum=CourseNum).first()
-        # tables = []
-        # for cla in classes:
-        #     teacher= cla.teacher
-        #     student_class = Student_Class_table.query.filter_by(ClassNum=cla.ClassNum).all
-        #     table = {
-        #         'CourseNum':course.CourseNum,
-        #         'CourseName':course.CourseName,
-        #         'ClassNum':cla.ClassNum,
-        #         'TeacherName':teacher.TeacherName,
-        #         'CourseCredit':course.CourseCredit,
-        #         'ClassTime':cla.ClassTime
-        #     }
-        #     tables.append(table)
-        # return render_template('student/course_teachers.html', tables=tables)
-        course = Course.query.filter_by(CourseNum=CourseNum).first()
-        if not course:
-            flash('没有开设此课程号的课程')
-            return redirect(url_for('course'))
-        return redirect(url_for('course_teachers', CourseNum=CourseNum))
+    # if isinstance(current_user._get_current_object(), Student):
+    #     # classes = Class.query.filter(Class.ClassNum.like(CourseNum+'%'))
+    #     # course = Course.query.filter_by(CourseNum=CourseNum).first()
+    #     # tables = []
+    #     # for cla in classes:
+    #     #     teacher= cla.teacher
+    #     #     student_class = Student_Class_table.query.filter_by(ClassNum=cla.ClassNum).all
+    #     #     table = {
+    #     #         'CourseNum':course.CourseNum,
+    #     #         'CourseName':course.CourseName,
+    #     #         'ClassNum':cla.ClassNum,
+    #     #         'TeacherName':teacher.TeacherName,
+    #     #         'CourseCredit':course.CourseCredit,
+    #     #         'ClassTime':cla.ClassTime
+    #     #     }
+    #     #     tables.append(table)
+    #     # return render_template('student/course_teachers.html', tables=tables)
+    #
+    #     # course = Course.query.filter_by(CourseNum=CourseNum).first()
+    #     course = Course.query.filter(Course.CourseNum.like('%' + CourseNum + '%')).all()
+    #     print(course)
+    #
+    #     if not course:
+    #         flash('没有开设此课程号的课程')
+    #         return redirect(url_for('course'))
+    #     return redirect(url_for('course_teachers', CourseNum=CourseNum))
+    return redirect(url_for('course',searchNum=CourseNum))
 
 
 # 手动选课
@@ -387,6 +381,7 @@ def course_select_detail():
 @app.route('/course_grade_input', defaults={'CourseNum': 0})
 @login_required
 def course_grade_input(CourseNum):
+    # CourseNum = CourseNum[:8]
     if isinstance(current_user._get_current_object(), Teacher):
         if request.method == 'POST':
             course_select_tables = Student_Class_table.query.filter_by(ClassNum=CourseNum).all()
@@ -413,7 +408,8 @@ def course_grade_input(CourseNum):
                     'CourseNum': course.CourseNum,
                     'CourseName': course.CourseName,
                     'CourseStudents': cla.ClassCapacity,
-                    'ClassNum': cla.ClassNum.split('_')[1],
+                    'ClassNum': cla.ClassNum,
+                    'IsLock': cla.IsLock
                 }
                 tables = []
                 for record in course_select_tables:
@@ -431,6 +427,18 @@ def course_grade_input(CourseNum):
                     tables.append(table)
                 course_tables.append([course_info, tables, flag])
         return render_template('teacher/course_grade_input.html', course_tables=course_tables)
+
+@app.route('/set_lock/<CourseNum>')
+def set_lock(CourseNum):
+    if isinstance(current_user._get_current_object(), Teacher):
+        # course_select_table = Student_Class_table.query.filter(and_(Student_Class_table.ClassNum.like(CourseNum+'_%'), Student_Class_table.StudentNum == StudentNum)).first()
+        currentClass = Class.query.filter_by(ClassNum=CourseNum).first()
+        currentClass.IsLock = True
+        print('tcy')
+        # course_select_table.input_grade(None)
+        db.session.commit()
+        # return redirect(url_for('course_grade_input', CourseNum=CourseNum))
+        return redirect(url_for('course_grade_input'))
 
 
 ## Todo 原因：可能不是很重要，还没有成功显示过 提交了的表单成绩  #to_test
@@ -667,7 +675,7 @@ def add_course_teacher():
             ClassTime = request.form['ClassTime']
             ClassVenue = request.form['ClassVenue']
             if not Class.query.filter_by(ClassNum=new_classnum).first():
-                course_teacher = Class(new_classnum, CourseNum, TeacherNum, ClassTime, ClassVenue)
+                course_teacher = Class(new_classnum, CourseNum, TeacherNum, null(), ClassTime, ClassVenue)
                 db.session.add(course_teacher)
                 db.session.commit()
                 flash('开设课程成功！')

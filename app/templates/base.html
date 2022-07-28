@@ -11,7 +11,7 @@
 {% block navbar %}
 <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
         <!--span class="navbar-brand mb-0 lead">功能列表</span-->
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" id="logo" href="javascript:void(0)">
             <img src="/static/img/logo.png" height="50" class="d-inline-block align-top" alt="logo">
         </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,4 +54,23 @@
 <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<!--<script>-->
+<!--     const logo = document.getElementById("logo")-->
+<!--     logo.onclick=function(){-->
+<!--        let isLock = localStorage.getItem("isLock")-->
+<!--        if (isLock === "true"){-->
+<!--            localStorage.setItem("isLock",false)-->
+<!--            const aBtns = document.getElementsByClassName("reset")-->
+<!--            Array.prototype.forEach.call(aBtns,function(item){-->
+<!--                item.style.display = "inline-block"-->
+<!--            })-->
+<!--        } else{-->
+<!--            localStorage.setItem("isLock",true)-->
+<!--            const aBtns = document. getElementsByClassName("reset")-->
+<!--            Array.prototype.forEach.call(aBtns,function(item){-->
+<!--                item.style.display = "none"-->
+<!--            })-->
+<!--        }-->
+<!--     }-->
+<!--</script>-->
 {% endblock %}
