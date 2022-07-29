@@ -69,7 +69,7 @@
               <a href="{{ url_for('change_course_capacity', CourseNum=table.CourseNum, TeacherNum=table.TeacherNum, add_or_sub='sub') }}" class="btn btn-warning btn-sm" role="button">缩容</a>
            </td>
            <td class="lead">
-                <a href="{{ url_for('course_teacher_delete', ClassNum=table.ClassNum, TeacherNum=table.TeacherNum) }}" class="btn btn-outline-danger btn-sm" role="button">删除开设班级</a>
+                <a href="{{ url_for('course_teacher_delete', CourseNum=table.ClassNum, TeacherNum=table.TeacherNum) }}" class="btn btn-outline-danger btn-sm" role="button">删除开设班级</a>
            </td>
         </tr>
         {% endfor %}
