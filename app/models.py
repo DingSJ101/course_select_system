@@ -1,6 +1,6 @@
 from lib2to3.pgen2.token import NUMBER
 from mimetypes import init
-from sqlalchemy import ForeignKey,and_
+from sqlalchemy import ForeignKey,and_, null
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from app import db
@@ -60,6 +60,7 @@ class Student_Class_table(db.Model):
     def __init__(self, StudentNum,ClassNum):
         self.StudentNum = StudentNum
         self.ClassNum = ClassNum
+        self.Grade = null()
     # def __init__(self, StudentNum,CourseNum,ClassNum):
     #     self.StudentNum = StudentNum
     #     self.ClassNum = CourseNum+'-'+ClassNum

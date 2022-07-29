@@ -733,11 +733,16 @@ def course_teacher_delete(CourseNum, TeacherNum):
 
 
 ## todo   to_test
+## Post parameters :
+## CourseNum : 12345678
+## Class : 1234
+## StudentNum : 19XX1234
 @app.route('/add_course_select', methods=['POST', ])
 @login_required
 def add_course_select():
     if isinstance(current_user._get_current_object(), Manager):
         if request.method == 'POST':
+<<<<<<< HEAD
             # CourseNum = request.form['CourseNum']
             # TeacherNum = request.form['TeacherNum']
             try:
@@ -757,6 +762,24 @@ def add_course_select():
                     flash('手动选课失败！该学生已选择该门课程！')
             except:
                 flash('当前班级不存在')
+=======
+            CourseNum = request.form['CourseNum']
+            classnum = request.form['Class']
+            StudentNum = request.form['StudentNum']
+            ClassNum = CourseNum + '_' + classnum
+            cla = Class.query.filter_by(ClassNum=ClassNum).first()
+            if not cla:
+                flash('当前教师未开设该课程')
+            elif not Student_Class_table.query.filter_by(StudentNum=StudentNum, ClassNum=cla.ClassNum).first():
+                course_select_table = Student_Class_table(StudentNum, cla.ClassNum)
+                db.session.add(course_select_table)
+                db.session.commit()
+                flash('手动选课成功！')
+                if cla.ClassCapacity >= cla.course.CourseCapacity :
+                    change_class_capacity(ClassNum, 1)
+            else:
+                flash('手动选课失败！该学生已选择该门课程！')
+>>>>>>>  手动选课时动态调整课程容量
     return redirect(url_for('course_select_manage'))
 
 
@@ -766,11 +789,20 @@ def drop_course_select():
     if isinstance(current_user._get_current_object(), Manager):
         if request.method == 'POST':
             CourseNum = request.form['CourseNum']
+<<<<<<< HEAD
             Class = request.form['Class']
             StudentNum = request.form['StudentNum']
             ClassNum = CourseNum + '_' + Class
+=======
+            classnum = request.form['Class']
+            StudentNum = request.form['StudentNum']
+            ClassNum = CourseNum + '_' + classnum
+>>>>>>>  手动选课时动态调整课程容量
             course_select_table = Student_Class_table.query.filter_by(StudentNum=StudentNum, ClassNum=ClassNum).first()
             if course_select_table:
+                cla = Class.query.filter_by(ClassNum=ClassNum).first()
+                if cla.ClassCapacity >= cla.course.CourseCapacity :
+                    change_class_capacity(ClassNum, -1)
                 db.session.delete(course_select_table)
                 db.session.commit()
                 flash('手动退课成功！')
@@ -780,14 +812,14 @@ def drop_course_select():
 
 
 # Todo --管理端学生选课管理扩课 报错NoneType有course # totest
-@app.route('/change_course_capacity/<CourseNum>/<TeacherNum>/<add_or_sub>', methods=['GET', ])
+@app.route('/change_course_capacity/<CourseNum>/<TeacherNum>/<add_or_sub>/<Number>', methods=['GET', ],defaults={'Number': 10})
 @login_required
-def change_course_capacity(CourseNum, TeacherNum, add_or_sub):
+def change_course_capacity(CourseNum, TeacherNum, add_or_sub,Number):
     if isinstance(current_user._get_current_object(), Manager):
         course_teacher = Class.query.filter_by(CourseNum=CourseNum, TeacherNum=TeacherNum).first()
         course = course_teacher.course
         if add_or_sub == 'add' and course.CourseCapacity < 500:
-            course.CourseCapacity += 10
+            course.CourseCapacity += Number
             flash('课程容量扩容10人！')
         elif add_or_sub == 'sub' and course.CourseCapacity > 10:
             course.CourseCapacity -= 10
@@ -796,3 +828,13 @@ def change_course_capacity(CourseNum, TeacherNum, add_or_sub):
             flash('容量扩容/缩容失败！')
         db.session.commit()
     return redirect(url_for('course_select_manage'))
+
+## TODO 修改的字段为class表中的ClassCapacity字段，表示当前选课的人数（由触发器控制）
+## 应该实现的效果为修改这门课的选课人数上限，目前的实现方法为，所有CourseNum相同的class共享一个Course的CourseNum
+## 需要修改class表，加入初始化Max_Capacity = cla.course.CourseNum
+# @app.route('/add_course_capacity/<CourseNum>/<TeacherNum>/<Number>', methods=['GET', ])
+def change_class_capacity(ClassNum,  Number):
+    cla = Class.query.filter_by(ClassNum=ClassNum).first()
+    cla.ClassCapacity += int(Number)
+    db.session.commit()
+    return 'success'
