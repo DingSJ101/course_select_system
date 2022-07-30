@@ -370,6 +370,6 @@ if __name__ == "__main__":
     # createCourse(100)
     # createTeacher()
     # createManager()
-    # createClass(100)
-    # createStudent_Class(100)
+    createClass(100)
+    createStudent_Class(1000)
     pass

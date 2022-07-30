@@ -671,7 +671,7 @@ def add_course_teacher():
             ClassTime = request.form['ClassTime']
             ClassVenue = request.form['ClassVenue']
             if not Class.query.filter_by(ClassNum=new_classnum).first():
-                course_teacher = Class(new_classnum, CourseNum, TeacherNum, null(), ClassTime, ClassVenue)
+                course_teacher = Class(new_classnum, CourseNum, TeacherNum, ClassTime, ClassVenue, null())
                 db.session.add(course_teacher)
                 db.session.commit()
                 flash('开设课程成功！')
@@ -835,6 +835,7 @@ def change_course_capacity(CourseNum, TeacherNum, add_or_sub,Number):
 # @app.route('/add_course_capacity/<CourseNum>/<TeacherNum>/<Number>', methods=['GET', ])
 def change_class_capacity(ClassNum,  Number):
     cla = Class.query.filter_by(ClassNum=ClassNum).first()
-    cla.ClassCapacity += int(Number)
+    if Number >0 and cla.MaxCapacity <= cla.ClassCapacity :
+        cla.ClassCapacity += int(Number)
     db.session.commit()
     return 'success'

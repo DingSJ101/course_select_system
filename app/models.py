@@ -135,17 +135,18 @@ class Course(db.Model):
         self.CourseCapacity = CourseCapacity
 
 class Class(db.Model):
-    ClassNum = db.Column(db.String(16), primary_key=True) #courseNum_clasNum
+    ClassNum = db.Column(db.String(16), primary_key=True) #CourseNum_classnum
     ClassTime = db.Column(db.Text)
     ClassVenue = db.Column(db.Text)
     ClassCapacity = db.Column(db.Integer)
+    MaxCapacity = db.Column(db.Integer)
     CourseNum = db.Column(db.String(8), db.ForeignKey('course.CourseNum'), nullable=True)
     TeacherNum = db.Column(db.String(8), db.ForeignKey('teacher.TeacherNum'), nullable=True)
     IsLock = db.Column(db.Boolean)
     # course
     # students
     # teacher
-    def __init__(self, ClassNum ,CourseNum,TeacherNum,IsLock,ClassTime='',ClassVenue=''):
+    def __init__(self, ClassNum ,CourseNum,TeacherNum,ClassTime='',ClassVenue='',IsLock=null()):
         self.ClassNum = ClassNum
         self.ClassTime = ClassTime
         self.ClassVenue = ClassVenue
@@ -153,6 +154,7 @@ class Class(db.Model):
         self.TeacherNum = TeacherNum
         self.IsLock = IsLock
         self.ClassCapacity=0
+        self.MaxCapacity = self.course.CourseCapacity # To test
 
 
 class Manager(UserMixin, db.Model):
