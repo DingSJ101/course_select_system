@@ -154,8 +154,10 @@ class Class(db.Model):
         self.TeacherNum = TeacherNum
         self.IsLock = IsLock
         self.ClassCapacity=0
-        self.MaxCapacity = self.course.CourseCapacity # To test
-
+        self.MaxCapacity = 0 # 使用触发器实现
+    def change_max_capacity(self,number=1):
+        self.MaxCapacity += int(number)
+        db.session.commit()
 
 class Manager(UserMixin, db.Model):
     # 管理员

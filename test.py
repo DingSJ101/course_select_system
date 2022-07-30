@@ -307,7 +307,7 @@ def createClass(count=9999):
             cnt=cnt+1
         except:
             db.session.rollback()
-            print(result)
+            # print(result)
         if(cnt>=count):break
 
 
@@ -316,8 +316,12 @@ def createStudent_Class(count_student=-1,count_class=10):
     students = Student.query.all()
     cnt_student=0
     for i,student in enumerate(students):
+        course_selected = []
         for cla in random.sample(classes,count_class):
+            if cla.ClassNum[:8] in course_selected or cla.MaxCapacity<=cla.ClassCapacity:
+                continue
             new_record = Student_Class_table(student.StudentNum,cla.ClassNum)
+            course_selected.append(cla.ClassNum[:8])
             try:
                 db.session.add(new_record)
                 db.session.commit()
@@ -326,13 +330,6 @@ def createStudent_Class(count_student=-1,count_class=10):
                 db.session.rollback()
         if(i>=count_student):break
         
-
-
-
-
-    
-
-     
 
 def createDept():
     # insert into dept
@@ -357,6 +354,30 @@ def createManager():
     db.session.add(new_teacher)
     db.session.commit()
 
+def add_trigger():
+    add_trigger  = """
+        create or replace function sync_MaxCapacity() returns trigger as $$
+        BEGIN
+            update class set class."MaxCapacity" = 
+                (select CourseCapacity from course 
+                    where CourseNum = left(new.ClassNum,8) limit 1 ) 
+                where class."ClassNum"=new."ClassNum";
+        return new;
+        END 
+        $$ LANGUAGE PLPGSQL;
+    """
+    set_trigger = """
+        create trigger sync_class_max_capacity  after insert on class 
+        for each row execute PROCEDURE public.sync_MaxCapacity();
+    """
+    try:
+        engine.execute(add_trigger)
+    except:
+        print("error when add trigger")
+    try:
+        engine.execute(set_trigger)
+    except:
+        print("error when set trigger")
 # sql  = 'select *  from class' 
 # tmp = 'select * distinct cid,distinct cname from '
 # result = engine.execute(sql)
@@ -370,6 +391,7 @@ if __name__ == "__main__":
     # createCourse(100)
     # createTeacher()
     # createManager()
+    # add_trigger()
     createClass(100)
-    createStudent_Class(1000)
+    createStudent_Class(100)
     pass
