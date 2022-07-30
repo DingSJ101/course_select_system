@@ -19,7 +19,7 @@
     {% if tables %}
     {% for table in tables %}
     <tr>
-        <td class="lead">{{ table.ClassNum }}</td>
+       <td class="lead">{{ table.classNum }}</td>
         <td class="lead">{{ table.CourseName }}</td>
         <td class="lead">{{ table.TeacherName }}</td>
         <td class="lead">{{ table.Time }}</td>
@@ -32,7 +32,7 @@
        {% else %}
        <td class="lead"><a href="{{ url_for('course_select', CourseNum=table.ClassNum) }}" class="btn btn-outline-success btn-sm" role="button">选课</a></td>
        {% endif %}
-       
+
     </tr>
     {% endfor %}
     {% endif %}
