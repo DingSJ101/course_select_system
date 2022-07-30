@@ -8,7 +8,7 @@ from app.forms import EditProfileForm
 from app import db
 from flask_sqlalchemy import  SQLAlchemy
 from sqlalchemy import and_, or_, null
-
+from app import func
 
 @app.route('/')
 def index():
@@ -194,9 +194,8 @@ def course_teachers(CourseNum):
                 'CourseName': course.CourseName,
                 'TeacherName': cla.teacher.TeacherName,
                 'Time': cla.ClassTime,
-                'CourseCapacity': course.CourseCapacity,
+                'CourseCapacity': cla.MaxCapacity,
                 'CourseStudents': cla.ClassCapacity,
-
             }
             tables.append(table)
 
@@ -284,23 +283,28 @@ def course_query():
 
 
 # 手动选课
-@app.route('/course_select/<CourseNum>', methods=['GET', ])
+@app.route('/course_select/<ClassNum>', methods=['GET', ])
 @login_required
-def course_select(CourseNum):
+def course_select(ClassNum):
     if isinstance(current_user._get_current_object(), Student):
         flag = 0
         classes = current_user.Classes
         # print(classes[0].ClassNum)
         for cla in classes:
-            if CourseNum.split('_')[0] == cla.ClassNum.split('_')[0]:
+            if ClassNum.split('_')[0] == cla.ClassNum.split('_')[0]:
                 flash('错误：您已选课程中存在该门课程！')
                 flag = 1
                 break
+        cla = Class.query.filter_by(ClassNum = ClassNum).first()
         if flag == 0:
-            new_record = Student_Class_table(current_user.StudentNum, CourseNum)
-            db.session.add(new_record)
-            db.session.commit()
-            flash('您已成功选择该门课程。')
+            _ = func.classtime_judge(cla.ClassTime,classes)
+            if _ :
+                flash('所选课程%s与已选课程%s存在时间冲突'%(cla.ClassNum,_.ClassNum))
+            else:
+                new_record = Student_Class_table(current_user.StudentNum, ClassNum)
+                db.session.add(new_record)
+                db.session.commit()
+                flash('您已成功选择该门课程。')
         return redirect(url_for('course_select_table'))
 
 
@@ -355,7 +359,7 @@ def course_select_detail():
                 'CourseNum': course.CourseNum,
                 'CourseName': course.CourseName,
                 'CourseStudents': cla.ClassCapacity,
-                'CourseCapacity': course.CourseCapacity,
+                'CourseCapacity': cla.MaxCapacity,
                 'CourseCredit': course.CourseCredit,
                 'ClassVenue': cla.ClassVenue,
                 'ClassTime': cla.ClassTime
@@ -528,7 +532,7 @@ def course_select_search():
                 'CourseName': _course.CourseName,
                 'TeacherNum': cla.TeacherNum,
                 'TeacherName': cla.teacher.TeacherName,
-                'CourseCapacity': _course.CourseCapacity,
+                'CourseCapacity': cla.MaxCapacity,
                 'CourseStudents': cla.ClassCapacity,
                 # 'CourseStudents': cla.ClassCapacity,
 
@@ -746,8 +750,12 @@ def add_course_select():
             StudentNum = request.form['StudentNum']
             ClassNum = CourseNum + '_' + classnum
             cla = Class.query.filter_by(ClassNum=ClassNum).first()
+            student = Student.query.filter_by(StudentNum = StudentNum).first()
+            _ = func.classtime_judge(cla.ClassTime,student.Classes)
             if not cla:
                 flash('当前教师未开设该课程')
+            elif _ :
+                flash('所选课程%s与已选课程%s存在时间冲突'%(cla.ClassNum,_.ClassNum))
             elif not Student_Class_table.query.filter_by(StudentNum=StudentNum, ClassNum=cla.ClassNum).first():
                 course_select_table = Student_Class_table(StudentNum, cla.ClassNum)
                 db.session.add(course_select_table)

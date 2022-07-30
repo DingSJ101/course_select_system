@@ -30,7 +30,7 @@
        {% elif table.ClassNum in class_selected %}
         <td class="lead">已选</td>
        {% else %}
-       <td class="lead"><a href="{{ url_for('course_select', CourseNum=table.ClassNum) }}" class="btn btn-outline-success btn-sm" role="button">选课</a></td>
+       <td class="lead"><a href="{{ url_for('course_select', ClassNum=table.ClassNum) }}" class="btn btn-outline-success btn-sm" role="button">选课</a></td>
        {% endif %}
 
     </tr>
