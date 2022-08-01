@@ -5,4 +5,4 @@ if __name__ == "__main__":
     app.wsgi_app = ProxyFix(app.wsgi_app)
     # db.drop_all()
     # db.create_all()
-    app.run(host='0.0.0.0', port=8000, debug=False)
+    app.run(host='127.0.0.1', port=8000, debug=False)

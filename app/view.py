@@ -797,7 +797,7 @@ def change_course_capacity(CourseNum, TeacherNum, add_or_sub, Number):
         if add_or_sub == 'add' and cla.MaxCapacity < 500:
             cla.change_max_capacity(Number)
             flash('课程容量扩容10人！')
-        elif add_or_sub == 'sub' and cla.MaxCapacity > Number:
+        elif add_or_sub == 'sub' and cla.MaxCapacity >= cla.ClassCapacity + 10:
             cla.change_max_capacity(-1*Number)
             flash('课程容量缩容10人！')
         else:
