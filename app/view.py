@@ -279,8 +279,31 @@ def course_query():
     #         flash('没有开设此课程号的课程')
     #         return redirect(url_for('course'))
     #     return redirect(url_for('course_teachers', CourseNum=CourseNum))
-    return redirect(url_for('course',searchNum=CourseNum))
+    return redirect(url_for('course', searchNum=CourseNum))
 
+@app.route('/student_query', methods=['GET', 'POST'])
+@login_required
+def student_query():
+    StudentNum = request.form['StudentNum']
+    print(StudentNum)
+    searchStudentNum = StudentNum
+    if isinstance(current_user._get_current_object(), Manager):
+        if searchStudentNum == 'all':
+            all_students = Student.query.all()
+        else:
+            all_students = Student.query.filter(or_(Student.StudentNum.like('%'+searchStudentNum+'%'), Student.StudentNum.like('%'+searchStudentNum+'%'))).all()
+        # Classes = current_user.Classes
+        # class_selected = [Cla.CourseNum for Cla in Classes]
+        tables = []
+        for student in all_students:
+            table = {
+                'DeptName': student.major.dept.DeptName,
+                'MajorNum': student.major.MajorName,
+                'StudentNum': student.StudentNum,
+                'StudentName': student.StudentName,
+            }
+            tables.append(table)
+        return render_template('admin/student_manage.html', students=tables)
 
 # 手动选课
 @app.route('/course_select/<ClassNum>', methods=['GET', ])
@@ -666,11 +689,13 @@ def add_course_teacher():
         if request.method == 'POST':
             ClassNum = request.form['ClassNum']
             # ClassNum = Course.query.filter_by(CourseName=ClassName).first().ClassNum
-            CourseName = request.form['CourseName']
-            CourseNum = Course.query.filter_by(CourseName=CourseName).first().CourseNum
+            CourseNum = request.form['CourseNum']
+            # CourseName = request.form['CourseName']
+            # CourseNum = Course.query.filter_by(CourseName=CourseName).first().CourseNum
             new_classnum = CourseNum + '_' + ClassNum
-            TeacherName = request.form['TeacherName']
-            TeacherNum = Teacher.query.filter_by(TeacherName=TeacherName).first().TeacherNum
+            TeacherNum = request.form['TeacherNum']
+            # TeacherName = request.form['TeacherName']
+            # TeacherNum = Teacher.query.filter_by(TeacherName=TeacherName).first().TeacherNum
             # CourseCapacity = request.form['CourseCapacity']
             ClassTime = request.form['ClassTime']
             ClassVenue = request.form['ClassVenue']
@@ -685,7 +710,7 @@ def add_course_teacher():
                 #     db.session.commit()
                 #     flash('开设课程成功！')
             else:
-                flash('%s老师已开设"%s"课程，请勿重复添加！' % (TeacherName, CourseName))
+                flash('%s老师已开设"%s"课程，请勿重复添加！' % (TeacherNum, CourseNum))
         return redirect(url_for('course_manage'))
 
 
@@ -754,14 +779,14 @@ def add_course_select():
             _ = func.classtime_judge(cla.ClassTime,student.Classes)
             if not cla:
                 flash('当前教师未开设该课程')
-            elif _ :
-                flash('所选课程%s与已选课程%s存在时间冲突'%(cla.ClassNum,_.ClassNum))
+            elif _:
+                flash('所选课程%s与已选课程%s存在时间冲突' % (cla.ClassNum, _.ClassNum))
             elif not Student_Class_table.query.filter_by(StudentNum=StudentNum, ClassNum=cla.ClassNum).first():
                 course_select_table = Student_Class_table(StudentNum, cla.ClassNum)
                 db.session.add(course_select_table)
                 db.session.commit()
                 flash('手动选课成功！')
-                if cla.ClassCapacity >= cla.MaxCapacity :
+                if cla.ClassCapacity >= cla.MaxCapacity:
                     cla.change_max_capacity(cla.ClassCapacity-cla.MaxCapacity)
             else:
                 flash('手动选课失败！该学生已选择该门课程！')
