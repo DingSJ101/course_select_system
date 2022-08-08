@@ -285,25 +285,31 @@ def course_query():
 @login_required
 def student_query():
     StudentNum = request.form['StudentNum']
-    print(StudentNum)
-    searchStudentNum = StudentNum
+    return redirect(url_for('student_manage', searchNum=StudentNum))
+
+@app.route('/student_manage/<searchNum>', methods=['GET', ])
+@app.route('/student_manage', defaults={'searchNum': 'all'}, methods=['GET', 'POST'])
+@login_required
+def student_manage(searchNum):
     if isinstance(current_user._get_current_object(), Manager):
-        if searchStudentNum == 'all':
+        info = {
+            'majors': [major.MajorName for major in Major.query.all()],
+            'dept': [dept.DeptName for dept in Dept.query.all()]
+        }
+        if searchNum == 'all':
             all_students = Student.query.all()
         else:
-            all_students = Student.query.filter(or_(Student.StudentNum.like('%'+searchStudentNum+'%'), Student.StudentNum.like('%'+searchStudentNum+'%'))).all()
-        # Classes = current_user.Classes
-        # class_selected = [Cla.CourseNum for Cla in Classes]
+            all_students = Student.query.filter(or_(Student.StudentNum.like('%'+searchNum+'%'), Student.StudentNum.like('%'+searchNum+'%'))).all()
         tables = []
         for student in all_students:
             table = {
                 'DeptName': student.major.dept.DeptName,
-                'MajorNum': student.major.MajorName,
+                'MajorName': student.major.MajorName,
                 'StudentNum': student.StudentNum,
                 'StudentName': student.StudentName,
             }
             tables.append(table)
-        return render_template('admin/student_manage.html', students=tables)
+        return render_template('admin/student_manage.html', students=tables, info=info)
 
 # 手动选课
 @app.route('/course_select/<ClassNum>', methods=['GET', ])
@@ -475,17 +481,17 @@ def grade_set_zero(CourseNum, StudentNum):
         return redirect(url_for('course_grade_input'))
 
 
-@app.route('/student_manage', methods=['GET', 'POST'])
-@login_required
-def student_manage():
-    if isinstance(current_user._get_current_object(), Manager):
-        info = {
-            'majors': [major.MajorName for major in Major.query.all()],
-            'dept': [dept.DeptName for dept in Dept.query.all()]
-        }
-        # major_dic = {str(major.MajorNum):major.MajorName for major in Major.query.all()}
-        students = Student.query.order_by(Student.MajorNum).all()
-        return render_template('admin/student_manage.html', info=info, students=students)
+# @app.route('/student_manage', methods=['GET', 'POST'])
+# @login_required
+# def student_manage():
+#     if isinstance(current_user._get_current_object(), Manager):
+#         info = {
+#             'majors': [major.MajorName for major in Major.query.all()],
+#             'dept': [dept.DeptName for dept in Dept.query.all()]
+#         }
+#         # major_dic = {str(major.MajorNum):major.MajorName for major in Major.query.all()}
+#         students = Student.query.order_by(Student.MajorNum).all()
+#         return render_template('admin/student_manage.html', info=info, students=students)
 
 
 @app.route('/teacher_manage', methods=['GET', 'POST'])
