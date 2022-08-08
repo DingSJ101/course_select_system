@@ -299,7 +299,7 @@ def student_manage(searchNum):
         if searchNum == 'all':
             all_students = Student.query.all()
         else:
-            all_students = Student.query.filter(or_(Student.StudentNum.like('%'+searchNum+'%'), Student.StudentNum.like('%'+searchNum+'%'))).all()
+            all_students = Student.query.filter(or_(Student.StudentNum.like('%'+searchNum+'%'), Student.StudentName.like('%'+searchNum+'%'))).all()
         tables = []
         for student in all_students:
             table = {
