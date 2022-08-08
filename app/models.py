@@ -102,7 +102,7 @@ class Student(UserMixin, db.Model):
     Classes = db.relationship('Class', secondary='student_class_table', backref='students', lazy='dynamic')
     # dept
     # major
-    def __init__(self, StudentNum,StudentName, MajorNum, DeptNum):
+    def __init__(self, StudentNum,StudentName, MajorNum='000000', DeptNum='9999'):
         self.StudentNum = StudentNum
         self.StudentName = StudentName
         self.MajorNum = MajorNum

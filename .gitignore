@@ -2,3 +2,6 @@ app.log
 .idea/
 venv/
 *.pyc
+/upload/*
+!/upload/dir_description
+__pycache__

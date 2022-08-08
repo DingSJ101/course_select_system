@@ -1,4 +1,5 @@
 from werkzeug.urls import url_parse
+from werkzeug.utils import secure_filename
 
 from app import app
 from flask import render_template, request, flash, redirect, url_for
@@ -9,6 +10,10 @@ from app import db
 from flask_sqlalchemy import  SQLAlchemy
 from sqlalchemy import and_, or_, null
 from app import func
+
+
+
+import os
 
 @app.route('/')
 def index():
@@ -838,3 +843,22 @@ def change_course_capacity(CourseNum, TeacherNum, add_or_sub, Number):
         db.session.commit()
     return redirect(url_for('course_select_manage'))
 
+
+@app.route('/upload')
+def upload_file():
+    return render_template('upload.html')
+
+@app.route('/uploader',methods=['GET','POST'])
+def uploader():
+    if request.method == 'POST':
+        f = request.files['file']
+        print(request.files)
+        print(f)
+        print('-'*3)
+        newname = secure_filename(f.filename)
+        filepath = os.path.join(app.config['UPLOAD_FOLDER'], newname)
+        f.save(filepath)
+        func.load_student_from_file(filepath)
+        return 'file uploaded successfully'
+    else:
+        return render_template('upload.html')

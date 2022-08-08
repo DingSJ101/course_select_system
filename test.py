@@ -346,6 +346,7 @@ def createMajor():
         d = '0'*(4-len(str(c-1)))+str(c-1)
         sql = """insert into major values ('%s','%s','%s');"""%(a,b,d)
         engine.execute(sql)
+    engine.execute("insert into major values('000000','未知','9999');")
 
 def createManager():
     new_teacher = Manager('1000','1000')
