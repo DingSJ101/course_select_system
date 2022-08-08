@@ -431,7 +431,8 @@ def course_grade_input(CourseNum):
                     'CourseNum': course.CourseNum,
                     'CourseName': course.CourseName,
                     'CourseStudents': cla.ClassCapacity,
-                    'ClassNum': cla.ClassNum.split('_')[1],
+                    'ClassNum': cla.ClassNum,
+                    'ClassNum1': cla.ClassNum.split('_')[1],
                     'IsLock': cla.IsLock
                 }
                 tables = []
