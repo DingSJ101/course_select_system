@@ -13,3 +13,4 @@ Flask-Login==0.4.1
 Flask-WTF==0.14.2
     # WTForms==2.2.1
 psycopg2==2.9.3
+xlrd==1.2.0

@@ -858,7 +858,7 @@ def uploader():
         newname = secure_filename(f.filename)
         filepath = os.path.join(app.config['UPLOAD_FOLDER'], newname)
         f.save(filepath)
-        func.load_student_from_file(filepath)
-        return 'file uploaded successfully'
+        a,b = func.load_student_from_file(filepath)
+        return f'file uploaded successfully <br> student number:<br>{a}<br> student name:<br>{b}'
     else:
         return render_template('upload.html')

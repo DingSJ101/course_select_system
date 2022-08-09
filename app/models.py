@@ -107,6 +107,9 @@ class Student(UserMixin, db.Model):
         self.StudentName = StudentName
         self.MajorNum = MajorNum
         self.DeptNum = DeptNum
+        new_account = Account(StudentNum, '0', StudentNum)
+        db.session.add(new_account)
+        db.session.commit()
 
     # override
     def get_id(self):
