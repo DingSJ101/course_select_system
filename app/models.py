@@ -88,7 +88,13 @@ class Teacher(UserMixin, db.Model):
         self.DeptNum = DeptNum
         self.TeacherName = TeacherName
         self.TeacherTitle = TeacherTitle
-
+        try:
+            new_account = Account(TeacherNum, '1', TeacherNum)
+            db.session.add(new_account)
+            db.session.commit()
+        except:
+            db.session.rollback()
+            Account.query.filter_by(User_id=TeacherNum).first().set_password(TeacherNum)
     # override
     def get_id(self):
         return self.TeacherNum
@@ -107,9 +113,13 @@ class Student(UserMixin, db.Model):
         self.StudentName = StudentName
         self.MajorNum = MajorNum
         self.DeptNum = DeptNum
-        new_account = Account(StudentNum, '0', StudentNum)
-        db.session.add(new_account)
-        db.session.commit()
+        try:
+            new_account = Account(StudentNum, '0', StudentNum)
+            db.session.add(new_account)
+            db.session.commit()
+        except:
+            db.session.rollback()
+            Account.query.filter_by(User_id=StudentNum).first().set_password(StudentNum)
 
     # override
     def get_id(self):

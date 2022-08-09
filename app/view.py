@@ -620,9 +620,9 @@ def add_student():
             # StudentInyear = request.form['StudentInyear']
             if not Student.query.filter_by(StudentNum=StudentNum).first():
                 student = Student(StudentNum, StudentName, MajorNum, DeptNum)
-                new_account = Account(StudentNum, '0', StudentNum)
+                # new_account = Account(StudentNum, '0', StudentNum)
                 db.session.add(student)
-                db.session.add(new_account)
+                # db.session.add(new_account)
                 db.session.commit()
                 flash('录入学生信息成功！')
             else:
