@@ -1,1 +1,7 @@
 files uploaded from url /uploader
+data format in file :
+# Order | StudentName | DeptName | MajorName
+1   小赵    计算机工程与科学学院    计算机科学与技术
+2   小钱    计算机工程与科学学院    计算机科学与技术
+3   小孙    计算机工程与科学学院    计算机科学与技术
+4   小李    计算机工程与科学学院    计算机科学与技术
