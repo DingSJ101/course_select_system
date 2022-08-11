@@ -85,7 +85,7 @@ def logout():
     logout_user()
     return redirect(url_for('index'))
 
-
+# 学生端主页
 @app.route('/student_index')
 @login_required
 def student_index():
@@ -94,7 +94,7 @@ def student_index():
     else:
         logout_user()
 
-
+# 教师端主页
 @app.route('/teacher_index')
 @login_required
 def teacher_index():
@@ -103,7 +103,7 @@ def teacher_index():
     else:
         logout_user()
 
-
+# 管理端主页
 @app.route('/manager')
 @login_required
 def manager():
@@ -113,7 +113,13 @@ def manager():
         logout_user()
         return redirect(url_for('login'))
 
-
+# 学生端-修改密码
+# - GET : 返回页面
+# - POST : 接受表单，修改密码，重定向返回页面
+#     old_password 
+#     new_password 
+#     new_password2 
+# return :  student/student_info.html 
 @app.route('/student_info/<int:change>', methods=['GET', 'POST'])
 @app.route('/student_info', defaults={'change': 0}, methods=['GET', 'POST'])
 @login_required
@@ -135,7 +141,13 @@ def student_info(change):
         return redirect(url_for('student_info'))
     return render_template('student/student_info.html', change=change)
 
-
+# 教师端-修改密码
+# - GET : 返回页面
+# - POST : 接受表单，修改密码，重定向返回页面
+    # old_password 
+    # new_password 
+    # new_password2 
+# return :  teacher/teacher_info.html
 @app.route('/teacher_info/<int:change>', methods=['GET', 'POST'])
 @app.route('/teacher_info', defaults={'change': 0}, methods=['GET', 'POST'])
 @login_required
@@ -157,8 +169,17 @@ def teacher_info(change):
         return redirect(url_for('teacher_info'))
     return render_template('teacher/teacher_info.html', change=change)
 
-
-## 查看已选课表
+# 学生端-查看已选课程
+# - GET : 返回页面
+# return :  student/course_select_table.html
+    # - tables
+    #     'CourseNum': _course.CourseNum,
+    #     'CourseName': _course.CourseName,
+    #     'ClassNum': cla.ClassNum.split('_')[1],
+    #     'CourseCredit': _course.CourseCredit,
+    #     'ClassTime': cla.ClassTime,
+    #     'ClassVenue': cla.ClassVenue,
+    #     'TeacherName': cla.teacher.TeacherName
 @app.route('/course_select_table', methods=['GET', ])
 @login_required
 def course_select_table():
@@ -180,10 +201,22 @@ def course_select_table():
         return render_template('student/course_select_table.html', tables=tables)
 
 
-## CourseNum like 'CourseNum_ClassNum'('00864122_3001')
+# 学生端-查看具体课程信息
+# - GET : 返回页面
+# return :  student/course_teachers.html
+    # - tables
+    #     'classNum': cla.ClassNum.split('_')[1],
+    #     'ClassNum': cla.ClassNum,
+    #     'CourseNum': cla.CourseNum,
+    #     'TeacherNum': cla.TeacherNum,
+    #     'CourseName': course.CourseName,
+    #     'TeacherName': cla.teacher.TeacherName,
+    #     'Time': cla.ClassTime,
+    #     'CourseCapacity': cla.MaxCapacity,
+    #     'CourseStudents': cla.ClassCapacity,
 @app.route('/course_teachers/<CourseNum>', methods=['GET', ])
 @login_required
-def course_teachers(CourseNum):
+def course_teachers(CourseNum:'00864122_3001'):
     if isinstance(current_user._get_current_object(), Student):
         CourseNum = CourseNum[:8]
         course = Course.query.filter_by(CourseNum=CourseNum).first()
@@ -206,12 +239,31 @@ def course_teachers(CourseNum):
 
         return render_template('student/course_teachers.html', tables=tables)
 
+# 学生端-查看所有课程
+# - GET : 重定向 /course
+# - POST : 模糊查询，重定向 /course    
+    # searchNum: 课程号/课程名
+@app.route('/course_query', methods=['GET', 'POST'])
+@login_required
+def course_query():
+    CourseNum = request.form['CourseNum']
+    return redirect(url_for('course', searchNum=CourseNum))
 
-## 查看所有课程，展示所有Course，具体classes在/course_teachers
+# 学生端-查看所有课程
+# - GET : 返回页面
+# - POST : 模糊查询，返回页面
+    # searchNum: 课程号/课程名
+# return :  student/course.html
+    # - tables
+    #     'CourseNum': course.CourseNum,
+    #     'CourseName': course.CourseName,
+    #     'CourseCredit': course.CourseCredit,
+    # - course_selected # 已选课程
+    #     List: Class.CourseNum
 @app.route('/course/<searchNum>', methods=['GET', ])
 @app.route('/course', defaults={'searchNum': 'all'}, methods=['GET', 'POST'])
 @login_required
-def course(searchNum):
+def course(searchNum:'模糊查询字段，课程号/课程名'):
     print(searchNum)
     if isinstance(current_user._get_current_object(), Student):
         if searchNum == 'all':
@@ -232,10 +284,11 @@ def course(searchNum):
         return render_template('student/course.html', tables=tables, course_selected=class_selected)
 
 
-## CourseNum like 'CourseNum_ClassNum'('00864122_3001') #question
+# 学生端-退课
+# - GET : 退课，重定向 /course_select_table
 @app.route('/course_drop/<CourseNum>', methods=['GET', ])
 @login_required
-def course_drop(CourseNum):
+def course_drop(CourseNum:'00864122_3001'):
     if isinstance(current_user._get_current_object(), Student):
         Classes = current_user.Classes
         tmpMap = {}
@@ -251,79 +304,14 @@ def course_drop(CourseNum):
             flash('您已成功退选该门课程。')
         return redirect(url_for('course_select_table'))
 
-# Todo ---查询 404报错 ## to_test
-# @app.route('/course_query/<CourseNum>/<ClassNum>', methods=['GET','POST' ])
-@app.route('/course_query', methods=['GET', 'POST'])
-@login_required
-def course_query():
-    CourseNum = request.form['CourseNum']
-    # ClassNum = request.form['TeacherNum']
-    # if isinstance(current_user._get_current_object(), Student):
-    #     # classes = Class.query.filter(Class.ClassNum.like(CourseNum+'%'))
-    #     # course = Course.query.filter_by(CourseNum=CourseNum).first()
-    #     # tables = []
-    #     # for cla in classes:
-    #     #     teacher= cla.teacher
-    #     #     student_class = Student_Class_table.query.filter_by(ClassNum=cla.ClassNum).all
-    #     #     table = {
-    #     #         'CourseNum':course.CourseNum,
-    #     #         'CourseName':course.CourseName,
-    #     #         'ClassNum':cla.ClassNum,
-    #     #         'TeacherName':teacher.TeacherName,
-    #     #         'CourseCredit':course.CourseCredit,
-    #     #         'ClassTime':cla.ClassTime
-    #     #     }
-    #     #     tables.append(table)
-    #     # return render_template('student/course_teachers.html', tables=tables)
-    #
-    #     # course = Course.query.filter_by(CourseNum=CourseNum).first()
-    #     course = Course.query.filter(Course.CourseNum.like('%' + CourseNum + '%')).all()
-    #     print(course)
-    #
-    #     if not course:
-    #         flash('没有开设此课程号的课程')
-    #         return redirect(url_for('course'))
-    #     return redirect(url_for('course_teachers', CourseNum=CourseNum))
-    return redirect(url_for('course', searchNum=CourseNum))
-
-@app.route('/student_query', methods=['GET', 'POST'])
-@login_required
-def student_query():
-    StudentNum = request.form['StudentNum']
-    return redirect(url_for('student_manage', searchNum=StudentNum))
-
-@app.route('/student_manage/<searchNum>', methods=['GET', ])
-@app.route('/student_manage', defaults={'searchNum': 'all'}, methods=['GET', 'POST'])
-@login_required
-def student_manage(searchNum):
-    if isinstance(current_user._get_current_object(), Manager):
-        info = {
-            'majors': [major.MajorName for major in Major.query.all()],
-            'dept': [dept.DeptName for dept in Dept.query.all()]
-        }
-        if searchNum == 'all':
-            all_students = Student.query.all()
-        else:
-            all_students = Student.query.filter(or_(Student.StudentNum.like('%'+searchNum+'%'), Student.StudentName.like('%'+searchNum+'%'))).all()
-        tables = []
-        for student in all_students:
-            table = {
-                'DeptName': student.major.dept.DeptName,
-                'MajorName': student.major.MajorName,
-                'StudentNum': student.StudentNum,
-                'StudentName': student.StudentName,
-            }
-            tables.append(table)
-        return render_template('admin/student_manage.html', students=tables, info=info)
-
-# 手动选课
+# 学生端-选课
+# - GET : 选课，重定向 /course_select_table
 @app.route('/course_select/<ClassNum>', methods=['GET', ])
 @login_required
-def course_select(ClassNum):
+def course_select(ClassNum:'00864122_3001'):
     if isinstance(current_user._get_current_object(), Student):
         flag = 0
         classes = current_user.Classes
-        # print(classes[0].ClassNum)
         for cla in classes:
             if ClassNum.split('_')[0] == cla.ClassNum.split('_')[0]:
                 flash('错误：您已选课程中存在该门课程！')
@@ -342,18 +330,32 @@ def course_select(ClassNum):
         return redirect(url_for('course_select_table'))
 
 
-# CourseNum like 'CourseNum_ClassNum'('00864122_3001')
+# 学生端-重选课程
+# - GET : 退选当前课程，重定向 /course_teachers
+    # CourseNum : '00864122' # 当前课程的课程号
 @app.route('/course_change/<CourseNum>', methods=['GET', ])
 @login_required
-def course_change(CourseNum):
+def course_change(CourseNum:'00864122_3001'):
     if isinstance(current_user._get_current_object(), Student):
-        # cla = Class.query.filter(Class.ClassNum.like(CourseNum+'_%')).first()
         cla = Student_Class_table.query.filter(and_(Student_Class_table.ClassNum.like(CourseNum+'_%'),Student_Class_table.StudentNum==current_user._get_current_object().StudentNum)).first()
         current_user.drop_course(cla.ClassNum)
         db.session.commit()
         return redirect(url_for('course_teachers', CourseNum=cla.ClassNum))
 
 
+# 学生端-查看成绩
+# - GET : 返回页面
+# return student/grade_query.html
+    # - tables 
+    #     - List: table
+    #         'CourseNum': course.CourseNum,
+    #         'ClassNum': cla.ClassNum.split('_')[1],
+    #         'CourseName': course.CourseName,
+    #         'CourseCredit': course.CourseCredit,
+    #         'CourseTime': cla.ClassTime,
+    #         'CourseDept': teacher.dept.DeptName,
+    #         'TeacherName': teacher.TeacherName,
+    #         'Grade': grade,
 @app.route('/grade_query', methods=['GET', ])
 @login_required
 def grade_query():
@@ -379,6 +381,26 @@ def grade_query():
         return render_template('student/grade_query.html', tables=tables)
 
 
+# 教师端-开课详情
+# - GET : 返回页面
+# return :  teacher/course_select_detail.html
+    # - course_tables
+    #     List : [course_info , tables ]
+    #         - course_info
+    #             'ClassNum': cla.ClassNum.split('_')[1],
+    #             'CourseNum': course.CourseNum,
+    #             'CourseName': course.CourseName,
+    #             'CourseStudents': cla.ClassCapacity,
+    #             'CourseCapacity': cla.MaxCapacity,
+    #             'CourseCredit': course.CourseCredit,
+    #             'ClassVenue': cla.ClassVenue,
+    #             'ClassTime': cla.ClassTime
+    #         - tables
+    #             List: table
+    #                 'StudentNum': student.StudentNum,
+    #                 'StudentName': student.StudentName,
+    #                 'DeptName': student.major.dept.DeptName,
+    #                 'MajorName': student.major.MajorName,
 @app.route('/course_select_detail')
 @login_required
 def course_select_detail():
@@ -400,8 +422,6 @@ def course_select_detail():
             }
             tables = []
             for student in cla.students:
-                # for course_select_table in course_select_tables:
-                # student = Student.query.filter_by(StudentNum=course_select_table.StudentNum).first()
                 table = {
                     'StudentNum': student.StudentNum,
                     'StudentName': student.StudentName,
@@ -414,16 +434,35 @@ def course_select_detail():
 
 
 ## CourseNum like 'CourseNum_ClassNum'('00864122_3001')
+# 教师端-更新成绩
+# - GET : 返回页面
+# - POST : 修改成绩，重定向 /course_grade_input
+# return :  teacher/course_grade_input.html
+    # - course_tables
+    #     List : [course_info , tables , flag]
+    #         - course_info
+    #             'CourseNum': course.CourseNum,
+    #             'CourseName': course.CourseName,
+    #             'CourseStudents': cla.ClassCapacity,
+    #             'ClassNum': cla.ClassNum,
+    #             'ClassNum1': cla.ClassNum.split('_')[1],
+    #             'IsLock': cla.IsLock
+    #         - tables
+    #             List: table
+    #                 'StudentNum': student.StudentNum,
+    #                 'StudentName': student.StudentName,
+    #                 'DeptName': student.dept.DeptName,
+    #                 'MajorName': student.major.MajorName,
+    #                 'Grade': record.Grade
+    #         - flag # 是否全部录入
 @app.route('/course_grade_input/<CourseNum>', methods=['GET', 'POST'])
 @app.route('/course_grade_input', defaults={'CourseNum': 0})
 @login_required
-def course_grade_input(CourseNum):
+def course_grade_input(CourseNum:'00864122_3001'):
     # CourseNum = CourseNum[:8]
     if isinstance(current_user._get_current_object(), Teacher):
         if request.method == 'POST':
             course_select_tables = Student_Class_table.query.filter_by(ClassNum=CourseNum).all()
-            # course_select_tables = Student_Class_table.query.filter(
-            #     Student_Class_table.ClassNum.like(CourseNum + '_%')).all()
             for course_select_table in course_select_tables:
                 if not course_select_table.Grade:
                     grade = request.form[course_select_table.StudentNum]
@@ -452,7 +491,6 @@ def course_grade_input(CourseNum):
                     table = {
                         'StudentNum': student.StudentNum,
                         'StudentName': student.StudentName,
-                        # 'StudentSex': student.StudentSex,
                         'DeptName': student.dept.DeptName,
                         'MajorName': student.major.MajorName,
                         'Grade': record.Grade
@@ -463,43 +501,26 @@ def course_grade_input(CourseNum):
                 course_tables.append([course_info, tables, flag])
         return render_template('teacher/course_grade_input.html', course_tables=course_tables)
 
+
+# 教师端-锁定成绩
+# - GET : 重定向 /course_grade_input
 @app.route('/set_lock/<CourseNum>')
-def set_lock(CourseNum):
+def set_lock(CourseNum:'00864122_3001'):
     if isinstance(current_user._get_current_object(), Teacher):
-        # course_select_table = Student_Class_table.query.filter(and_(Student_Class_table.ClassNum.like(CourseNum+'_%'), Student_Class_table.StudentNum == StudentNum)).first()
         currentClass = Class.query.filter_by(ClassNum=CourseNum).first()
-        currentClass.IsLock = True
-        print('tcy')
-        # course_select_table.input_grade(None)
-        db.session.commit()
-        # return redirect(url_for('course_grade_input', CourseNum=CourseNum))
-        return redirect(url_for('course_grade_input'))
-
-
-## Todo 原因：可能不是很重要，还没有成功显示过 提交了的表单成绩  #to_test
-@app.route('/grade_set_zero/<CourseNum>/<StudentNum>')
-def grade_set_zero(CourseNum, StudentNum):
-    if isinstance(current_user._get_current_object(), Teacher):
-        course_select_table = Student_Class_table.query.filter(and_(Student_Class_table.ClassNum.like(CourseNum+'_%'), Student_Class_table.StudentNum == StudentNum)).first()
-        course_select_table.input_grade(None)
+        currentClass.IsLock = True # 锁定成绩
         db.session.commit()
         return redirect(url_for('course_grade_input'))
 
 
-# @app.route('/student_manage', methods=['GET', 'POST'])
-# @login_required
-# def student_manage():
-#     if isinstance(current_user._get_current_object(), Manager):
-#         info = {
-#             'majors': [major.MajorName for major in Major.query.all()],
-#             'dept': [dept.DeptName for dept in Dept.query.all()]
-#         }
-#         # major_dic = {str(major.MajorNum):major.MajorName for major in Major.query.all()}
-#         students = Student.query.order_by(Student.MajorNum).all()
-#         return render_template('admin/student_manage.html', info=info, students=students)
-
-
-@app.route('/teacher_manage', methods=['GET', 'POST'])
+# 管理端-查看所有教师
+# - GET : 返回页面
+# return admin/teacher_manage.html
+    # - info 
+    #     List: Dept.DeptName 
+    # - teachers
+    #     List: Teacher.query.all()
+@app.route('/teacher_manage', methods=['GET',])
 @login_required
 def teacher_manage():
     if isinstance(current_user._get_current_object(), Manager):
@@ -510,7 +531,67 @@ def teacher_manage():
         return render_template('admin/teacher_manage.html', info=info, teachers=teachers)
 
 
-@app.route('/course_select_manage', methods=['GET', 'POST'])
+# 管理端-查看所有学生
+# - POST : 重定向 /student_manage
+    # searchNum: 课程号/课程名
+@app.route('/student_query', methods=['POST'])
+@login_required
+def student_query():
+    StudentNum = request.form['StudentNum']
+    return redirect(url_for('student_manage', searchNum=StudentNum))
+
+# 管理端-查看所有学生
+# - GET : 返回页面
+# - POST : 模糊查询，返回页面
+    # searchNum: 课程号/课程名
+# return admin/student_manage.html
+#     - students
+#         List: table 
+#             'DeptName': student.major.dept.DeptName,
+#             'MajorName': student.major.MajorName,
+#             'StudentNum': student.StudentNum,
+#             'StudentName': student.StudentName,
+#     - info 
+#         - majors
+#             List: Major.MajorName
+#         - dept 
+#             List: Dept.DeptName
+@app.route('/student_manage/<searchNum>', methods=['GET', ])
+@app.route('/student_manage', defaults={'searchNum': 'all'}, methods=['GET', 'POST'])
+@login_required
+def student_manage(searchNum):
+    if isinstance(current_user._get_current_object(), Manager):
+        info = {
+            'majors': [major.MajorName for major in Major.query.all()],
+            'dept': [dept.DeptName for dept in Dept.query.all()]
+        }
+        if searchNum == 'all':
+            all_students = Student.query.all()
+        else:
+            all_students = Student.query.filter(or_(Student.StudentNum.like('%'+searchNum+'%'), Student.StudentName.like('%'+searchNum+'%'))).all()
+        tables = []
+        for student in all_students:
+            table = {
+                'DeptName': student.major.dept.DeptName,
+                'MajorName': student.major.MajorName,
+                'StudentNum': student.StudentNum,
+                'StudentName': student.StudentName,
+            }
+            tables.append(table)
+        return render_template('admin/student_manage.html', students=tables, info=info)
+
+# 管理端-查看课程开课情况，手动签退课
+# - GET : 返回页面
+# return admin/course_select_manage.html
+    # - tables
+    #     'ClassNum': cla.ClassNum.split('_')[1],
+    #     'CourseNum': course.CourseNum,
+    #     'CourseName': course.CourseName,
+    #     'TeacherNum': teacher.TeacherNum,
+    #     'TeacherName': teacher.TeacherName,
+    #     'CourseCapacity': cla.MaxCapacity,
+    #     'CourseStudents': cla.ClassCapacity,
+@app.route('/course_select_manage', methods=['GET', ])
 @login_required
 def course_select_manage():
     if isinstance(current_user._get_current_object(), Manager):
@@ -532,7 +613,21 @@ def course_select_manage():
     return render_template('admin/course_select_manage.html', tables=tables)
 
 
-# Todo --管理端的查找 查找成功，但前端需要加个跳转页面显示（可能来不及做辽）
+# 管理端-查看课程开课情况
+# - GET : 返回页面
+# - POST : 精准查询，返回页面
+    # CourseNum: '00864122'
+    # Class: '1000'
+# return admin/course_select_search.html
+    # - tables
+    #     List: table
+    #         'ClassNum': cla.ClassNum.split('_')[1],
+    #         'CourseNum': _course.CourseNum,
+    #         'CourseName': _course.CourseName,
+    #         'TeacherNum': cla.TeacherNum,
+    #         'TeacherName': cla.teacher.TeacherName,
+    #         'CourseCapacity': cla.MaxCapacity,
+    #         'CourseStudents': cla.ClassCapacity,
 @app.route('/course_select_search', methods=['GET', 'POST'])
 @login_required
 def course_select_search():
@@ -545,22 +640,8 @@ def course_select_search():
         else:
             classes = Class.query.order_by(Class.CourseNum).all()
         tables = []
-        # for cla in classes:
-        # # _course = cla.course
-        # #             table = {
-        # #                 'CourseNum': _course.CourseNum,
-        # #                 'CourseName': _course.CourseName,
-        # #                 'ClassNum':cla.ClassNum,
-        # #                 'CourseCredit': _course.CourseCredit,
-        # #                 'ClassTime': cla.ClassTime,
-        # #                 'ClassVenue': cla.ClassVenue,
-        # #                 'TeacherName': cla.teacher.TeacherName,
-        # #                 'TeacherNum': cla.TeacherNum
-        # #
-        # #             }
         for cla in classes:
             _course = cla.course
-            # teacher=cla.teacher
             table = {
                 'ClassNum': cla.ClassNum.split('_')[1],
                 'CourseNum': _course.CourseNum,
@@ -569,19 +650,33 @@ def course_select_search():
                 'TeacherName': cla.teacher.TeacherName,
                 'CourseCapacity': cla.MaxCapacity,
                 'CourseStudents': cla.ClassCapacity,
-                # 'CourseStudents': cla.ClassCapacity,
-
             }
             tables.append(table)
     return render_template('admin/course_select_search.html', tables=tables)
 
 
-@app.route('/course_manage', methods=['GET', 'POST'])
+# 管理端-课程管理
+# - GET : 返回页面
+# return admin/course_manage.html
+    # - tables
+    #     List: table
+    #         'CourseNum': course.CourseNum,
+    #         'CourseName': course.CourseName,
+    #         'ClassNum': cla.ClassNum.split('_')[1],
+    #         'TeacherNum': teacher.TeacherNum,
+    #         'TeacherName': teacher.TeacherName,
+    #         'CourseCapacity': course.CourseCapacity,
+    #         'CourseCredit': course.CourseCredit,
+    # - courses
+    #     List: Course.query.order_by(Course.CourseNum).all()
+    # - info 
+    #     List: Course.CourseName
+    #     List: Teacher.TeacherName
+@app.route('/course_manage', methods=['GET', ])
 @login_required
 def course_manage():
     if isinstance(current_user._get_current_object(), Manager):
         info = {
-            # 'depts': [dept.DeptName for dept in Dept.query.all()],
             'courses': [course.CourseName for course in Course.query.all()],
             'teachers': [teacher.TeacherName for teacher in Teacher.query.order_by(Teacher.TeacherName).all()],
         }
@@ -599,12 +694,17 @@ def course_manage():
                 'TeacherName': teacher.TeacherName,
                 'CourseCapacity': course.CourseCapacity,
                 'CourseCredit': course.CourseCredit,
-                # 'CourseStudents': cla.ClassCapacity,
             }
             tables.append(table)
     return render_template('admin/course_manage.html', info=info, courses=courses, tables=tables)
 
 
+# 管理端-录入学生
+# - POST: 录入学生，重定向 /student_manage
+    # StudentNum 
+    # MajorName
+    # StudentName
+    # DeptName
 @app.route('/add_student', methods=['POST', ])
 @login_required
 def add_student():
@@ -616,8 +716,6 @@ def add_student():
             StudentName = request.form['StudentName']
             DeptName = request.form['DeptName']
             DeptNum = Dept.query.filter_by(DeptName=DeptName).first().DeptNum
-            # StudentSex = request.form['StudentSex']
-            # StudentInyear = request.form['StudentInyear']
             if not Student.query.filter_by(StudentNum=StudentNum).first():
                 student = Student(StudentNum, StudentName, MajorNum, DeptNum)
                 # new_account = Account(StudentNum, '0', StudentNum)
@@ -630,6 +728,12 @@ def add_student():
         return redirect(url_for('student_manage'))
 
 
+# 管理端-录入教师
+# - POST: 录入教师，重定向 /teacher_manage
+    # TeacherNum 
+    # MajorName
+    # TeacherName
+    # TeacherTitle
 @app.route('/add_teacher', methods=['POST', ])
 @login_required
 def add_teacher():
@@ -650,9 +754,11 @@ def add_teacher():
         return redirect(url_for('teacher_manage'))
 
 
+# 管理端-删除学生
+# - GET: 删除学生,重定向 /student_manage
 @app.route('/delete_student/<StudentNum>', methods=['GET', 'POST'])
 @login_required
-def delete_student(StudentNum):
+def delete_student(StudentNum:'19000000'):
     if isinstance(current_user._get_current_object(), Manager):
         delete_stu = Student.query.filter_by(StudentNum=StudentNum).first()
         # 先删除选课表中信息
@@ -674,6 +780,12 @@ def delete_student(StudentNum):
         return redirect(url_for('student_manage'))
 
 
+# 管理端-添加课程
+# - POST : 添加课程，重定向 /course_manage
+    # CourseName 
+    # CourseNum 
+    # CourseCredit 
+    # CourseCapacity 
 @app.route('/add_course', methods=['POST', ])
 @login_required
 def add_course():
@@ -694,21 +806,22 @@ def add_course():
 
 
 # Todo course_teacher换成了Class，但没有改完  to_test
+# 管理端-添加课程班
+# - POST : 添加课程班，重定向 /course_manage
+    # ClassNum 
+    # CourseNum 
+    # TeacherNum 
+    # ClassTime 
+    # ClassVenue 
 @app.route('/add_course_teacher', methods=['POST', ])
 @login_required
 def add_course_teacher():
     if isinstance(current_user._get_current_object(), Manager):
         if request.method == 'POST':
             ClassNum = request.form['ClassNum']
-            # ClassNum = Course.query.filter_by(CourseName=ClassName).first().ClassNum
             CourseNum = request.form['CourseNum']
-            # CourseName = request.form['CourseName']
-            # CourseNum = Course.query.filter_by(CourseName=CourseName).first().CourseNum
             new_classnum = CourseNum + '_' + ClassNum
             TeacherNum = request.form['TeacherNum']
-            # TeacherName = request.form['TeacherName']
-            # TeacherNum = Teacher.query.filter_by(TeacherName=TeacherName).first().TeacherNum
-            # CourseCapacity = request.form['CourseCapacity']
             ClassTime = request.form['ClassTime']
             ClassVenue = request.form['ClassVenue']
             if not Class.query.filter_by(ClassNum=new_classnum).first():
@@ -716,20 +829,16 @@ def add_course_teacher():
                 db.session.add(course_teacher)
                 db.session.commit()
                 flash('开设课程成功！')
-                # if not Course_Teacher.query.filter_by(CourseNum=CourseNum, TeacherNum=TeacherNum).first():
-                #     course_teacher = Course_Teacher(CourseNum, TeacherNum, CourseCapacity)
-                #     db.session.add(course_teacher)
-                #     db.session.commit()
-                #     flash('开设课程成功！')
             else:
                 flash('%s老师已开设"%s"课程，请勿重复添加！' % (TeacherNum, CourseNum))
         return redirect(url_for('course_manage'))
 
 
-# ClassNum ,CourseNum,TeacherNum,ClassTime='',ClassVenue='' )
+# 管理端-删除课程
+# - GET : 删除课程，重定向 /course_manage
 @app.route('/course_delete/<CourseNum>')
 @login_required
-def course_delete(CourseNum):
+def course_delete(CourseNum:'00864122'):
     if isinstance(current_user._get_current_object(), Manager):
         # 先删除选课信息
         course_select_tables = Student_Class_table.query.filter(
@@ -752,10 +861,11 @@ def course_delete(CourseNum):
     return redirect(url_for('course_manage'))
 
 
-# Todo extra todo--管理端删除开设课程 报错get_course没有self  # to_test
+# 管理端-删除课程班
+# - GET : 删除课程班，重定向 /course_select_manage
 @app.route('/course_teacher_delete/<CourseNum>/<TeacherNum>')
 @login_required
-def course_teacher_delete(CourseNum, TeacherNum):
+def course_teacher_delete(CourseNum:'00864122', TeacherNum:''):
     if isinstance(current_user._get_current_object(), Manager):
         # 先删除选课信息
         course_select_tables = Student_Class_table.query.filter(
@@ -777,6 +887,12 @@ def course_teacher_delete(CourseNum, TeacherNum):
 ## CourseNum : 12345678
 ## Class : 1234
 ## StudentNum : 19XX1234
+
+# 管理端-手动选课
+# - POST : 手动选课，重定向 /course_select_manage
+    # CourseNum 
+    # Class 
+    # StudentNum
 @app.route('/add_course_select', methods=['POST', ])
 @login_required
 def add_course_select():
@@ -805,6 +921,11 @@ def add_course_select():
     return redirect(url_for('course_select_manage'))
 
 
+# 管理端-手动退课
+# - POST : 手动退课，重定向 /course_select_manage
+    # CourseNum 
+    # Class 
+    # StudentNum
 @app.route('/drop_course_select', methods=['POST', ])
 @login_required
 def drop_course_select():
@@ -826,11 +947,14 @@ def drop_course_select():
 
 
 
-@app.route('/change_course_capacity/<CourseNum>/<TeacherNum>/<add_or_sub>/<Number>', methods=['GET', ],defaults={'Number': 10})
+# 管理端-修改课程班容量
+# - GET : 修改课程班容量，重定向 /course_select_manage
+@app.route('/change_course_capacity/<CourseNum>/<classnum>/<add_or_sub>/<Number>', methods=['GET', ],defaults={'Number': 10})
 @login_required
-def change_course_capacity(CourseNum, TeacherNum, add_or_sub, Number):
+def change_course_capacity(CourseNum:'00864122', classnum:'1000', add_or_sub:'add/sub', Number:int):
     if isinstance(current_user._get_current_object(), Manager):
-        cla = Class.query.filter_by(CourseNum=CourseNum, TeacherNum=TeacherNum).first()
+        ClassNum = CourseNum + '_' + classnum
+        cla = Class.query.filter_by(ClassNum=ClassNum).first()
         if add_or_sub == 'add' and cla.MaxCapacity < 500:
             cla.change_max_capacity(Number)
             flash('课程容量扩容10人！')
@@ -843,11 +967,16 @@ def change_course_capacity(CourseNum, TeacherNum, add_or_sub, Number):
         db.session.commit()
     return redirect(url_for('course_select_manage'))
 
-
+# 管理端-上传文件
+# - GET : 返回页面
 @app.route('/upload')
 def upload_file():
     return render_template('upload.html')
 
+
+# 管理端-从文件导入学生名单
+# - GET : 返回页面
+# - POST : 接收文件，导入名单
 @app.route('/uploader',methods=['GET','POST'])
 def uploader():
     if request.method == 'POST':
