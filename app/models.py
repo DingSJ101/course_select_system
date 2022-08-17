@@ -56,14 +56,10 @@ class Student_Class_table(db.Model):
     StudentNum = db.Column(db.String(8), db.ForeignKey('student.StudentNum'), primary_key=True, nullable=False)
     ClassNum = db.Column(db.String(16), db.ForeignKey('class.ClassNum'), primary_key=True, nullable=False)
     Grade = db.Column(db.Integer)
-    # CourseNum = db.Column(db.String(8), db.ForeignKey('course.CourseNum'), nullable=True, primary_key=True)
     def __init__(self, StudentNum,ClassNum):
         self.StudentNum = StudentNum
         self.ClassNum = ClassNum
         self.Grade = null()
-    # def __init__(self, StudentNum,CourseNum,ClassNum):
-    #     self.StudentNum = StudentNum
-    #     self.ClassNum = CourseNum+'-'+ClassNum
 
     def input_grade(self, grade=None):
         self.Grade = grade
@@ -81,7 +77,6 @@ class Teacher(UserMixin, db.Model):
     TeacherTitle = db.Column(db.String(10))
     DeptNum = db.Column(db.String(4), db.ForeignKey('dept.DeptNum'), nullable=False)
     Classes = db.relationship('Class', backref='teacher', lazy='dynamic')
-    
     
     def __init__(self, TeacherNum,TeacherName, TeacherTitle, DeptNum='9999'):
         self.TeacherNum = TeacherNum

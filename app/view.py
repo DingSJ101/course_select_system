@@ -116,9 +116,9 @@ def manager():
 # 学生端-修改密码
 # - GET : 返回页面
 # - POST : 接受表单，修改密码，重定向返回页面
-#     old_password 
-#     new_password 
-#     new_password2 
+    # old_password 
+    # new_password 
+    # new_password2 
 # return :  student/student_info.html 
 @app.route('/student_info/<int:change>', methods=['GET', 'POST'])
 @app.route('/student_info', defaults={'change': 0}, methods=['GET', 'POST'])
@@ -220,8 +220,6 @@ def course_teachers(CourseNum:'00864122_3001'):
     if isinstance(current_user._get_current_object(), Student):
         CourseNum = CourseNum[:8]
         course = Course.query.filter_by(CourseNum=CourseNum).first()
-        # course = Course.query.filter_by(CourseNum.like('%' + CourseNum + '%')).first()
-        # cla = Class.query.filter(Class.ClassNum.like(CourseNum + '%')).first()
         tables = []
         for cla in course.Classes:
             table = {
@@ -240,10 +238,9 @@ def course_teachers(CourseNum:'00864122_3001'):
         return render_template('student/course_teachers.html', tables=tables)
 
 # 学生端-查看所有课程
-# - GET : 重定向 /course
 # - POST : 模糊查询，重定向 /course    
     # searchNum: 课程号/课程名
-@app.route('/course_query', methods=['GET', 'POST'])
+@app.route('/course_query', methods=['POST'])
 @login_required
 def course_query():
     CourseNum = request.form['CourseNum']
@@ -260,7 +257,6 @@ def course_query():
     #     'CourseCredit': course.CourseCredit,
     # - course_selected # 已选课程
     #     List: Class.CourseNum
-@app.route('/course/<searchNum>', methods=['GET', ])
 @app.route('/course', defaults={'searchNum': 'all'}, methods=['GET', 'POST'])
 @login_required
 def course(searchNum:'模糊查询字段，课程号/课程名'):
@@ -269,7 +265,8 @@ def course(searchNum:'模糊查询字段，课程号/课程名'):
         if searchNum == 'all':
             all_courses = Course.query.all()
         else:
-            all_courses = Course.query.filter(or_(Course.CourseNum.like('%'+searchNum+'%'), Course.CourseName.like('%'+searchNum+'%'))).all()
+            all_courses = Course.query.filter(or_(Course.CourseNum.like('%'+searchNum+'%'), 
+                Course.CourseName.like('%'+searchNum+'%'))).all()
         Classes = current_user.Classes
         class_selected = [Cla.CourseNum for Cla in Classes]
         tables = []
@@ -337,7 +334,8 @@ def course_select(ClassNum:'00864122_3001'):
 @login_required
 def course_change(CourseNum:'00864122_3001'):
     if isinstance(current_user._get_current_object(), Student):
-        cla = Student_Class_table.query.filter(and_(Student_Class_table.ClassNum.like(CourseNum+'_%'),Student_Class_table.StudentNum==current_user._get_current_object().StudentNum)).first()
+        cla = Student_Class_table.query.filter(and_(Student_Class_table.ClassNum.like(CourseNum+'_%'),
+            Student_Class_table.StudentNum==current_user._get_current_object().StudentNum)).first()
         current_user.drop_course(cla.ClassNum)
         db.session.commit()
         return redirect(url_for('course_teachers', CourseNum=cla.ClassNum))
@@ -545,17 +543,17 @@ def student_query():
 # - POST : 模糊查询，返回页面
     # searchNum: 课程号/课程名
 # return admin/student_manage.html
-#     - students
-#         List: table 
-#             'DeptName': student.major.dept.DeptName,
-#             'MajorName': student.major.MajorName,
-#             'StudentNum': student.StudentNum,
-#             'StudentName': student.StudentName,
-#     - info 
-#         - majors
-#             List: Major.MajorName
-#         - dept 
-#             List: Dept.DeptName
+    # - students
+    #     List: table 
+    #         'DeptName': student.major.dept.DeptName,
+    #         'MajorName': student.major.MajorName,
+    #         'StudentNum': student.StudentNum,
+    #         'StudentName': student.StudentName,
+    # - info 
+    #     - majors
+    #         List: Major.MajorName
+    #     - dept 
+    #         List: Dept.DeptName
 @app.route('/student_manage/<searchNum>', methods=['GET', ])
 @app.route('/student_manage', defaults={'searchNum': 'all'}, methods=['GET', 'POST'])
 @login_required
@@ -568,7 +566,8 @@ def student_manage(searchNum):
         if searchNum == 'all':
             all_students = Student.query.all()
         else:
-            all_students = Student.query.filter(or_(Student.StudentNum.like('%'+searchNum+'%'), Student.StudentName.like('%'+searchNum+'%'))).all()
+            all_students = Student.query.filter(or_(Student.StudentNum.like('%'+searchNum+'%'), 
+                Student.StudentName.like('%'+searchNum+'%'))).all()
         tables = []
         for student in all_students:
             table = {
@@ -718,9 +717,7 @@ def add_student():
             DeptNum = Dept.query.filter_by(DeptName=DeptName).first().DeptNum
             if not Student.query.filter_by(StudentNum=StudentNum).first():
                 student = Student(StudentNum, StudentName, MajorNum, DeptNum)
-                # new_account = Account(StudentNum, '0', StudentNum)
                 db.session.add(student)
-                # db.session.add(new_account)
                 db.session.commit()
                 flash('录入学生信息成功！')
             else:
@@ -805,7 +802,6 @@ def add_course():
         return redirect(url_for('course_manage'))
 
 
-# Todo course_teacher换成了Class，但没有改完  to_test
 # 管理端-添加课程班
 # - POST : 添加课程班，重定向 /course_manage
     # ClassNum 
@@ -829,6 +825,8 @@ def add_course_teacher():
                 db.session.add(course_teacher)
                 db.session.commit()
                 flash('开设课程成功！')
+            elif func.classtime_judge(ClassTime,current_user._get_current_object().classes):
+                flash('课程时间冲突')
             else:
                 flash('%s老师已开设"%s"课程，请勿重复添加！' % (TeacherNum, CourseNum))
         return redirect(url_for('course_manage'))
@@ -957,13 +955,12 @@ def change_course_capacity(CourseNum:'00864122', classnum:'1000', add_or_sub:'ad
         cla = Class.query.filter_by(ClassNum=ClassNum).first()
         if add_or_sub == 'add' and cla.MaxCapacity < 500:
             cla.change_max_capacity(Number)
-            flash('课程容量扩容10人！')
+            flash('课程容量扩容%s人！'%(Number))
         elif add_or_sub == 'sub' and cla.MaxCapacity >= cla.ClassCapacity + 10:
             cla.change_max_capacity(-1*Number)
-            flash('课程容量缩容10人！')
+            flash('课程容量缩容%s人！'%(Number))
         else:
             flash('容量扩容/缩容失败！')
-        db.session.commit()
         db.session.commit()
     return redirect(url_for('course_select_manage'))
 

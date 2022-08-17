@@ -6,8 +6,9 @@ import sqlalchemy
 from app import app
 from app import db
 from app.models import Student, Teacher, Manager, Course, Student_Class_table, Class, Major, Dept,Account
-engine = sqlalchemy.create_engine( 'postgresql+psycopg2://gaussdb:123@QWEasd@122.9.68.170:15432/css',pool_pre_ping=True)
-# engine = sqlalchemy.create_engine( 'postgresql+psycopg2://gaussdb:123@QWEasd@175.24.167.6:15432/css',pool_pre_ping=True)
+from app.func import classtime_judge
+# engine = sqlalchemy.create_engine( 'postgresql+psycopg2://gaussdb:123@QWEasd@122.9.68.170:15432/css',pool_pre_ping=True)
+engine = sqlalchemy.create_engine( 'postgresql+psycopg2://gaussdb:123@QWEasd@175.24.167.6:15432/css',pool_pre_ping=True)
 print('create engine')
 depts = ['马克思主义学院','文学院','外国语学院','法学院','社会学院', #1
 '新闻传播学院','钱伟长学院','理学院','通信与信息工程学院','计算机工程与科学学院',#6
@@ -218,7 +219,7 @@ def createStudent(count):
     for i in range(19000000,19000000+count):
         account=str(i)
         psw = account
-        
+
         type = '0'
         firstName_name =firstName[random.choice(range(len(firstName)))]
         sex = random.choice(range(2))
@@ -261,7 +262,7 @@ def createCourse(count):
     results = engine.execute(sql).fetchall()
     for result in results[:count]:
         cid,cname,credit,capacity = result[:]
-        new_course =Course(cid,cname,credit,capacity)
+        new_course = Course(cid,cname,credit,capacity)
         db.session.add(new_course)
         db.session.commit()
 
@@ -279,8 +280,8 @@ def createTeacher(count=9999):
 where t.tname = '%s'"""%(name)).fetchone()[0]
         sql = """insert into teacher values('%s','%s','tt','9999')"""%(str(cnt),name,)
         new_teacher = Teacher(str(cnt),name,result)
-        new_account = Account(str(cnt),'1',str(cnt))
-        db.session.add(new_account)
+        # new_account = Account(str(cnt),'1',str(cnt))
+        # db.session.add(new_account)
         db.session.add(new_teacher)
         db.session.commit()
         cnt=cnt+1
@@ -288,27 +289,29 @@ where t.tname = '%s'"""%(name)).fetchone()[0]
 
 
 def createClass(count=9999):
+    cnt=0
     courses = Course.query.all()
     for course in courses:
-        pass
-    sql = """ select classinfo.cid,classinfo.ttid,pairs.tname,time,venue from classinfo join pairs on classinfo.cid=pairs.cid and classinfo.ttid=pairs.ttid """
-    results = engine.execute(sql).fetchall()
-    cnt=0
-    for result in results:
-        courseNum,classNum,teacherName,time,venue = result[:]
-        teacherNum = Teacher.query.filter_by(TeacherName=teacherName).first()
-        if teacherNum is None:
-            continue
-        new_class = Class(str(courseNum)+'_'+str(classNum),courseNum,teacherNum.TeacherNum,time,venue)
-        
-        try:
-            db.session.add(new_class)
-            db.session.commit()
-            cnt=cnt+1
-        except:
-            db.session.rollback()
-            # print(result)
-        if(cnt>=count):break
+        sql = """ select classinfo.cid,classinfo.ttid,pairs.tname,time,venue from classinfo 
+        join pairs on classinfo.cid=pairs.cid and classinfo.ttid=pairs.ttid where classinfo.cid = '%s'"""%(course.CourseNum)
+        results = engine.execute(sql).fetchall()
+    # sql = """ select classinfo.cid,classinfo.ttid,pairs.tname,time,venue from classinfo join pairs on classinfo.cid=pairs.cid and classinfo.ttid=pairs.ttid """
+    # results = engine.execute(sql).fetchall()
+        for result in results:
+            print(result)
+            courseNum,classNum,teacherName,time,venue = result[:]
+            teacherNum = Teacher.query.filter_by(TeacherName=teacherName).first()
+            if teacherNum is None:
+                continue
+            new_class = Class(str(courseNum)+'_'+str(classNum),courseNum,teacherNum.TeacherNum,time,venue)
+            try:
+                db.session.add(new_class)
+                db.session.commit()
+                cnt=cnt+1
+            except Exception as e:
+                db.session.rollback()
+                print(e)
+            if(cnt>=count):break
 
 
 def createStudent_Class(count_student=-1,count_class=10):
@@ -317,17 +320,20 @@ def createStudent_Class(count_student=-1,count_class=10):
     cnt_student=0
     for i,student in enumerate(students):
         course_selected = []
-        for cla in random.sample(classes,count_class):
-            if cla.ClassNum[:8] in course_selected or cla.MaxCapacity<=cla.ClassCapacity:
-                continue
+        for cla in random.sample(classes,count_class+5):
+            if cla.ClassNum[:8] in course_selected \
+                or cla.MaxCapacity<=cla.ClassCapacity \
+                or  classtime_judge(cla.ClassTime,student.Classes):
+                    continue
             new_record = Student_Class_table(student.StudentNum,cla.ClassNum)
             course_selected.append(cla.ClassNum[:8])
             try:
                 db.session.add(new_record)
                 db.session.commit()
                 cnt_class=cnt_class+1
-            except:
+            except Exception as e :
                 db.session.rollback()
+                print(e)
         if(i>=count_student):break
         
 
@@ -357,26 +363,65 @@ def createManager():
 
 def add_trigger():
     add_trigger  = """
-        create or replace function sync_MaxCapacity() returns trigger as $$
-        BEGIN
-            update class set class."MaxCapacity" = 
-                (select CourseCapacity from course 
-                    where CourseNum = left(new.ClassNum,8) limit 1 ) 
-                where class."ClassNum"=new."ClassNum";
-        return new;
-        END 
-        $$ LANGUAGE PLPGSQL;
+        CREATE OR REPLACE FUNCTION "public"."sync_MaxCapacity"()
+    RETURNS "pg_catalog"."trigger" AS $BODY$
+    declare
+    nCnt int;
+    BEGIN
+        select count(1) into nCnt from  course where "CourseNum" = new."CourseNum";
+        if nCnt = 1 then 
+            update class set class."MaxCapacity" = (select "CourseCapacity" from course where "CourseNum" = new."CourseNum" ) where class."ClassNum"=new."ClassNum";
+        end if;
+    return new;
+    END 
+    $BODY$
+    LANGUAGE plpgsql VOLATILE
+    COST 100
     """
     set_trigger = """
         create trigger sync_class_max_capacity  after insert on class 
         for each row execute PROCEDURE public.sync_MaxCapacity();
     """
+    select_class = """
+    CREATE OR REPLACE FUNCTION "public"."add_classcapacity"()
+    RETURNS "pg_catalog"."trigger" AS $BODY$
+    DECLARE BEGIN 
+    update class set class."ClassCapacity" = class."ClassCapacity" + 1 where class."ClassNum"=new."ClassNum";
+    return new;
+    END 
+    $BODY$
+    LANGUAGE plpgsql VOLATILE
+    COST 100
+    """
+    set_select_class = """
+        create trigger add_classcapacity  before insert on student_class_table 
+        for each row execute PROCEDURE public.add_classcapacity();
+    """
+    drop_class = """
+    CREATE OR REPLACE FUNCTION "public"."reduce_classcapacity"()
+    RETURNS "pg_catalog"."trigger" AS $BODY$
+    DECLARE BEGIN 
+    update class set class."ClassCapacity" = class."ClassCapacity" - 1 where class."ClassNum"=old."ClassNum";
+    return old;
+    END 
+    $BODY$
+    LANGUAGE plpgsql VOLATILE
+    COST 100
+    """
+    set_drop_class = """
+        create trigger reduce_classcapacity  before delete on student_class_table 
+        for each row execute PROCEDURE public.reduce_classcapacity();
+    """
     try:
         engine.execute(add_trigger)
+        engine.execute(select_class)
+        engine.execute(drop_class)
     except:
         print("error when add trigger")
     try:
         engine.execute(set_trigger)
+        engine.execute(set_select_class)
+        engine.execute(set_drop_class)
     except:
         print("error when set trigger")
 # sql  = 'select *  from class' 
@@ -385,14 +430,75 @@ def add_trigger():
 # print('execute sql')
 # print(result.fetchone())
 
+def create_table_pairs():
+    engine.execute("drop table if exists pairs;")
+    create_table_pairs = """CREATE TABLE "public"."pairs" ( 
+        "id" serial primary key,  
+        "campus" varchar(10),  
+        "time" varchar(100),
+        "cid" varchar(10),  
+        "cname" varchar(40),  
+        "credit" float4,  
+        "ttid" int4,  
+        "tname" varchar(40)
+        );"""
+    engine.execute(create_table_pairs)
+    course = json.loads(open('course.txt','r').read())
+    for sign in course :
+        sql = f"""insert into pairs("campus","time","cid","cname","credit","ttid","tname") values{tuple(sign.values())};"""
+        engine.execute(sql)
+
+def create_table_classinfo():
+    engine.execute("drop table if exists classinfo;")
+    create_table_classinfo = """CREATE TABLE "public"."classinfo" ( 
+        "id" serial primary key,  
+        "cid" varchar(10),
+        "ttid" int4,  
+        "capacity" int4,  
+        "teacher_title" varchar(20),
+        "venue" varchar(40)
+        );"""
+    engine.execute(create_table_classinfo)
+    
+    info = json.loads(open('info.txt','r').read())
+    for key in info['data'] :
+        t = info['data'][key]
+        # print(t.keys()) #dict_keys(['capacity', 'date', 'limitations', 'number', 'teacher_title', 'venue'])
+        res = key.split('-')
+        res.append(t['capacity'])
+        res.append(t['teacher_title'])
+        res.append(t['venue'])
+        # tmp = f"""{tuple(res)}"""
+        sql = f"""insert into classinfo("cid","ttid","capacity","teacher_title","venue") values{tuple(res)};"""
+        engine.execute(sql)
+
+
 if __name__ == "__main__":
+    
+    # print("start create table pairs and data...")
+    # create_table_pairs()
+    # print("finished...")
+    # print("start create table classinfo and data...")
+    # create_table_classinfo()
+    # print("finished...")
+    # db.drop_all()
+    # db.create_all()
+    
+    print("add trigger")
+    add_trigger()
+
+    # print("create dept and major info ")
     # createDept()
     # createMajor()
+    # print("create student")
     # createStudent(100)
-    # createCourse(100)
+    # print("create course")
+    # createCourse(30)
+    # print("create teacher")
     # createTeacher()
     # createManager()
-    # add_trigger()
-    createClass(100)
-    createStudent_Class(100)
+    # print("create class")
+    # createClass(100)
+    print("select class")
+    createStudent_Class(100,10)
     pass

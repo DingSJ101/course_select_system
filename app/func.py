@@ -38,7 +38,7 @@ def classtime_judge(newTime,classes):
     newtimebox = [[0 for j in range(14)] for i in range(8)]
     time_transform(newTime,newtimebox)
     for cla in classes:
-        print(cla.ClassTime)
+        # print(cla.ClassTime)
         time_transform(cla.ClassTime,timebox)
         if time_overlap_check(newtimebox,timebox):
             return cla
@@ -95,8 +95,6 @@ def load_student_from_file(filepath):
             deptnum = deptname2deptnum(dept)
             majornum = majorname2majornum(major)
             new_student = Student(str(maxNum+i),name,majornum,deptnum)
-            print(new_student)
-            print(str(maxNum+i),name,deptnum,majornum)
             try:
                 db.session.add(new_student)
                 db.session.commit()
